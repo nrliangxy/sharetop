@@ -51,7 +51,7 @@ def get_history_data_one(
     return application_obj.deal_k_data(columns, quote_id)
 
 
-def get_quote_history(
+def get_history(
         codes: Union[str, List[str]],
         beg: str = '19000101',
         end: str = '20500101',
@@ -124,7 +124,7 @@ def get_quote_history_multi(
     """
     获取多只股票、债券历史行情信息
     """
-    dfs: Dict[str, pd.DataFrame] = {}
+    # dfs: Dict[str, pd.DataFrame] = {}
     total = len(codes)
     pool = Pool(total)
     coroutine_list = [pool.spawn(get_history_data_one, x) for x in codes]

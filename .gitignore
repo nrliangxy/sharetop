@@ -161,4 +161,4 @@ cython_debug/
 .idea/
 
 docs/build/
-efinance/data
+sharetop/data
