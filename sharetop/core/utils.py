@@ -3,15 +3,19 @@ import rich
 import json
 import re
 from retry.api import retry
-from typing import Any, Callable, Dict, List, TypeVar, Union
-from collections import OrderedDict, namedtuple
-from .cache import SEARCH_RESULT_DICT, session
+from typing import List, TypeVar, Union
+from .cache import SEARCH_RESULT_DICT
 from .config import Quote
 from .config import SEARCH_RESULT_CACHE_PATH
 import pandas as pd
 from functools import wraps
+from ..crawl import BaseRequest
+from ..parser import BaseParse
+
 
 F = TypeVar('F')
+requests_obj = BaseRequest()
+parse_obj = BaseParse()
 
 
 def to_numeric(func: F) -> F:
@@ -26,7 +30,6 @@ def to_numeric(func: F) -> F:
     Returns
     -------
     Union[DataFrame, Series]
-
     """
 
     ignore = ['股票代码', '基金代码', '代码', '市场类型', '市场编号', '债券代码', '行情ID', '正股代码']
@@ -124,7 +127,7 @@ def search_quote(
         ('token', 'D43BF722C8E33BDC906FB84D85E326E8'),
         ('count', f'{count}'),
     )
-    json_response = session.get(url, params=params).json()
+    json_response = requests_obj.get(url, params).json()
     items = json_response['QuotationCodeTable']['Data']
     if items is not None:
         quotes = [Quote(*item.values()) for item in items]

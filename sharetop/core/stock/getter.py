@@ -3,8 +3,8 @@ import pandas as pd
 from ..common import get_quote_history as get_quote_history_for_stock
 
 
-def get_quote_history(
-        stock_codes: Union[str, List[str]],
+def get_history_data(
+        stock_codes: Union[str, List[str], List[Dict]],
         beg: str = '19000101',
         end: str = '20500101',
         klt: int = 101,
@@ -86,13 +86,11 @@ def get_quote_history(
     4758  贵州茅台  600519  2021-07-27  1803.00  1712.89  1810.00  1703.00   86577  1.523081e+10  5.93 -5.06 -91.22   0.69
     4759  贵州茅台  600519  2021-07-28  1703.00  1768.90  1788.20  1682.12   85369  1.479247e+10  6.19  3.27  56.01   0.68
     4760  贵州茅台  600519  2021-07-29  1810.01  1749.79  1823.00  1734.34   63864  1.129957e+10  5.01 -1.08 -19.11   0.51
-
     """
     df = get_quote_history_for_stock(
         stock_codes, beg=beg, end=end, klt=klt, fqt=fqt, **kwargs
     )
     if isinstance(df, pd.DataFrame):
-
         df.rename(columns={'代码': '股票代码', '名称': '股票名称'}, inplace=True)
     elif isinstance(df, dict):
         for stock_code in df.keys():

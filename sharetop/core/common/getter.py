@@ -1,16 +1,18 @@
 import multitasking
+import gevent
+from gevent.pool import Pool
 import pandas as pd
-from .config import EASTMONEY_KLINE_FIELDS, MagicConfig, EASTMONEY_REQUEST_HEADERS
-from ..utils import get_quote_id, to_numeric
+from .config import EM_KLINE_FIELDS, MagicConfig, EASTMONEY_REQUEST_HEADERS
+from ..utils import get_quote_id, to_numeric, requests_obj
 from typing import Any, Callable, Dict, List, TypeVar, Union
 from retry import retry
 from tqdm import tqdm
-from jsonpath import jsonpath
-from ..cache import session
+from ...application import BaseApplication
+from ...crawl.settings import *
 
 
 @to_numeric
-def get_quote_history_single(
+def get_history_data_one(
         code: str,
         beg: str = '19000101',
         end: str = '20500101',
@@ -21,43 +23,32 @@ def get_quote_history_single(
     """
     获取单只股票、债券 K 线数据
     """
-    fields = list(EASTMONEY_KLINE_FIELDS.keys())
-    columns = list(EASTMONEY_KLINE_FIELDS.values())
+    fields = list(EM_KLINE_FIELDS.keys())
+    columns = list(EM_KLINE_FIELDS.values())
     fields2 = ",".join(fields)
     if kwargs.get(MagicConfig.QUOTE_ID_MODE):
         quote_id = code
     else:
         quote_id = get_quote_id(code)
-    params = (
-        ('fields1', 'f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12,f13'),
-        ('fields2', fields2),
-        ('beg', beg),
-        ('end', end),
-        ('rtntype', '6'),
-        ('secid', quote_id),
-        ('klt', f'{klt}'),
-        ('fqt', f'{fqt}'),
+    params = {
+        'fields1': ','.join(fields1_list),
+        'fields2': fields2,
+        'beg': beg,
+        'end': end,
+        'rtntype': '6',
+        'klt': f'{klt}',
+        'fqt': f'{fqt}',
+    }
+    quote_id_key = ''.join(quote_id_key_list)
+    params.update(
+        {quote_id_key: quote_id}
     )
-
-    url = 'https://push2his.eastmoney.com/api/qt/stock/kline/get'
-
-    json_response = session.get(
-        url, headers=EASTMONEY_REQUEST_HEADERS, params=params
+    url = ''.join(k_url_list)
+    json_response = requests_obj.get(
+        url, params, user_agent=True
     ).json()
-    klines: List[str] = jsonpath(json_response, '$..klines[:]')
-    if not klines:
-        columns.insert(0, '代码')
-        columns.insert(0, '名称')
-        return pd.DataFrame(columns=columns)
-
-    rows = [kline.split(',') for kline in klines]
-    name = json_response['data']['name']
-    code = quote_id.split('.')[-1]
-    df = pd.DataFrame(rows, columns=columns)
-    df.insert(0, '代码', code)
-    df.insert(0, '名称', name)
-
-    return df
+    application_obj = BaseApplication(json_response)
+    return application_obj.deal_k_data(columns, quote_id)
 
 
 def get_quote_history(
@@ -109,7 +100,7 @@ def get_quote_history(
     """
 
     if isinstance(codes, str):
-        return get_quote_history_single(
+        return get_history_data_one(
             codes, beg=beg, end=end, klt=klt, fqt=fqt, **kwargs
         )
 
@@ -132,27 +123,32 @@ def get_quote_history_multi(
 ) -> Dict[str, pd.DataFrame]:
     """
     获取多只股票、债券历史行情信息
-
     """
-
     dfs: Dict[str, pd.DataFrame] = {}
     total = len(codes)
-
-    @multitasking.task
-    @retry(tries=tries, delay=1)
-    def start(code: str):
-        _df = get_quote_history_single(
-            code, beg=beg, end=end, klt=klt, fqt=fqt, **kwargs
-        )
-        dfs[code] = _df
-        pbar.update(1)
-        pbar.set_description_str(f'Processing => {code}')
-
-    pbar = tqdm(total=total)
-    for code in codes:
-        start(code)
-    multitasking.wait_for_tasks()
-    pbar.close()
-    if kwargs.get(MagicConfig.RETURN_DF):
-        return pd.concat(dfs, axis=0, ignore_index=True)
+    pool = Pool(total)
+    coroutine_list = [pool.spawn(get_history_data_one, x) for x in codes]
+    gevent.joinall(coroutine_list)
+    df_value = [_.value for _ in coroutine_list]
+    dfs = dict(zip(codes, df_value))
     return dfs
+
+
+
+    # @multitasking.task
+    # @retry(tries=tries, delay=1)
+    # def start(code: str):
+    #     _df = get_history_data_one(
+    #         code, beg=beg, end=end, klt=klt, fqt=fqt, **kwargs
+    #     )
+    #     dfs[code] = _df
+    #     pbar.update(1)
+    #     pbar.set_description_str(f'Processing => {code}')
+    # pbar = tqdm(total=total)
+    # for code in codes:
+    #     start(code)
+    # multitasking.wait_for_tasks()
+    # pbar.close()
+    # if kwargs.get(MagicConfig.RETURN_DF):
+    #     return pd.concat(dfs, axis=0, ignore_index=True)
+    # return dfs

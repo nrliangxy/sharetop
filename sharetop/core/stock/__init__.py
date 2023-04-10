@@ -10,7 +10,7 @@ from .getter import (
     # get_latest_ipo_info,
     # get_latest_quote,
     # get_members,
-    get_quote_history,
+    get_history_data,
     # get_quote_snapshot,
     # get_realtime_quotes,
     # get_today_bill,

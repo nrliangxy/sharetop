@@ -18,7 +18,7 @@ EASTMONEY_REQUEST_HEADERS = {
 }
 
 # 股票、ETF、债券 K 线表头
-EASTMONEY_KLINE_FIELDS = {
+EM_KLINE_FIELDS = {
     'f51': '日期',
     'f52': '开盘',
     'f53': '收盘',
