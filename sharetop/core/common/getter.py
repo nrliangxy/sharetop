@@ -124,10 +124,9 @@ def get_quote_history_multi(
     """
     获取多只股票、债券历史行情信息
     """
-    # dfs: Dict[str, pd.DataFrame] = {}
     total = len(codes)
     pool = Pool(total)
-    coroutine_list = [pool.spawn(get_history_data_one, x) for x in codes]
+    coroutine_list = [pool.spawn(get_history_data_one, x, beg=beg, end=end, klt=klt, fqt=fqt) for x in codes]
     gevent.joinall(coroutine_list)
     df_value = [_.value for _ in coroutine_list]
     dfs = dict(zip(codes, df_value))
