@@ -1,10 +1,10 @@
 from typing import Dict, List, Union
 import pandas as pd
 from ..common import get_history as get_history_data_for_stock
-
+from ..common import get_real_time
 
 def get_history_data(
-        stock_codes: Union[str, List[str], List[Dict]],
+        stock_codes: Union[str, List[str]],
         beg: str = '19000101',
         end: str = '20500101',
         klt: int = 101,
@@ -53,7 +53,7 @@ def get_history_data(
     --------
     >>> import sharetop as ef
     >>> # 获取单只股票日 K 行情数据
-    >>> ef.core.stock.get_quote_history('600519')
+    >>> ef.core.stock.get_history_data('600519')
         股票名称    股票代码          日期      开盘      收盘  ...    涨跌幅   涨跌额    换手率  盘后量  盘后额
             0     比亚迪  002594  2011-06-30   20.75   24.20  ...  44.48  7.45  87.96    0    0
             1     比亚迪  002594  2011-07-01   24.52   26.75  ...  10.54  2.55  52.44    0    0
@@ -68,12 +68,12 @@ def get_history_data(
             2850  比亚迪  002594  2023-04-10  249.28  251.00  ...   0.69  1.72   0.84    0    0
 
     >>> # 获取多只股票历史行情
-    >>> stock_df = ef.stock.get_quote_history(['600519','300750'])
+    >>> stock_df = ef.core.stock.get_history_data(['600519','300750'])
     >>> type(stock_df)
     <class 'dict'>
     >>> stock_df.keys()
     dict_keys(['300750', '600519'])
-    >>> stock_df['600519']
+    >>> stock_df['002594']
              股票名称    股票代码          日期      开盘      收盘  ...    涨跌幅   涨跌额    换手率  盘后量  盘后额
             0     比亚迪  002594  2011-06-30   20.75   24.20  ...  44.48  7.45  87.96    0    0
             1     比亚迪  002594  2011-07-01   24.52   26.75  ...  10.54  2.55  52.44    0    0
@@ -96,3 +96,10 @@ def get_history_data(
         for stock_code in df.keys():
             df[stock_code].rename(columns={'代码': '股票代码', '名称': '股票名称'}, inplace=True)
     return df
+
+
+def get_real_time_data(
+        stock_codes: Union[str, List[str]],
+) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
+    df = get_real_time(stock_codes)
+    print(df)

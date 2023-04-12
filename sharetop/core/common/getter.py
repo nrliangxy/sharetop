@@ -2,13 +2,49 @@ import multitasking
 import gevent
 from gevent.pool import Pool
 import pandas as pd
-from .config import EM_KLINE_FIELDS, MagicConfig, EASTMONEY_REQUEST_HEADERS
+from .config import EM_KLINE_FIELDS, MagicConfig, EASTMONEY_REQUEST_HEADERS, EM_REAL_TIME_FIELDS_PARAMS, EM_REAL_TIME_FIELDS
 from ..utils import get_quote_id, to_numeric, requests_obj
 from typing import Any, Callable, Dict, List, TypeVar, Union
 from retry import retry
 from tqdm import tqdm
 from ...application import BaseApplication
 from ...crawl.settings import *
+
+
+def quote_id_process(params, quote_id):
+    quote_id_key = ''.join(quote_id_key_list)
+    params.update(
+        {quote_id_key: quote_id}
+    )
+    return params
+
+
+def get_real_time(
+        stock_codes: Union[str, List[str]],
+):
+    if isinstance(stock_codes, str):
+        return get_real_time_data_one(stock_codes)
+    raise TypeError('代码数据类型输入不正确！')
+
+
+def get_real_time_data_one(
+        code: str
+) -> pd.DataFrame:
+    fields = list(EM_REAL_TIME_FIELDS.keys())
+    columns = list(EM_REAL_TIME_FIELDS.values())
+    quote_id = get_quote_id(code)
+    params = {
+        "fields": EM_REAL_TIME_FIELDS_PARAMS
+    }
+    params = quote_id_process(params, quote_id)
+    url = ''.join(real_time_url_list)
+    print("url:", url)
+    print("params:", params)
+    json_response = requests_obj.get(
+        url, params, user_agent=False
+    ).json()
+    application_obj = BaseApplication(json_response)
+    return application_obj.deal_real_time_data(columns, quote_id, fields)
 
 
 @to_numeric
@@ -39,10 +75,7 @@ def get_history_data_one(
         'klt': f'{klt}',
         'fqt': f'{fqt}',
     }
-    quote_id_key = ''.join(quote_id_key_list)
-    params.update(
-        {quote_id_key: quote_id}
-    )
+    params = quote_id_process(params, quote_id)
     url = ''.join(k_url_list)
     json_response = requests_obj.get(
         url, params, user_agent=True
@@ -131,23 +164,3 @@ def get_quote_history_multi(
     df_value = [_.value for _ in coroutine_list]
     dfs = dict(zip(codes, df_value))
     return dfs
-
-
-
-    # @multitasking.task
-    # @retry(tries=tries, delay=1)
-    # def start(code: str):
-    #     _df = get_history_data_one(
-    #         code, beg=beg, end=end, klt=klt, fqt=fqt, **kwargs
-    #     )
-    #     dfs[code] = _df
-    #     pbar.update(1)
-    #     pbar.set_description_str(f'Processing => {code}')
-    # pbar = tqdm(total=total)
-    # for code in codes:
-    #     start(code)
-    # multitasking.wait_for_tasks()
-    # pbar.close()
-    # if kwargs.get(MagicConfig.RETURN_DF):
-    #     return pd.concat(dfs, axis=0, ignore_index=True)
-    # return dfs

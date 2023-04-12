@@ -7,3 +7,7 @@ quote_id_key_list = ["se", "cid"]
 fields1_list = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12', 'f13']
 
 k_url_list = ['htt', 'ps:', '//pu', 'sh', '2hi', 's.eas', 'tmon', 'ey.com', '/api', '/q', 't/st', 'ock/k', 'line/get']
+
+# http://push2.eastmoney.com/api/qt/stock/get
+
+real_time_url_list = ['htt', 'ps:', '//pu', 'sh', '2.ea', 'stmon', 'ey.co', 'm/ap', 'i/q', 't/st', 'oc', 'k/g', 'et']

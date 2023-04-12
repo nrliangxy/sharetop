@@ -1,7 +1,4 @@
-class B:
-    def __init__(self, h):
-        self.h = h
+from sharetop.core.stock import get_real_time
 
-if __name__ == '__main__':
-    b = B("dd")
-    print(b)
+d = get_real_time("300033")
+
