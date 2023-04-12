@@ -44,7 +44,7 @@ def get_real_time_data_one(
         url, params, user_agent=False
     ).json()
     application_obj = BaseApplication(json_response)
-    return application_obj.deal_real_time_data(columns, quote_id, fields)
+    return application_obj.deal_real_time_data(columns, quote_id, EM_REAL_TIME_FIELDS)
 
 
 @to_numeric
