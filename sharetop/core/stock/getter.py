@@ -6,6 +6,7 @@ from ..common.config import EASTMONEY_REQUEST_HEADERS, FS_DICT, MagicConfig
 from ..common import get_market_realtime_by_fs
 from ..utils import to_numeric, process_dataframe_and_series
 
+
 def get_history_data(
         stock_codes: Union[str, List[str]],
         beg: str = '19000101',
@@ -155,7 +156,7 @@ def get_market_real_time(fs: Union[str, List[str]] = None, **kwargs) -> pd.DataF
 
         Examples
         --------
-        >>> import efinance as ef
+        >>> import sharetop as ef
         >>> ef.stock.get_realtime_quotes()
                 股票代码   股票名称     涨跌幅     最新价      最高      最低      今开     涨跌额    换手率    量比    动态市盈率     成交量           成交额   昨日收盘           总市值         流通市值      行情ID 市场类型
         0     688787    N海天  277.59  139.48  172.39  139.25  171.66  102.54  85.62     -    78.93   74519  1110318832.0  36.94    5969744000   1213908667  1.688787   沪A

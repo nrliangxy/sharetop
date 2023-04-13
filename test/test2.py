@@ -5,6 +5,6 @@ from sharetop.core.stock import get_real_time_data, get_market_real_time
 # print(d)
 
 h = get_market_real_time(['ETF'])
-# print(h)
-j = h.to_dict("records")
-print(j)
+print(h)
+# j = h.to_dict("records")
+# print(j)

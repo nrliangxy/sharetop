@@ -2,6 +2,8 @@ import pandas as pd
 import math
 from typing import List
 from jsonpath import jsonpath
+from datetime import datetime
+from ..core.common.config import MARKET_NUMBER_DICT
 
 
 class BaseApplication:
@@ -43,3 +45,17 @@ class BaseApplication:
         data = self.deal_fields(data, deal_fields_list)
         r = {v: data[k] for k, v in fields_k_v.items() if data.get(k)}
         return pd.DataFrame([r])
+
+    def deal_market_realtime(self, columns):
+        df = pd.DataFrame(self.json_data['data']['diff'])
+        df = df.rename(columns=columns)
+        df: pd.DataFrame = df[columns.values()]
+        df['行情ID'] = df['市场编号'].astype(str) + '.' + df['代码'].astype(str)
+        df['市场类型'] = df['市场编号'].astype(str).apply(lambda x: MARKET_NUMBER_DICT.get(x))
+        df['更新时间'] = df['更新时间戳'].apply(lambda x: str(datetime.fromtimestamp(x)))
+        df['最新交易日'] = pd.to_datetime(df['最新交易日'], format='%Y%m%d').astype(str)
+        tmp = df['最新交易日']
+        del df['最新交易日']
+        df['最新交易日'] = tmp
+        del df['更新时间戳']
+        return df

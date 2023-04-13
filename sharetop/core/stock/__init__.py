@@ -16,3 +16,5 @@ from .getter import (
     # get_today_bill,
     # get_top10_stock_holder_info,
 )
+
+from .rank_list import get_daily_billboard
