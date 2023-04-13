@@ -163,7 +163,7 @@ def get_quote_multi(
         **kwargs,
 ) -> Dict[str, pd.DataFrame]:
     """
-    获取多只股票、债券历史行情信息
+    获取多只股票、债券历史行情信息 或者实时行情
     """
     s = traceback.extract_stack()
     base_func_name = s[-2][2]

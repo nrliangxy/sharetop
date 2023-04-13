@@ -3,6 +3,7 @@ import pandas as pd
 from ..common import get_history as get_history_data_for_stock
 from ..common import get_real_time
 
+
 def get_history_data(
         stock_codes: Union[str, List[str]],
         beg: str = '19000101',
