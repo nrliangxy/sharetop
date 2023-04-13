@@ -11,8 +11,8 @@ from .getter import (
     # get_latest_quote,
     # get_members,
     get_history_data,
-    get_real_time,
-    # get_realtime_quotes,
+    get_real_time_data,
+    get_market_real_time,
     # get_today_bill,
     # get_top10_stock_holder_info,
 )

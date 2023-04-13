@@ -3,7 +3,7 @@ import rich
 import json
 import re
 from retry.api import retry
-from typing import List, TypeVar, Union
+from typing import Any, Callable, Dict, List, TypeVar, Union
 from .cache import SEARCH_RESULT_DICT
 from .config import Quote
 from .config import SEARCH_RESULT_CACHE_PATH
@@ -184,3 +184,40 @@ def get_quote_id(stock_code: str) -> str:
     if quote is None:
         rich.print(f'证券代码 "{stock_code}" 可能有误')
         return ''
+
+
+def process_dataframe_and_series(
+    function_fields: Dict[str, Callable] = dict(),
+    remove_columns_and_indexes: List[str] = list(),
+):
+    """
+    对 DataFrame 和 Series 进一步操作
+
+    Parameters
+    ----------
+    function_fields : Dict[str, Callable], optional
+        函数字典
+    remove_columns_and_indexes : List[str], optional
+        需要删除的行或者列, by default list()
+    """
+
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            values = func(*args, **kwargs)
+            if isinstance(values, pd.DataFrame):
+                for column, function_name in function_fields.items():
+                    if column not in values.columns:
+                        continue
+                    values[column] = values[column].apply(function_name)
+                for column in remove_columns_and_indexes:
+                    if column in values.columns:
+                        del values[column]
+            elif isinstance(values, pd.Series):
+                for index in remove_columns_and_indexes:
+                    values = values.drop(index)
+            return values
+
+        return wrapper
+
+    return decorator

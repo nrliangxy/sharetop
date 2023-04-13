@@ -11,3 +11,7 @@ k_url_list = ['htt', 'ps:', '//pu', 'sh', '2hi', 's.eas', 'tmon', 'ey.com', '/ap
 # http://push2.eastmoney.com/api/qt/stock/get
 
 real_time_url_list = ['htt', 'ps:', '//pu', 'sh', '2.ea', 'stmon', 'ey.co', 'm/ap', 'i/q', 't/st', 'oc', 'k/g', 'et']
+
+
+market_real_time_url_list = ['htt', 'p:/', '/pus', 'h2.e', 'ast', 'mon', 'ey.c', 'om/a', 'pi/q', 't/cl', 'ist/g', 'et']
+

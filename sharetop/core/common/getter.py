@@ -1,14 +1,62 @@
 import traceback
 import gevent
+from datetime import datetime
 from gevent.pool import Pool
 import pandas as pd
-from .config import EM_KLINE_FIELDS, MagicConfig, EASTMONEY_REQUEST_HEADERS, EM_REAL_TIME_FIELDS_PARAMS, EM_REAL_TIME_FIELDS
+from .config import (EM_KLINE_FIELDS,
+                     MagicConfig,
+                     EASTMONEY_REQUEST_HEADERS,
+                     EM_REAL_TIME_FIELDS_PARAMS,
+                     EM_REAL_TIME_FIELDS,
+                     EASTMONEY_QUOTE_FIELDS,
+                     MARKET_NUMBER_DICT
+                     )
 from ..utils import get_quote_id, to_numeric, requests_obj
 from typing import Any, Callable, Dict, List, TypeVar, Union
-from retry import retry
-from tqdm import tqdm
 from ...application import BaseApplication
 from ...crawl.settings import *
+
+
+@to_numeric
+def get_market_realtime_by_fs(fs: str, **kwargs) -> pd.DataFrame:
+    """
+    获取沪深市场最新行情总体情况
+
+    Returns
+    -------
+    DataFrame
+        沪深市场最新行情信息（涨跌幅、换手率等信息）
+
+    """
+    columns = {**EASTMONEY_QUOTE_FIELDS, **kwargs.get(MagicConfig.EXTRA_FIELDS, {})}
+    fields = ",".join(columns.keys())
+    params = (
+        ('pn', '1'),
+        ('pz', '1000000'),
+        ('po', '1'),
+        ('np', '1'),
+        ('fltt', '2'),
+        ('invt', '2'),
+        ('fid', 'f3'),
+        ('fs', fs),
+        ('fields', fields),
+    )
+    url = ''.join(market_real_time_url_list)
+    json_response = requests_obj.get(
+        url, params, user_agent=False
+    ).json()
+    df = pd.DataFrame(json_response['data']['diff'])
+    df = df.rename(columns=columns)
+    df: pd.DataFrame = df[columns.values()]
+    df['行情ID'] = df['市场编号'].astype(str) + '.' + df['代码'].astype(str)
+    df['市场类型'] = df['市场编号'].astype(str).apply(lambda x: MARKET_NUMBER_DICT.get(x))
+    df['更新时间'] = df['更新时间戳'].apply(lambda x: str(datetime.fromtimestamp(x)))
+    df['最新交易日'] = pd.to_datetime(df['最新交易日'], format='%Y%m%d').astype(str)
+    tmp = df['最新交易日']
+    del df['最新交易日']
+    df['最新交易日'] = tmp
+    del df['更新时间戳']
+    return df
 
 
 def quote_id_process(params, quote_id):
