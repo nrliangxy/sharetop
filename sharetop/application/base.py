@@ -33,10 +33,7 @@ class BaseApplication:
             data[_] = item
         return data
 
-    def deal_real_time_data(self, columns, quote_id, fields_k_v):
-        print(self.json_data)
-        print(columns)
-        print(quote_id)
+    def deal_real_time_data(self, columns, fields_k_v):
         data = self.json_data['data']
         if not data:
             columns.insert(0, '代码')
@@ -44,13 +41,5 @@ class BaseApplication:
             return pd.DataFrame(columns=columns)
         deal_fields_list = ["f43", "f169", "f44", "f45", "f46", "f60", "f71", "f164", "f167", "f169", "f170", "f171"]
         data = self.deal_fields(data, deal_fields_list)
-        f170 = data['f170'] / 100
-        f171 = data['f171'] / 100
-        data.update(
-            f170=f170,
-            f171=f171
-        )
         r = {v: data[k] for k, v in fields_k_v.items() if data.get(k)}
-        print(pd.DataFrame([r]))
-        print("r:", r)
-        print('data:', data)
+        return pd.DataFrame([r])

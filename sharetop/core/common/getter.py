@@ -1,4 +1,4 @@
-import multitasking
+import traceback
 import gevent
 from gevent.pool import Pool
 import pandas as pd
@@ -21,16 +21,26 @@ def quote_id_process(params, quote_id):
 
 def get_real_time(
         stock_codes: Union[str, List[str]],
+        **kwargs
 ):
     if isinstance(stock_codes, str):
         return get_real_time_data_one(stock_codes)
+    elif hasattr(stock_codes, '__iter__'):
+        codes = list(stock_codes)
+        return get_quote_multi(
+            codes, **kwargs
+        )
     raise TypeError('代码数据类型输入不正确！')
 
 
+@to_numeric
 def get_real_time_data_one(
-        code: str
+        code: str,
+        **kwargs
 ) -> pd.DataFrame:
-    fields = list(EM_REAL_TIME_FIELDS.keys())
+    """
+        获取单只股票、债券 实时的基本数据
+    """
     columns = list(EM_REAL_TIME_FIELDS.values())
     quote_id = get_quote_id(code)
     params = {
@@ -38,13 +48,11 @@ def get_real_time_data_one(
     }
     params = quote_id_process(params, quote_id)
     url = ''.join(real_time_url_list)
-    print("url:", url)
-    print("params:", params)
     json_response = requests_obj.get(
         url, params, user_agent=False
     ).json()
     application_obj = BaseApplication(json_response)
-    return application_obj.deal_real_time_data(columns, quote_id, EM_REAL_TIME_FIELDS)
+    return application_obj.deal_real_time_data(columns, EM_REAL_TIME_FIELDS)
 
 
 @to_numeric
@@ -139,13 +147,13 @@ def get_history(
 
     elif hasattr(codes, '__iter__'):
         codes = list(codes)
-        return get_quote_history_multi(
+        return get_quote_multi(
             codes, beg=beg, end=end, klt=klt, fqt=fqt, **kwargs
         )
     raise TypeError('代码数据类型输入不正确！')
 
 
-def get_quote_history_multi(
+def get_quote_multi(
         codes: List[str],
         beg: str = '19000101',
         end: str = '20500101',
@@ -157,9 +165,12 @@ def get_quote_history_multi(
     """
     获取多只股票、债券历史行情信息
     """
+    s = traceback.extract_stack()
+    base_func_name = s[-2][2]
     total = len(codes)
     pool = Pool(total)
-    coroutine_list = [pool.spawn(get_history_data_one, x, beg=beg, end=end, klt=klt, fqt=fqt) for x in codes]
+    func = globals()[f"{base_func_name}_data_one"]
+    coroutine_list = [pool.spawn(func, x, beg=beg, end=end, klt=klt, fqt=fqt) for x in codes]
     gevent.joinall(coroutine_list)
     df_value = [_.value for _ in coroutine_list]
     dfs = dict(zip(codes, df_value))

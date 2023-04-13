@@ -102,4 +102,4 @@ def get_real_time_data(
         stock_codes: Union[str, List[str]],
 ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
     df = get_real_time(stock_codes)
-    print(df)
+    return df
