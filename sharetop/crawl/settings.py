@@ -12,6 +12,10 @@ k_url_list = ['htt', 'ps:', '//pu', 'sh', '2hi', 's.eas', 'tmon', 'ey.com', '/ap
 
 real_time_url_list = ['htt', 'ps:', '//pu', 'sh', '2.ea', 'stmon', 'ey.co', 'm/ap', 'i/q', 't/st', 'oc', 'k/g', 'et']
 
-
 market_real_time_url_list = ['htt', 'p:/', '/pus', 'h2.e', 'ast', 'mon', 'ey.c', 'om/a', 'pi/q', 't/cl', 'ist/g', 'et']
 
+rank_list_list = ['htt', 'p:/', '/dat', 'acen', 'ter-w', 'eb.ea', 'stmo', 'ney.c', 'om/a', 'pi/d', 'ata/', 'v1/g', 'et']
+
+quarterly_report_url_list = ['htt', 'p:/', '/da', 'tac', 'ente', 'r-w', 'eb.e', 'astm', 'oney.', 'co', 'm/ap', 'i/da', 'ta/g', 'et']
+
+one_quarterly_report_url_list = ['htt', 'ps:/', '/dat', 'acen', 'ter', '-we', 'b.ea', 'stmo', 'ney', '.co', 'm/ap', 'i/da', 'ta/v', '1/g', 'et']

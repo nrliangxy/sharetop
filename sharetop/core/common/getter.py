@@ -16,6 +16,19 @@ from ...application import BaseApplication
 from ...crawl.settings import *
 
 
+def get_one_company_report(code: str, report_class: str = None, **kwargs) -> pd.DataFrame:
+    params = {
+        'callback': 'jQuery112308812788184778955_1681551007075',
+        'sortColumns': 'REPORTDATE',
+        'sortTypes': '-1',
+        'pageSize': '200',
+        'columns': 'ALL',
+        'filter': f'(SECURITY_CODE={code})(DATEMMDD="{report_class}")' if report_class else f'(SECURITY_CODE={code})',
+        'reportName': 'RPT_LICO_FN_CPD',
+    }
+    
+
+
 @to_numeric
 def get_market_realtime_by_fs(fs: str, **kwargs) -> pd.DataFrame:
     """

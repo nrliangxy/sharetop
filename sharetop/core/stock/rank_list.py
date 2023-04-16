@@ -9,6 +9,7 @@ from .config import (
     EASTMONEY_STOCK_BASE_INFO_FIELDS,
     EASTMONEY_STOCK_DAILY_BILL_BOARD_FIELDS,
 )
+from ...crawl.settings import *
 
 
 @to_numeric
@@ -73,8 +74,6 @@ def get_daily_billboard(start_date: str = None, end_date: str = None) -> pd.Data
     416  688408   中信博  2021-08-20  4家机构卖出，成功率47.86%  179.98  -0.0666  15.3723 -4.336304e+07  3.750919e+08  4.184550e+08  7.935469e+08   846547400  -5.122340   93.739221  5.695886e+09      有价格涨跌幅限制的日价格振幅达到30%的前五只证券
     417  688556  高测股份  2021-08-20  上海资金买入，成功率60.21%   51.97  17.0495  10.6452 -3.940045e+07  1.642095e+08  2.036099e+08  3.678194e+08   575411600  -6.847351   63.922831  5.739089e+09    有价格涨跌幅限制的日收盘价格涨幅达到15%的前五只证券
     418  688636   智明达  2021-08-20  2家机构买入，成功率47.37%  161.90  15.8332  11.9578  2.922406e+07  6.598126e+07  3.675721e+07  1.027385e+08   188330100  15.517464   54.552336  1.647410e+09    有价格涨跌幅限制的日收盘价格涨幅达到15%的前五只证券
-
-
     """
     today = datetime.today().date()
     mode = 'auto'
@@ -110,13 +109,13 @@ def get_daily_billboard(start_date: str = None, end_date: str = None) -> pd.Data
                 ('filter', f"(TRADE_DATE<='{end_date}')(TRADE_DATE>='{start_date}')"),
             )
 
-            url = 'http://datacenter-web.eastmoney.com/api/data/v1/get'
+            url = ''.join(rank_list_list)
             response = requests_obj.get(
                 url, params, user_agent=False
             )
-            # response = session.get(url, params=params)
             if bar is None:
                 pages = jsonpath(response.json(), '$..pages')
+                print("pages:", pages)
                 if pages and pages[0] != 1:
                     total = pages[0]
                     bar = tqdm(total=int(total))

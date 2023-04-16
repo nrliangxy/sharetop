@@ -18,3 +18,4 @@ from .getter import (
 )
 
 from .rank_list import get_daily_billboard
+from .quarterly_report import get_all_company_quarterly_report
