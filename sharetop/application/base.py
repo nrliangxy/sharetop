@@ -59,3 +59,12 @@ class BaseApplication:
         df['最新交易日'] = tmp
         del df['更新时间戳']
         return df
+
+    def deal_quarterly_report(self, columns):
+        df = pd.DataFrame(self.json_data['result']['data'])
+        df = df.drop(['TRADE_MARKET_CODE', 'SECURITY_TYPE_CODE', 'PAYYEAR', 'PUBLISHNAME', 'ORG_CODE', 'TRADE_MARKET_ZJG',
+                 'ISNEW', 'DATAYEAR', 'DATEMMDD', 'EITIME', 'SECUCODE', 'QDATE'], axis=1)
+        df = df.rename(columns=columns)
+        return df
+
+

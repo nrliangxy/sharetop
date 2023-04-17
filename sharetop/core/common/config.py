@@ -36,7 +36,7 @@ EM_KLINE_FIELDS = {
 
 # 获取实时股票数据 请求参数
 EM_REAL_TIME_FIELDS_PARAMS = "f58,f107,f57,f43,f59,f169,f170,f152,f46,f60,f44,f45,f47,f48,f19,f532,f39,f161,f49,f171," \
-                      "f50,f86,f600,f601,f154,f84,f85,f168,f108,f116,f167,f164,f92,f71,f117"
+                             "f50,f86,f600,f601,f154,f84,f85,f168,f108,f116,f167,f164,f92,f71,f117"
 
 EM_REAL_TIME_FIELDS = {
     "f58": "股票名称",
@@ -64,8 +64,6 @@ EM_REAL_TIME_FIELDS = {
     "f171": "振幅(%)"
 }
 
-
-
 # 股票、债券榜单表头
 EASTMONEY_QUOTE_FIELDS = {
     'f12': '代码',
@@ -89,7 +87,6 @@ EASTMONEY_QUOTE_FIELDS = {
     'f297': '最新交易日',
 }
 
-
 # 各个市场编号
 MARKET_NUMBER_DICT = {
     '0': '深A',
@@ -108,7 +105,6 @@ MARKET_NUMBER_DICT = {
     '90': '板块',
     '225': '广期所',
 }
-
 
 FS_DICT = {
     # 可转债
@@ -153,4 +149,29 @@ FS_DICT = {
     '英股': 'm:155 t:1,m:155 t:2,m:155 t:3,m:156 t:1,m:156 t:2,m:156 t:5,m:156 t:6,m:156 t:7,m:156 t:8',
     '中概股': 'b:MK0201',
     '中国概念股': 'b:MK0201',
+}
+
+QUARTERLY_DICT = {
+    "SECURITY_CODE": "股票代码",
+    "SECURITY_NAME_ABBR": "股票名称",
+    "TRADE_MARKET": "板块",
+    "SECURITY_TYPE": "股票类型",
+    "UPDATE_DATE": "最新公告日期",
+    "REPORTDATE": "报告期",
+    "BASIC_EPS": "每股收益(元)",
+    "DEDUCT_BASIC_EPS": "每股收益(扣除)(元)",
+    "TOTAL_OPERATE_INCOME": "营业总收入(元)",
+    "PARENT_NETPROFIT": "净利润(元)",
+    "WEIGHTAVG_ROE": "净资产收益率(%)",
+    "YSTZ": "营业总收入同比增长(%)",
+    "SJLTZ": "净利润同比增长(%)",
+    "BPS": "每股净资产(元)",
+    "MGJYXJJE": "每股经营现金流量(元)",
+    "XSMLL": "销售毛利率(%)",
+    "YSHZ": "营业总收入季度环比增长(%)",
+    "SJLHZ": "净利润季度环比增长",
+    "ASSIGNDSCRPT": "利润分配",
+    "ZXGXL": "股息率(%)",
+    "NOTICE_DATE": "首次公告日期",
+    "DATATYPE": "年报类型"
 }

@@ -8,7 +8,7 @@ from .config import (EM_KLINE_FIELDS,
                      EM_REAL_TIME_FIELDS_PARAMS,
                      EM_REAL_TIME_FIELDS,
                      EASTMONEY_QUOTE_FIELDS,
-                     MARKET_NUMBER_DICT
+                     QUARTERLY_DICT
                      )
 from ..utils import get_quote_id, to_numeric, requests_obj
 from typing import Any, Callable, Dict, List, TypeVar, Union
@@ -17,8 +17,8 @@ from ...crawl.settings import *
 
 
 def get_one_company_report(code: str, report_class: str = None, **kwargs) -> pd.DataFrame:
+    columns = QUARTERLY_DICT
     params = {
-        'callback': 'jQuery112308812788184778955_1681551007075',
         'sortColumns': 'REPORTDATE',
         'sortTypes': '-1',
         'pageSize': '200',
@@ -26,7 +26,13 @@ def get_one_company_report(code: str, report_class: str = None, **kwargs) -> pd.
         'filter': f'(SECURITY_CODE={code})(DATEMMDD="{report_class}")' if report_class else f'(SECURITY_CODE={code})',
         'reportName': 'RPT_LICO_FN_CPD',
     }
-    
+    print("params:", params)
+    json_response = requests_obj.get(
+        ''.join(one_quarterly_report_url_list), params, user_agent=False
+    ).json()
+    application_obj = BaseApplication(json_response)
+    return application_obj.deal_quarterly_report(columns)
+
 
 
 @to_numeric
