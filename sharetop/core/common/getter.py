@@ -16,7 +16,8 @@ from ...application import BaseApplication
 from ...crawl.settings import *
 
 
-def get_one_company_report(code: str, report_class: str = None, **kwargs) -> pd.DataFrame:
+@to_numeric
+def get_company_report_data_one(code: str, report_class: str = None, **kwargs) -> pd.DataFrame:
     columns = QUARTERLY_DICT
     params = {
         'sortColumns': 'REPORTDATE',
@@ -26,13 +27,23 @@ def get_one_company_report(code: str, report_class: str = None, **kwargs) -> pd.
         'filter': f'(SECURITY_CODE={code})(DATEMMDD="{report_class}")' if report_class else f'(SECURITY_CODE={code})',
         'reportName': 'RPT_LICO_FN_CPD',
     }
-    print("params:", params)
     json_response = requests_obj.get(
         ''.join(one_quarterly_report_url_list), params, user_agent=False
     ).json()
     application_obj = BaseApplication(json_response)
     return application_obj.deal_quarterly_report(columns)
 
+
+def get_company_report(stock_codes: Union[str, List[str]],
+                       report_class: str = None, **kwargs):
+    if isinstance(stock_codes, str):
+        return get_company_report_data_one(stock_codes, report_class)
+    elif hasattr(stock_codes, '__iter__'):
+        codes = list(stock_codes)
+        return get_quote_multi(
+            codes, **kwargs
+        )
+    raise TypeError('代码数据类型输入不正确！')
 
 
 @to_numeric
@@ -215,6 +226,7 @@ def get_quote_multi(
         end: str = '20500101',
         klt: int = 101,
         fqt: int = 1,
+        report_class: str = None,
         tries: int = 3,
         **kwargs,
 ) -> Dict[str, pd.DataFrame]:
@@ -226,7 +238,7 @@ def get_quote_multi(
     total = len(codes)
     pool = Pool(total)
     func = globals()[f"{base_func_name}_data_one"]
-    coroutine_list = [pool.spawn(func, x, beg=beg, end=end, klt=klt, fqt=fqt) for x in codes]
+    coroutine_list = [pool.spawn(func, x, beg=beg, end=end, klt=klt, fqt=fqt, report_class=report_class) for x in codes]
     gevent.joinall(coroutine_list)
     df_value = [_.value for _ in coroutine_list]
     dfs = dict(zip(codes, df_value))
