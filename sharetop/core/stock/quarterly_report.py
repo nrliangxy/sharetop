@@ -5,7 +5,7 @@ from typing import Dict, List, Union
 from jsonpath import jsonpath
 from ..common.config import EASTMONEY_REQUEST_HEADERS
 from ...crawl.settings import *
-from ..common.getter import get_company_report_data_one
+from ..common.getter import get_company_report
 
 
 def get_all_report_dates() -> pd.DataFrame:
@@ -82,13 +82,14 @@ def get_all_report_dates() -> pd.DataFrame:
     return df
 
 
-def get_company_report(stock_codes: Union[str, List[str]], report_class: str = None) -> pd.DataFrame:
+@to_numeric
+def get_company_report_base(stock_codes: Union[str, List[str]], report_class: str = None) -> pd.DataFrame:
     """
     :param stock_codes:
     :param report_class: 默认为空是全部，一季报，半年报，三季报，年报
     :return:
     """
-    return get_company_report_data_one(stock_codes, report_class)
+    return get_company_report(stock_codes, report_class)
 
 
 @to_numeric

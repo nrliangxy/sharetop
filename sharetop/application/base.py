@@ -67,4 +67,18 @@ class BaseApplication:
         df = df.rename(columns=columns)
         return df
 
+    def deal_bill(self, columns, quote_id, json_par='$..klines[:]'):
+        klines: List[str] = self.parse_json(json_par)
+        if not klines:
+            columns.insert(0, '代码')
+            columns.insert(0, '名称')
+            return pd.DataFrame(columns=columns)
+        rows = [kline.split(',') for kline in klines]
+        name = jsonpath(self.json_data, '$..name')[0]
+        code = quote_id.split('.')[-1]
+        df = pd.DataFrame(rows, columns=columns)
+        df.insert(0, '代码', code)
+        df.insert(0, '名称', name)
+        return df
+
 

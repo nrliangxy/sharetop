@@ -8,12 +8,49 @@ from .config import (EM_KLINE_FIELDS,
                      EM_REAL_TIME_FIELDS_PARAMS,
                      EM_REAL_TIME_FIELDS,
                      EASTMONEY_QUOTE_FIELDS,
-                     QUARTERLY_DICT
+                     QUARTERLY_DICT,
+                     EASTMONEY_HISTORY_BILL_FIELDS
                      )
 from ..utils import get_quote_id, to_numeric, requests_obj
 from typing import Any, Callable, Dict, List, TypeVar, Union
 from ...application import BaseApplication
 from ...crawl.settings import *
+
+
+@to_numeric
+def get_history_bill(code: str) -> pd.DataFrame:
+    """
+    获取单支股票、债券的历史单子流入流出数据
+
+    Parameters
+    ----------
+    code : str
+        股票、债券代码
+
+    Returns
+    -------
+    DataFrame
+        沪深市场单只股票、债券历史单子流入流出数据
+
+    """
+    fields = list(EASTMONEY_HISTORY_BILL_FIELDS.keys())
+    columns = list(EASTMONEY_HISTORY_BILL_FIELDS.values())
+    fields2 = ",".join(fields)
+    quote_id = get_quote_id(code)
+    params = (
+        ('lmt', '100000'),
+        ('klt', '101'),
+        ('secid', quote_id),
+        ('fields1', 'f1,f2,f3,f7'),
+        ('fields2', fields2),
+    )
+    url = 'http://push2his.eastmoney.com/api/qt/stock/fflow/daykline/get'
+    # json_response = session.get(
+    #     url, headers=EASTMONEY_REQUEST_HEADERS, params=params
+    # ).json()
+    json_response = requests_obj.get(url, params).json()
+    application_obj = BaseApplication(json_response)
+    return application_obj.deal_bill(columns, quote_id)
 
 
 @to_numeric
