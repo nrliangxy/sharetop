@@ -71,7 +71,6 @@ def get_all_report_dates() -> pd.DataFrame:
         ('ps', '2000'),
     )
     url = 'https://datacenter.eastmoney.com/securities/api/data/get'
-    # response = requests.get(url, headers=EASTMONEY_REQUEST_HEADERS, params=params)
     response = requests_obj.get(url, params, user_agent=True)
     items = jsonpath(response.json(), '$..data[:]')
     if not items:

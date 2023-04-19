@@ -19,3 +19,5 @@ rank_list_list = ['htt', 'p:/', '/dat', 'acen', 'ter-w', 'eb.ea', 'stmo', 'ney.c
 quarterly_report_url_list = ['htt', 'p:/', '/da', 'tac', 'ente', 'r-w', 'eb.e', 'astm', 'oney.', 'co', 'm/ap', 'i/da', 'ta/g', 'et']
 
 one_quarterly_report_url_list = ['htt', 'ps:/', '/dat', 'acen', 'ter', '-we', 'b.ea', 'stmo', 'ney', '.co', 'm/ap', 'i/da', 'ta/v', '1/g', 'et']
+
+bill_url_list = ['htt', 'p:/', '/pus', 'h2h', 'is.e', 'astm', 'oney', '.co', 'm/a', 'pi/', 'qt/', 'sto', 'ck/', 'fflo', 'w/d', 'aykl', 'ine/g', 'et']

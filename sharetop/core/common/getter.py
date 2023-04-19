@@ -2,6 +2,7 @@ import traceback
 import gevent
 from gevent.pool import Pool
 import pandas as pd
+from jsonpath import jsonpath
 from .config import (EM_KLINE_FIELDS,
                      MagicConfig,
                      EASTMONEY_REQUEST_HEADERS,
@@ -15,6 +16,46 @@ from ..utils import get_quote_id, to_numeric, requests_obj
 from typing import Any, Callable, Dict, List, TypeVar, Union
 from ...application import BaseApplication
 from ...crawl.settings import *
+
+
+@to_numeric
+def get_real_time_bill_data_one(code: str) -> pd.DataFrame:
+    """
+    获取单只股票最新交易日的日内分钟级单子流入流出数据
+
+    Parameters
+    ----------
+    code : str
+        股票、债券代码
+
+    Returns
+    -------
+    DataFrame
+        单只股票、债券最新交易日的日内分钟级单子流入流出数据
+    """
+    quote_id = get_quote_id(code)
+    params = (
+        ('lmt', '0'),
+        ('klt', '1'),
+        ('secid', quote_id),
+        ('fields1', 'f1,f2,f3,f7'),
+        ('fields2', 'f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61,f62,f63'),
+    )
+    url = 'http://push2.eastmoney.com/api/qt/stock/fflow/kline/get'
+    json_response = requests_obj.get(url, params).json()
+    columns = ['时间', '主力净流入', '小单净流入', '中单净流入', '大单净流入', '超大单净流入']
+    name = jsonpath(json_response, '$..name')[0]
+    code = quote_id.split('.')[-1]
+    klines: List[str] = jsonpath(json_response, '$..klines[:]')
+    if not klines:
+        columns.insert(0, '股票代码')
+        columns.insert(0, '股票名称')
+        return pd.DataFrame(columns=columns)
+    rows = [kline.split(',') for kline in klines]
+    df = pd.DataFrame(rows, columns=columns)
+    df.insert(0, '股票代码', code)
+    df.insert(0, '股票名称', name)
+    return df
 
 
 @to_numeric
@@ -44,11 +85,7 @@ def get_history_bill(code: str) -> pd.DataFrame:
         ('fields1', 'f1,f2,f3,f7'),
         ('fields2', fields2),
     )
-    url = 'http://push2his.eastmoney.com/api/qt/stock/fflow/daykline/get'
-    # json_response = session.get(
-    #     url, headers=EASTMONEY_REQUEST_HEADERS, params=params
-    # ).json()
-    json_response = requests_obj.get(url, params).json()
+    json_response = requests_obj.get("".join(bill_url_list), params).json()
     application_obj = BaseApplication(json_response)
     return application_obj.deal_bill(columns, quote_id)
 

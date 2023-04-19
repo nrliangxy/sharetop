@@ -1,25 +1,21 @@
 from ..utils import to_numeric
 from ..common.getter import get_history_bill as get_history_bill_for_stock
+from ..common.getter import get_real_time_bill_data_one
 import pandas as pd
-
-
 
 
 @to_numeric
 def get_history_bill(stock_code: str) -> pd.DataFrame:
     """
     获取单只股票历史单子流入流出数据
-
     Parameters
     ----------
     stock_code : str
         股票代码
-
     Returns
     -------
     DataFrame
         沪深市场单只股票历史单子流入流出数据
-
     Examples
     --------
     >>> import efinance as ef
@@ -40,4 +36,40 @@ def get_history_bill(stock_code: str) -> pd.DataFrame:
     """
     df = get_history_bill_for_stock(stock_code)
     df.rename(columns={'代码': '股票代码', '名称': '股票名称'}, inplace=True)
+    return df
+
+
+@to_numeric
+def get_real_time_bill(stock_code: str) -> pd.DataFrame:
+    """
+    获取单只股票最新交易日的日内分钟级单子流入流出数据
+
+    Parameters
+    ----------
+    stock_code : str
+        股票代码
+
+    Returns
+    -------
+    DataFrame
+        单只股票最新交易日的日内分钟级单子流入流出数据
+
+    Examples
+    --------
+    >>> import efinance as ef
+    >>> ef.stock.get_today_bill('600519')
+        股票代码                时间        主力净流入      小单净流入        中单净流入        大单净流入       超大单净流入
+    0    600519  2021-07-29 09:31   -3261705.0  -389320.0    3651025.0  -12529658.0    9267953.0
+    1    600519  2021-07-29 09:32    6437999.0  -606994.0   -5831006.0  -42615994.0   49053993.0
+    2    600519  2021-07-29 09:33   13179707.0  -606994.0  -12572715.0  -85059118.0   98238825.0
+    3    600519  2021-07-29 09:34   15385244.0  -970615.0  -14414632.0  -86865209.0  102250453.0
+    4    600519  2021-07-29 09:35    7853716.0  -970615.0   -6883104.0  -75692436.0   83546152.0
+    ..      ...               ...          ...        ...          ...          ...          ...
+    235  600519  2021-07-29 14:56 -918956019.0 -1299630.0  920255661.0 -397127393.0 -521828626.0
+    236  600519  2021-07-29 14:57 -920977761.0 -2319213.0  923296987.0 -397014702.0 -523963059.0
+    237  600519  2021-07-29 14:58 -920984196.0 -2312233.0  923296442.0 -395974137.0 -525010059.0
+    238  600519  2021-07-29 14:59 -920984196.0 -2312233.0  923296442.0 -395974137.0 -525010059.0
+    239  600519  2021-07-29 15:00 -920984196.0 -2312233.0  923296442.0 -395974137.0 -525010059.0
+    """
+    df = get_real_time_bill_data_one(stock_code)
     return df

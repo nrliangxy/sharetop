@@ -19,4 +19,4 @@ from .getter import (
 
 from .rank_list import get_daily_billboard
 from .quarterly_report import get_all_company_quarterly_report
-from .bill_monitor import get_history_bill
+from .bill_monitor import get_history_bill, get_real_time_bill
