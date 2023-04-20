@@ -22,7 +22,6 @@ from ...crawl.settings import *
 def get_real_time_bill_data_one(code: str) -> pd.DataFrame:
     """
     获取单只股票最新交易日的日内分钟级单子流入流出数据
-
     Parameters
     ----------
     code : str
