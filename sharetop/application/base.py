@@ -81,4 +81,17 @@ class BaseApplication:
         df.insert(0, '名称', name)
         return df
 
-
+    def deal_fund_list(self):
+        def fund_data(item):
+            r1_list = item.split(",")
+            code = r1_list[0]
+            name = r1_list[1]
+            base_yield = r1_list[3]
+            funded_time = r1_list[6]
+            now_time = r1_list[9]
+            unit_value = r1_list[10]
+            accumulate_value = r1_list[11]
+            value_list = [code, name, base_yield, funded_time, now_time, unit_value, accumulate_value]
+            key_list = ["基金代码", "基金名称", "自成立以来收益(%)", "成立时间", "净值时间", "单位净值", "累计净值"]
+            return dict(zip(key_list, value_list))
+        return pd.DataFrame(list(map(fund_data, self.json_data)))

@@ -1,7 +1,10 @@
-from retry import retry
-
+import re
 import pandas as pd
-
+from retry import retry
+from ..utils import get_quote_id, to_numeric, requests_obj
+from ..common.getter import BaseApplication
+# from application import BaseApplication
+# from sharetop.application import BaseApplication
 
 
 @retry(tries=3)
@@ -28,9 +31,9 @@ def get_fund_codes(ft: str = None) -> pd.DataFrame:
     --------
     >>> import efinance as ef
     >>> # 全部类型的基金
-    >>> ef.fund.get_fund_codes()
+    >>> ef.fund_test.get_fund_codes()
     >>> # 股票型基金
-    >>> ef.fund.get_fund_codes(ft = 'gp')
+    >>> ef.fund_test.get_fund_codes(ft = 'gp')
         基金代码                  基金简称
     0     003834              华夏能源革新股票
     1     005669            前海开源公用事业股票
@@ -57,7 +60,6 @@ def get_fund_codes(ft: str = None) -> pd.DataFrame:
         ('pn', '50000'),
         ('dx', '0'),
     ]
-
     headers = {
         'Connection': 'keep-alive',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edg/87.0.664.75',
@@ -68,8 +70,17 @@ def get_fund_codes(ft: str = None) -> pd.DataFrame:
     if ft is not None:
         params.append(('ft', ft))
     url = 'http://fund.eastmoney.com/data/rankhandler.aspx'
-    response = requests.get(url, headers=headers, params=params)
-    columns = ['基金代码', '基金简称']
-    results = re.findall('"(\d{6}),(.*?),', response.text)
-    df = pd.DataFrame(results, columns=columns)
-    return df
+    response = requests_obj.get(url, params, headers=headers)
+    # print(response.text)
+    # print(response.url)
+    # columns = ['基金代码', '基金简称']
+    # results = re.findall('"(\d{6}),(.*?),', response.text)
+    results = re.findall('\[.*\]', response.text)
+    # print("results:", eval(results[0]))
+    new_results = eval(results[0])
+    application_obj = BaseApplication(new_results)
+    return application_obj.deal_fund_list()
+
+
+    # df = pd.DataFrame(results, columns=columns)
+    # return df
