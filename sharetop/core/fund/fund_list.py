@@ -71,16 +71,7 @@ def get_fund_codes(ft: str = None) -> pd.DataFrame:
         params.append(('ft', ft))
     url = 'http://fund.eastmoney.com/data/rankhandler.aspx'
     response = requests_obj.get(url, params, headers=headers)
-    # print(response.text)
-    # print(response.url)
-    # columns = ['基金代码', '基金简称']
-    # results = re.findall('"(\d{6}),(.*?),', response.text)
     results = re.findall('\[.*\]', response.text)
-    # print("results:", eval(results[0]))
     new_results = eval(results[0])
     application_obj = BaseApplication(new_results)
     return application_obj.deal_fund_list()
-
-
-    # df = pd.DataFrame(results, columns=columns)
-    # return df

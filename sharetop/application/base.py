@@ -87,7 +87,7 @@ class BaseApplication:
             code = r1_list[0]
             name = r1_list[1]
             base_yield = r1_list[3]
-            funded_time = r1_list[6]
+            funded_time = r1_list[12]
             now_time = r1_list[9]
             unit_value = r1_list[10]
             accumulate_value = r1_list[11]

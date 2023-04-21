@@ -21,3 +21,5 @@ quarterly_report_url_list = ['htt', 'p:/', '/da', 'tac', 'ente', 'r-w', 'eb.e', 
 one_quarterly_report_url_list = ['htt', 'ps:/', '/dat', 'acen', 'ter', '-we', 'b.ea', 'stmo', 'ney', '.co', 'm/ap', 'i/da', 'ta/v', '1/g', 'et']
 
 bill_url_list = ['htt', 'p:/', '/pus', 'h2h', 'is.e', 'astm', 'oney', '.co', 'm/a', 'pi/', 'qt/', 'sto', 'ck/', 'fflo', 'w/d', 'aykl', 'ine/g', 'et']
+
+fund_valuation_url_list = ['ht', 'tps:/', '/fun', 'dmob', 'ap', 'i.eas', 'tmon', 'ey.c', 'om/F', 'undM', 'Ap', 'i/Fu', 'ndV', 'arie', 'tieV', 'alua', 'tio', 'nDet', 'ail.', 'ash', 'x?FC', 'ODE=', '{cod', 'e}&d', 'evic', 'eid=', '{devi', 'cei', 'd}&', 'pla', 't=Iph', 'one&A', 'ppTy', 'pe=I', 'pho', 'ne&p', 'rod', 'uct=', 'EFun', 'd&v', 'ersi', 'on=6', '.2.5']
