@@ -23,3 +23,11 @@ one_quarterly_report_url_list = ['htt', 'ps:/', '/dat', 'acen', 'ter', '-we', 'b
 bill_url_list = ['htt', 'p:/', '/pus', 'h2h', 'is.e', 'astm', 'oney', '.co', 'm/a', 'pi/', 'qt/', 'sto', 'ck/', 'fflo', 'w/d', 'aykl', 'ine/g', 'et']
 
 fund_valuation_url_list = ['ht', 'tps:/', '/fun', 'dmob', 'ap', 'i.eas', 'tmon', 'ey.c', 'om/F', 'undM', 'Ap', 'i/Fu', 'ndV', 'arie', 'tieV', 'alua', 'tio', 'nDet', 'ail.', 'ash', 'x?FC', 'ODE=', '{cod', 'e}&d', 'evic', 'eid=', '{devi', 'cei', 'd}&', 'pla', 't=Iph', 'one&A', 'ppTy', 'pe=I', 'pho', 'ne&p', 'rod', 'uct=', 'EFun', 'd&v', 'ersi', 'on=6', '.2.5']
+
+fund_period_change_url = ['htt', 'ps:/', '/fun', 'dmo', 'bap', 'i.ea', 'stm', 'one', 'y.co', 'm/Fu', 'ndMN', 'ewAp', 'i/Fu', 'ndM', 'NPe', 'rio', 'dIn', 'cre', 'ase']
+
+fund_history_url = ['htt', 'ps:/', '/fu', 'ndmo', 'bap', 'i.ea', 'stmo', 'ney.', 'co', 'm/Fu', 'ndM', 'Ne', 'wAp', 'i/Fu', 'ndM', 'NHi', 'sNe', 'tL', 'ist']
+
+fun_types_percentage_url = ['htt', 'ps:/', '/fun', 'dmo', 'bap', 'i.ea', 'stm', 'oney.', 'co', 'm/Fu', 'ndMN', 'ewA', 'pi/', 'Fun', 'dMN', 'Ass', 'etA', 'llo', 'cati', 'onNew']
+
+fund_basic_url = ['htt', 'ps:/', '/fun', 'dmo', 'bap', 'i.ea', 'stm', 'oney', '.co', 'm/Fu', 'ndMN', 'ewA', 'pi/F' ,'undM', 'NNB', 'asic', 'Info', 'rmat', 'ion']

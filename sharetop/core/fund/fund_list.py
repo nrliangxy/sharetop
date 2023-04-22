@@ -3,9 +3,6 @@ import pandas as pd
 from retry import retry
 from ..utils import get_quote_id, to_numeric, requests_obj
 from ..common.getter import BaseApplication
-# from application import BaseApplication
-# from sharetop.application import BaseApplication
-
 
 @retry(tries=3)
 def get_fund_codes(ft: str = None) -> pd.DataFrame:
