@@ -31,3 +31,7 @@ fund_history_url = ['htt', 'ps:/', '/fu', 'ndmo', 'bap', 'i.ea', 'stmo', 'ney.',
 fun_types_percentage_url = ['htt', 'ps:/', '/fun', 'dmo', 'bap', 'i.ea', 'stm', 'oney.', 'co', 'm/Fu', 'ndMN', 'ewA', 'pi/', 'Fun', 'dMN', 'Ass', 'etA', 'llo', 'cati', 'onNew']
 
 fund_basic_url = ['htt', 'ps:/', '/fun', 'dmo', 'bap', 'i.ea', 'stm', 'oney', '.co', 'm/Fu', 'ndMN', 'ewA', 'pi/F' ,'undM', 'NNB', 'asic', 'Info', 'rmat', 'ion']
+
+fund_industry_url = ['htt', 'ps:/', '/fun', 'dmo', 'bap', 'i.ea', 'stm', 'one', 'y.co', 'm/Fu', 'ndM', 'NewA', 'pi/', 'Fun', 'dMNS', 'ecto', 'rAl', 'loc', 'ation']
+
+bond_base_list_url = ['htt', 'p:/', '/dat', 'acen', 'ter', '-we', 'b.ea', 'stmo', 'ney', '.co', 'm/a', 'pi/d', 'ata', '/v', '1/g', 'et']

@@ -5,3 +5,4 @@ from .get_fund_invest_info import get_invest_position, get_public_dates
 from .get_period_change_info import get_period_change
 from .get_types_percentage_info import get_types_percentage
 from .get_fund_base_info import get_base_info
+from .get_fund_industry_info import get_industry_distribution
