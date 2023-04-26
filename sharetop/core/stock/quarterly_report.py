@@ -82,7 +82,7 @@ def get_all_report_dates() -> pd.DataFrame:
 @to_numeric
 def get_company_report_base(stock_codes: Union[str, List[str]], report_class: str = None) -> pd.DataFrame:
     """
-    :param stock_codes:
+    :param stock_codes: 指定的单个公司或者多个公司
     :param report_class: 默认为空是全部，一季报，半年报，三季报，年报
     :return:
     """

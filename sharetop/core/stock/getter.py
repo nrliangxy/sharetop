@@ -95,6 +95,10 @@ def get_history_data(
 def get_real_time_data(
         stock_codes: Union[str, List[str]],
 ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
+    """
+    :param stock_codes: 单个或者多个股票代码
+    :return: 获取单个或者多个股票的实时股价和相关信息
+    """
     df = get_real_time(stock_codes)
     return df
 

@@ -12,7 +12,6 @@ from functools import wraps
 from ..crawl import BaseRequest
 from ..parser import BaseParse
 
-
 F = TypeVar('F')
 requests_obj = BaseRequest()
 parse_obj = BaseParse()
@@ -21,12 +20,10 @@ parse_obj = BaseParse()
 def to_numeric(func: F) -> F:
     """
     将 DataFrame 或者 Series 尽可能地转为数字的装饰器
-
     Parameters
     ----------
     func : Callable
         返回结果为 DataFrame 或者 Series 的函数
-
     Returns
     -------
     Union[DataFrame, Series]
