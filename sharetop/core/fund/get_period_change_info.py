@@ -21,8 +21,6 @@ def get_period_change(fund_code: str) -> pd.DataFrame:
         指定基金的阶段涨跌数据
     Examples
     --------
-    >>> import sharetop as ef
-    >>> ef.core.fund.get_period_change('161725')
         基金代码     收益率   同类平均  同类排行  同类总数   时间段
     0  161725   -6.28   0.07  1408  1409   近一周
     1  161725   10.85   5.82   178  1382   近一月

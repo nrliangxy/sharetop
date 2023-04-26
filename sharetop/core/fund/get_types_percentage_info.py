@@ -29,12 +29,6 @@ def get_types_percentage(
         指定基金的在不同日期的不同类型持仓占比信息
     Examples
     --------
-    >>> import efinance as ef
-    >>> # 获取持仓公开日期
-    >>> public_dates = ef.fund.get_public_dates('005827')
-    >>> # 取前两个公开持仓日期
-    >>> dates = public_dates[:2]
-    >>> ef.fund.get_types_percentage('005827',dates)
         基金代码   股票比重 债券比重  现金比重         总规模(亿元) 其他比重
     0  005827   94.4   --  6.06  880.1570625231    0
     0  005827  94.09   --  7.63   677.007455712    0

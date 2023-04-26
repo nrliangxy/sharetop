@@ -27,12 +27,6 @@ def get_industry_distribution(
         指定基金行业持仓信息
     Examples
     --------
-    >>> import efinance as ef
-    >>> # 获取持仓公开日期
-    >>> public_dates = ef.fund.get_public_dates('161725')
-    >>> # 取前一个公开持仓日期
-    >>> dates = public_dates[:1]
-    >>> ef.fund.get_industry_distribution('161725',dates)
     0   161725               制造业  93.07  2021-06-30  6492580.019556
     1   161725               金融业   0.01  2021-06-30      485.060688
     2   161725          农、林、牧、渔业      0  2021-06-30        0.585078

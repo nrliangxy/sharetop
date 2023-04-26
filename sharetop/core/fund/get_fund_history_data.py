@@ -25,8 +25,6 @@ def get_fund_history(fund_code: str, pz: int = 40000) -> pd.DataFrame:
 
     Examples
     --------
-    >>> import sharetop as ef
-    >>> ef.core.fund.get_fund_history('161725')
         日期    单位净值    累计净值     涨跌幅
     0    2021-06-11  1.5188  3.1499   -3.09
     1    2021-06-10  1.5673  3.1984    1.69

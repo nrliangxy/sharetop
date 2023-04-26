@@ -1,8 +1,9 @@
 import re
 import pandas as pd
 from retry import retry
-from ..utils import get_quote_id, to_numeric, requests_obj
+from ..utils import requests_obj
 from ..common.getter import BaseApplication
+
 
 @retry(tries=3)
 def get_fund_codes(ft: str = None) -> pd.DataFrame:
@@ -26,11 +27,6 @@ def get_fund_codes(ft: str = None) -> pd.DataFrame:
         天天基金网基金名单数据
     Examples
     --------
-    >>> import efinance as ef
-    >>> # 全部类型的基金
-    >>> ef.fund_test.get_fund_codes()
-    >>> # 股票型基金
-    >>> ef.fund_test.get_fund_codes(ft = 'gp')
         基金代码                  基金简称
     0     003834              华夏能源革新股票
     1     005669            前海开源公用事业股票

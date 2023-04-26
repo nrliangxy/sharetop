@@ -35,3 +35,5 @@ fund_basic_url = ['htt', 'ps:/', '/fun', 'dmo', 'bap', 'i.ea', 'stm', 'oney', '.
 fund_industry_url = ['htt', 'ps:/', '/fun', 'dmo', 'bap', 'i.ea', 'stm', 'one', 'y.co', 'm/Fu', 'ndM', 'NewA', 'pi/', 'Fun', 'dMNS', 'ecto', 'rAl', 'loc', 'ation']
 
 bond_base_list_url = ['htt', 'p:/', '/dat', 'acen', 'ter', '-we', 'b.ea', 'stmo', 'ney', '.co', 'm/a', 'pi/d', 'ata', '/v', '1/g', 'et']
+
+bond_base_info_url = ['htt', 'p:/', '/dat', 'acen', 'ter-w', 'eb.e', 'astm', 'one', 'y.co', 'm/ap', 'i/da', 'ta/v', '1/g', 'et']

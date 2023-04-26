@@ -1,4 +1,7 @@
 from pathlib import Path
+from typing import Dict
+
+import pandas as pd
 
 HERE = Path(__file__).parent
 
@@ -8,6 +11,25 @@ class MagicConfig:
     QUOTE_ID_MODE = 'quote_id_mode'
     RETURN_DF = 'return_df'
 
+
+EASTMONEY_BASE_INFO_FIELDS = {
+    'f57': '代码',
+    'f58': '名称',
+    'f162': '市盈率(动)',
+    'f167': '市净率',
+    'f127': '所处行业',
+    'f116': '总市值',
+    'f117': '流通市值',
+    'f198': '板块编号',
+    'f173': 'ROE',
+    'f187': '净利率',
+    'f105': '净利润',
+    'f186': '毛利率',
+}
+
+
+# 行情ID搜索缓存
+BASE_INFO_CACHE: Dict[str, pd.Series] = dict()
 
 # 请求头
 EASTMONEY_REQUEST_HEADERS = {
