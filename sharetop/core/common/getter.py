@@ -13,7 +13,7 @@ from .config import (EM_KLINE_FIELDS,
                      EASTMONEY_HISTORY_BILL_FIELDS
                      )
 from ..utils import get_quote_id, to_numeric, requests_obj
-from typing import Any, Callable, Dict, List, TypeVar, Union
+from typing import Dict, List, Union
 from ...application import BaseApplication
 from ...crawl.settings import *
 from .config import EASTMONEY_BASE_INFO_FIELDS, BASE_INFO_CACHE

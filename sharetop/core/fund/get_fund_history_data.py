@@ -1,5 +1,5 @@
 import pandas as pd
-from ..utils import get_quote_id, to_numeric, requests_obj
+from ..utils import to_numeric, requests_obj
 from retry import retry
 from .config import EastmoneyFundHeaders
 from ...crawl.settings import *

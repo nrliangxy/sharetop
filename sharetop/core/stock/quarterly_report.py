@@ -1,9 +1,8 @@
 import rich
 import pandas as pd
 from ..utils import to_numeric, requests_obj
-from typing import Dict, List, Union
+from typing import List, Union
 from jsonpath import jsonpath
-from ..common.config import EASTMONEY_REQUEST_HEADERS
 from ...crawl.settings import *
 from ..common.getter import get_company_report
 

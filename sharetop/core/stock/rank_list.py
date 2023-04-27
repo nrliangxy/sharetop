@@ -3,10 +3,9 @@ from datetime import datetime, timedelta
 from retry import retry
 from tqdm import tqdm
 from ..utils import to_numeric, requests_obj
-from typing import Dict, List, Union
+from typing import List
 from jsonpath import jsonpath
 from .config import (
-    EASTMONEY_STOCK_BASE_INFO_FIELDS,
     EASTMONEY_STOCK_DAILY_BILL_BOARD_FIELDS,
 )
 from ...crawl.settings import *

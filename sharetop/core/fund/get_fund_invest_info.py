@@ -2,7 +2,7 @@ import uuid
 import pandas as pd
 from typing import List, Union
 from retry import retry
-from ..utils import get_quote_id, to_numeric, requests_obj
+from ..utils import to_numeric, requests_obj
 from jsonpath import jsonpath
 from .config import EastmoneyFundHeaders
 
