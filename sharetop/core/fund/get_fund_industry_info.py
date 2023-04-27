@@ -1,3 +1,4 @@
+import uuid
 import pandas as pd
 from typing import List, Union
 from ..utils import to_numeric, requests_obj
@@ -49,6 +50,7 @@ def get_industry_distribution(
     19  161725                合计  93.08  2021-06-30  6493286.808514
     """
     columns = {'HYMC': '行业名称', 'ZJZBL': '持仓比例', 'FSRQ': '公布日期', 'SZ': '市值'}
+    str_uuid = str(uuid.uuid4()).upper()
     df = pd.DataFrame(columns=columns.values())
     if isinstance(dates, str):
         dates = [dates]
@@ -59,7 +61,7 @@ def get_industry_distribution(
             ('FCODE', fund_code),
             ('OSVersion', '14.4'),
             ('appVersion', '6.3.8'),
-            ('deviceid', '3EA024C2-7F22-408B-95E4-383D38160FB3'),
+            ('deviceid', str_uuid),
             ('plat', 'Iphone'),
             ('product', 'EFund'),
             ('serverVersion', '6.3.6'),

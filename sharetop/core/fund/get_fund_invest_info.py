@@ -1,3 +1,4 @@
+import uuid
 import pandas as pd
 from typing import List, Union
 from retry import retry
@@ -73,6 +74,7 @@ def get_invest_position(
         'JZBL': '持仓占比',
         'PCTNVCHG': '较上期变化',
     }
+    str_uuid = str(uuid.uuid4()).upper()
     df = pd.DataFrame(columns=columns.values())
     if not isinstance(dates, List):
         dates = [dates]
@@ -83,7 +85,7 @@ def get_invest_position(
         params = [
             ('FCODE', fund_code),
             ('appType', 'ttjj'),
-            ('deviceid', '3EA024C2-7F22-408B-95E4-383D38160FB3'),
+            ('deviceid', str_uuid),
             ('plat', 'Iphone'),
             ('product', 'EFund'),
             ('serverVersion', '6.2.8'),
