@@ -10,6 +10,12 @@ import sharetop as sp
 # d = sp.stock.get_real_time_data(stock_code)
 # print(d)
 
-d = sp.bond.get_bond_base_info_list()
+# d = sp.bond.get_bond_base_info_list()
+quote_ids = ['115.SM307','113.wr2310']
+d = sp.futures.get_history_data(quote_ids)
+
+# d = sp.bond.bond_treasure_issue_cninfo('20230415', '20230425')
+
+# d = sp.futures.get_futures_base_info()
 
 print(d)

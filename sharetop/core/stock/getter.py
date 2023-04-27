@@ -2,7 +2,7 @@ from typing import Dict, List, Union
 import pandas as pd
 from ..common import get_history as get_history_data_for_stock
 from ..common import get_real_time
-from ..common.config import EASTMONEY_REQUEST_HEADERS, FS_DICT, MagicConfig
+from ..common.config import FS_DICT
 from ..common import get_market_realtime_by_fs
 from ..utils import to_numeric, process_dataframe_and_series
 

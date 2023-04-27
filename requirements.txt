@@ -1,0 +1,7 @@
+requests
+tqdm
+pandas
+retry
+jsonpath
+rich
+gevent

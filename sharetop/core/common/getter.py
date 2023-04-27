@@ -312,7 +312,7 @@ def get_quote_multi(
     total = len(codes)
     pool = Pool(total)
     func = globals()[f"{base_func_name}_data_one"]
-    coroutine_list = [pool.spawn(func, x, beg=beg, end=end, klt=klt, fqt=fqt, report_class=report_class) for x in codes]
+    coroutine_list = [pool.spawn(func, x, beg=beg, end=end, klt=klt, fqt=fqt, report_class=report_class, **kwargs) for x in codes]
     gevent.joinall(coroutine_list)
     df_value = [_.value for _ in coroutine_list]
     dfs = dict(zip(codes, df_value))
