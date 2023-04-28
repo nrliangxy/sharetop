@@ -1,10 +1,8 @@
 ## Introduction
 
-[![Python Version](https://img.shields.io/badge/python-3.6+-blue.svg?style=flat)](https://pypi.python.org/pypi/efinance)
-[![Pypi Package](https://img.shields.io/pypi/v/sharetop.svg?maxAge=60)](https://pypi.python.org/pypi/efinance)
+[![Python Version](https://img.shields.io/badge/python-3.6+-blue.svg?style=flat)](https://pypi.python.org/pypi/sharetop)
+[![Pypi Package](https://img.shields.io/pypi/v/sharetop.svg?maxAge=60)](https://pypi.python.org/pypi/sharetop)
 [![Pypi-Install](https://img.shields.io/pypi/dm/sharetop.svg?maxAge=2592000&label=installs&color=%2327B1FF)](https://pypi.python.org/pypi/sharetop)
-[![Docs](https://readthedocs.org/projects/sharetop/badge/?version=latest)](https://efinance.readthedocs.io)
-[![CodeFactor](https://www.codefactor.io/repository/github/micro-sheep/efinance/badge)](https://www.codefactor.io/repository/github/micro-sheep/efinance/overview/main)
 [![Github Stars](https://img.shields.io/github/stars/sharetop/sharetop.svg?style=social&label=Star&maxAge=60)](https://github.com/nrliangxy/sharetop)
 
 [`efinance`](https://github.com/nrliangxy/sharetop) 是由个人打造的用于获取股票、基金、期货数据的免费开源 Python 库，你可以使用它很方便地获取数据以便更好地服务于个人的交易系统需求。
@@ -25,15 +23,6 @@ pip install sharetop
 
 ```bash
 pip install sharetop --upgrade
-```
-
-
-- 源码安装（用于开发）
-
-```bash
-git clone https://github.com/Micro-sheep/efinance
-cd efinance
-pip install -e .
 ```
 
 ---

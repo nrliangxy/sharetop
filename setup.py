@@ -7,7 +7,7 @@ here = pathlib.Path(__file__).parent
 require = ['requests', 'rich', 'jsonpath', 'pandas', 'tqdm', 'retry', 'gevent', 'py_mini_racer']
 readme = (here / "README.md").read_text(encoding='utf-8')
 about = {}
-exec((here / 'efinance' / '__version__.py').read_text(encoding='utf-8'), about)
+exec((here / 'sharetop' / '__version__.py').read_text(encoding='utf-8'), about)
 setup(
     name=about['__title__'],
     version=about['__version__'],
