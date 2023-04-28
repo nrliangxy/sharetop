@@ -138,8 +138,6 @@ def get_all_company_quarterly_report(date: str = None) -> pd.DataFrame:
 
     Notes
     -----
-    当输入的日期不正确时，会输出可选的日期列表。
-    你也可以通过函数 ``efinance.stock.get_all_report_dates`` 来获取可选日期
 
     """
     # TODO 加速

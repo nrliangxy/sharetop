@@ -29,8 +29,6 @@ def get_futures_base_info() -> pd.DataFrame:
     850  lu2109  低硫燃油2109  142.lu2109  上海能源期货交易所
     Notes
     -----
-    这里的 行情ID 主要作用是为使用函数 ``efinance.futures.get_quote_history``
-    获取期货行情信息提供参数
     """
     columns = ['期货代码', '期货名称', '行情ID', '市场类型']
     df = get_realtime_quotes()
@@ -86,16 +84,6 @@ def get_history_data(
 
     Examples
     --------
-    >>> import efinance as ef
-    >>> # 获取全部期货行情ID列表
-    >>> quote_ids = ef.futures.get_realtime_quotes()['行情ID']
-    >>> # 指定单个期货的行情ID(以上面获得到的行情ID列表为例)
-    >>> quote_id = quote_ids[0]
-    >>> # 查看第一个行情ID
-    >>> quote_ids[0]
-    '115.ZCM'
-    >>> # 获取第行情ID为第一个的期货日 K 线数据
-    >>> ef.futures.get_quote_history(quote_id)
         期货代码   期货名称          日期     开盘     收盘     最高     最低    成交量           成交额    振幅   涨跌幅   涨跌额  换手率
     0     ZCM  动力煤主力  2015-05-18  440.0  437.6  440.2  437.6     64  2.806300e+06  0.00  0.00   0.0  0.0
     1     ZCM  动力煤主力  2015-05-19  436.0  437.0  437.6  436.0      6  2.621000e+05  0.36 -0.32  -1.4  0.0
@@ -109,14 +97,6 @@ def get_history_data(
     1527  ZCM  动力煤主力  2021-08-20  778.0  793.0  795.0  775.2  70549  5.553617e+09  2.53  1.48  11.6  0.0
     1528  ZCM  动力煤主力  2021-08-23  796.8  836.6  843.8  796.8  82954  6.850341e+09  5.97  6.28  49.4  0.0
 
-    >>> # 指定多个期货的 行情ID
-    >>> quote_ids = ['115.ZCM','115.ZC109']
-    >>> futures_df = ef.futures.get_quote_history(quote_ids)
-    >>> type(futures_df)
-    <class 'dict'>
-    >>> futures_df.keys()
-    dict_keys(['115.ZC109', '115.ZCM'])
-    >>> futures_df['115.ZCM']
         期货名称 期货代码          日期     开盘     收盘     最高     最低    成交量           成交额    振幅   涨跌幅   涨跌额  换手率
     0     动力煤主力  ZCM  2015-05-18  440.0  437.6  440.2  437.6     64  2.806300e+06  0.00  0.00   0.0  0.0
     1     动力煤主力  ZCM  2015-05-19  436.0  437.0  437.6  436.0      6  2.621000e+05  0.36 -0.32  -1.4  0.0
@@ -175,8 +155,6 @@ def get_realtime_quotes() -> pd.DataFrame:
 
     Notes
     -----
-    如果不记得行情ID,则可以调用函数 ``efinance.futures.get_realtime_quotes`` 获取
-    接着便可以使用函数 ``efinance.futures.get_quote_history``
     来获取期货 K 线数据
     """
     fs = FS_DICT['futures']
@@ -201,7 +179,6 @@ def get_future_deal_detail(quote_id: str, max_count: int = 1000000) -> pd.DataFr
 
     Notes
     -----
-    行情ID 格式参考 ``efinance.futures.get_futures_base_info`` 中得到的数据
 
     Examples
     --------
