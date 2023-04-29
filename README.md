@@ -522,6 +522,7 @@ pip install sharetop --upgrade
 
 
 ## Contact
+微信：share_top
 
 [![Github](https://img.shields.io/badge/Github-blue?style=social&logo=github)](https://github.com/nrliangxy)
 [![Email](https://img.shields.io/badge/Email-blue)](mailto:nrliangxy@foxmail.com)
