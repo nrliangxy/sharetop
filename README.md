@@ -520,7 +520,7 @@ pip install sharetop --upgrade
 
 
 ## Contact
-- 对市场感兴趣的同学可以联系我，对互联网金融感兴趣的同学可以联系我，对市场行业相关数据感兴趣的同学可以联系我，对数据有需求的同学可以联系我。
+- 对市场感兴趣的同学可以联系我，对互联网金融感兴趣的同学可以联系我，对市场行业相关数据感兴趣的同学可以联系我，对数据有需求的同学可以联系我。欢迎志同道合的同学联系我
 - 微信：share_top
-<img src="static/sharetop.jpg" width="300">
+<img src="static/sharetop.jpg" width="350">
 
