@@ -7,7 +7,7 @@
 
 - [`Source Code`](https://github.com/nrliangxy/sharetop)
 - sharetop 微信二维码
-- <img src="https://github.com/nrliangxy/sharetop/static/sharetop.jpg" width="100">
+- <img src="static/sharetop.jpg" width="150">
 
 ---
 
