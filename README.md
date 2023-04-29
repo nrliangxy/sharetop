@@ -6,8 +6,6 @@
 [`sharetop`](https://github.com/nrliangxy/sharetop) 为个人或者机构提供准确详细的市场数据。用于获取经济市场相关的股票，基金，期货数据，也可以获取具体的行业数据，例如，猪肉周期相关数据，石油进出口数据等。
 
 - [`Source Code`](https://github.com/nrliangxy/sharetop)
-- sharetop 微信二维码
-<img src="static/sharetop.jpg" width="200">
 
 ---
 
@@ -522,7 +520,7 @@ pip install sharetop --upgrade
 
 
 ## Contact
-微信：share_top
-
+- 微信：share_top
+<img src="static/sharetop.jpg" width="200">
 [![Github](https://img.shields.io/badge/Github-blue?style=social&logo=github)](https://github.com/nrliangxy)
 [![Email](https://img.shields.io/badge/Email-blue)](mailto:nrliangxy@foxmail.com)
