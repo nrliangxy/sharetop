@@ -2,12 +2,12 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.6+-blue.svg?style=flat)](https://pypi.python.org/pypi/sharetop)
 [![Pypi Package](https://img.shields.io/pypi/v/sharetop.svg?maxAge=60)](https://pypi.python.org/pypi/sharetop)
-[![Pypi-Install](https://img.shields.io/pypi/dm/sharetop.svg?maxAge=2592000&label=installs&color=%2327B1FF)](https://pypi.python.org/pypi/sharetop)
-[![Github Stars](https://img.shields.io/github/stars/sharetop/sharetop.svg?style=social&label=Star&maxAge=60)](https://github.com/nrliangxy/sharetop)
 
-[`sharetop`](https://github.com/nrliangxy/sharetop) 是由个人打造的用于获取股票、基金、期货数据的免费开源 Python 库，你可以使用它很方便地获取数据以便更好地服务于个人的交易系统需求。
+[`sharetop`](https://github.com/nrliangxy/sharetop) 为个人或者机构提供准确详细的市场数据。用于获取经济市场相关的股票，基金，期货数据，也可以获取具体的行业数据，例如，猪肉周期相关数据，石油进出口数据等。
 
 - [`Source Code`](https://github.com/nrliangxy/sharetop)
+- sharetop 微信二维码
+- <img src="https://github.com/nrliangxy/sharetop/static/sharetop.jpg" width="100">
 
 ---
 
