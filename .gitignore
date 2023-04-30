@@ -163,3 +163,5 @@ cython_debug/
 docs/build/
 sharetop/data
 test/*
+
+sharetop/test/*

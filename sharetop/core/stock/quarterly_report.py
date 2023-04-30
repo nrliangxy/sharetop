@@ -184,7 +184,6 @@ def get_all_company_quarterly_report(date: str = None) -> pd.DataFrame:
         )
         url = "".join(quarterly_report_url_list)
         response = requests_obj.get(url, params, user_agent=True)
-        print("url:", response.url)
         # response = session.get(url, headers=EASTMONEY_REQUEST_HEADERS, params=params)
         items = jsonpath(response.json(), '$..data[:]')
         if not items:

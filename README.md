@@ -162,7 +162,7 @@ pip install sharetop --upgrade
 [4603 rows x 18 columns]
 ```
 
-- 获取单只股或者多只最新状况
+- 获取单只股或者多只最新股价情况
 
 ```python
 >>> import sharetop as sp

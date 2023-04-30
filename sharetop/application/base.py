@@ -41,9 +41,9 @@ class BaseApplication:
             columns.insert(0, '代码')
             columns.insert(0, '名称')
             return pd.DataFrame(columns=columns)
-        deal_fields_list = ["f43", "f169", "f44", "f45", "f46", "f60", "f71", "f164", "f167", "f169", "f170", "f171"]
+        deal_fields_list = ["f43", "f169", "f44", "f45", "f46", "f60", "f71", "f164", "f167", "f170", "f171"]
         data = self.deal_fields(data, deal_fields_list)
-        r = {v: data[k] for k, v in fields_k_v.items() if data.get(k)}
+        r = {v: data.get(k) for k, v in fields_k_v.items()}
         return pd.DataFrame([r])
 
     def deal_market_realtime(self, columns):

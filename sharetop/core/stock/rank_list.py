@@ -106,7 +106,6 @@ def get_daily_billboard(start_date: str = None, end_date: str = None) -> pd.Data
             )
             if bar is None:
                 pages = jsonpath(response.json(), '$..pages')
-                print("pages:", pages)
                 if pages and pages[0] != 1:
                     total = pages[0]
                     bar = tqdm(total=int(total))
