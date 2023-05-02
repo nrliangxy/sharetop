@@ -184,6 +184,7 @@ def get_real_time_data_one(
     """
     columns = list(EM_REAL_TIME_FIELDS.values())
     quote_id = get_quote_id(code)
+    print("quote_id:", quote_id)
     params = {
         "fields": EM_REAL_TIME_FIELDS_PARAMS
     }

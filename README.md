@@ -52,6 +52,19 @@ pip install sharetop --upgrade
 [4761 rows x 13 columns]
 ```
 
+- 获取股票历史日 K 线数据
+
+```python
+>>> import sharetop as sp
+>>> # 股票代码
+>>> stock_code = '600519'
+>>> sp.stock.get_stock_base_info(stock_code)
+       唯一代码    股票代码 市场代码  股票名称  ... 管理人员人数       律师事务所             会计师事务所 交易所代码
+0  002714.SZ  002714   SZ  牧原股份  ...     21  北京市康达律师事务所  中兴华会计师事务所(特殊普通合伙)  SZSE
+
+[1 rows x 34 columns]
+```
+
 - 获取非 A 股的股票 K 线数据（支持输入股票名称以及代码）
 
 ```python
