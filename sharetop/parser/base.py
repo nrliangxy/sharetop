@@ -1,5 +1,6 @@
 import pandas as pd
 from lxml import etree
+import re
 from jsonpath import jsonpath
 from typing import Any, Callable, Dict, List, TypeVar, Union
 from .config import STOCK_BASE_INFO_DICT
@@ -15,6 +16,11 @@ class BaseParse:
         json_r: List[str] = jsonpath(json_response, json_par)
         return json_r
 
+    def parse_fund_json(self, text_response):
+        results = re.findall('\[.*\]', text_response)
+        json_data = eval(results[0])
+        return json_data
+
     def parse_stock_base_info(self, base_data):
         jbzl = base_data['jbzl'][0]
         fxxg = base_data['fxxg'][0]
@@ -25,7 +31,6 @@ class BaseParse:
         name = jbzl['security_name_abbr']
         org_name = jbzl['org_name']
         org_name_en = jbzl['org_name_en']
-        org_code = jbzl['org_code']
         uscc = jbzl['reg_num']
         security_type = jbzl['security_type']
         trade_market = jbzl['trade_market']

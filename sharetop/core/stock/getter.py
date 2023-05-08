@@ -97,6 +97,7 @@ def get_real_time_data(
 ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
     """
     :param stock_codes: 单个或者多个股票代码
+    也可以是1.000001 0为深证，1为上证， 116为港股
     :return: 获取单个或者多个股票的实时股价和相关信息
     """
     df = get_real_time(stock_codes)

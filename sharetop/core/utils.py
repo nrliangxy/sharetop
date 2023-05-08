@@ -180,7 +180,7 @@ def get_quote_id(stock_code: str) -> str:
         return quote.quote_id
     if quote is None:
         rich.print(f'证券代码 "{stock_code}" 可能有误')
-        return ''
+        return stock_code
 
 
 def process_dataframe_and_series(

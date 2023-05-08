@@ -39,3 +39,5 @@ bond_base_list_url = ['htt', 'p:/', '/dat', 'acen', 'ter', '-we', 'b.ea', 'stmo'
 bond_base_info_url = ['htt', 'p:/', '/dat', 'acen', 'ter-w', 'eb.e', 'astm', 'one', 'y.co', 'm/ap', 'i/da', 'ta/v', '1/g', 'et']
 
 stock_base_info_url = ['htt', 'p:/', '/em', 'we', 'b.se', 'curi', 'ties.', 'eas', 'tmon', 'ey.c', 'om/P', 'C_HS', 'F10/C', 'ompa', 'nySu', 'rve', 'y/Pa', 'geAj', 'ax']
+
+base_url_list = ["htt", "p:/", "/12", "1.37", ".16.", "150:", "686", "9/a", "pi"]
