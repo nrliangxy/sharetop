@@ -21,6 +21,12 @@ class BaseParse:
         json_data = eval(results[0])
         return json_data
 
+    def parse_god_cup_json(self, data_json, country_field_dict):
+        data = data_json['data']
+        df = pd.DataFrame(data)
+        df.rename(columns=country_field_dict, inplace=True)
+        return df
+
     def parse_stock_base_info(self, base_data):
         jbzl = base_data['jbzl'][0]
         fxxg = base_data['fxxg'][0]

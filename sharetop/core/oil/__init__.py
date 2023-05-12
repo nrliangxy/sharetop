@@ -1,0 +1,1 @@
+from .oil_detail import get_oil_reserves
