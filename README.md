@@ -3,7 +3,7 @@
 [![Python Version](https://img.shields.io/badge/python-3.6+-blue.svg?style=flat)](https://pypi.python.org/pypi/sharetop)
 [![Pypi Package](https://img.shields.io/pypi/v/sharetop.svg?maxAge=60)](https://pypi.python.org/pypi/sharetop)
 
-[`sharetop`](https://github.com/nrliangxy/sharetop) 为个人或者机构提供准确详细的市场数据。用于获取经济市场相关的股票，基金，期货数据，也可以获取具体的行业数据，例如，猪肉周期相关数据，石油进出口数据等。
+[`sharetop`](https://github.com/nrliangxy/sharetop) 为个人或者机构提供准确详细的市场数据。用于获取经济市场相关的股票，基金，期货数据，也可以获取具体的行业数据，例如，猪肉周期相关数据，石油相关数据等。
 
 - [`Source Code`](https://github.com/nrliangxy/sharetop)
 

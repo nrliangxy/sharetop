@@ -1,6 +1,7 @@
 import pandas as pd
 from .config import oil_reserves_url, oil_reserves_field_dict, oil_products_field_dict, oil_products_url, \
-    oil_consumption_url, oil_consumption_field_dict
+    oil_consumption_url, oil_consumption_field_dict, oil_refinerythroughput_field_dict, oil_refinerythroughput_url, \
+    oil_refinerycapacity_url, oil_refinerycapacity_field_dict
 from ...crawl.settings import *
 from ..utils import to_numeric, requests_obj, parse_obj
 
@@ -47,3 +48,21 @@ def get_oil_consumption(data_type: str = None, limit: int = None) -> pd.DataFram
     :return:
     """
     return get_oil_data_common(oil_consumption_url, oil_consumption_field_dict, data_type, limit)
+
+
+def get_oil_refinerythroughput(data_type: str = None, limit: int = None) -> pd.DataFrame:
+    """
+    :param data_type: 1为国家数据 2为机构数据 4为大洲数据
+    :param limit:
+    :return:
+    """
+    return get_oil_data_common(oil_refinerythroughput_url, oil_refinerythroughput_field_dict, data_type, limit)
+
+
+def get_oil_refinerycapacity(data_type: str = None, limit: int = None) -> pd.DataFrame:
+    """
+    :param data_type: 1为国家数据 2为机构数据 4为大洲数据
+    :param limit:
+    :return:
+    """
+    return get_oil_data_common(oil_refinerycapacity_url, oil_refinerycapacity_field_dict, data_type, limit)
