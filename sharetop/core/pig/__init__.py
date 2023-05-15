@@ -1,4 +1,4 @@
-from .oil_detail import (
+from .pig_detail import (
     get_oil_reserves,
     get_oil_products,
     get_oil_consumption,

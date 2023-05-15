@@ -1,9 +1,5 @@
-oil_reserves_url = "/oil/reserves"
-oil_products_url = "/oil/products"
-oil_consumption_url = "/oil/consumption"
-oil_refinerythroughput_url = "/oil/refinerythroughput"
-oil_refinerycapacity_url = "/oil/refinerycapacity"
-oil_crudeoilpricehistory_url = "/oil/crudeoilpricehistory"
+pig_fcr_url = "/pig/fcr"
+
 
 
 
