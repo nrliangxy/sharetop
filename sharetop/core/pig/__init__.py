@@ -1,8 +1,8 @@
 from .pig_detail import (
-    get_oil_reserves,
-    get_oil_products,
-    get_oil_consumption,
-    get_oil_refinerythroughput,
-    get_oil_refinerycapacity,
-    get_oil_crudeoilpricehistory
+    get_fcr
 )
+
+
+__all__ = [
+    'get_fcr'
+]

@@ -75,8 +75,7 @@ def get_oil_refinerycapacity(data_type: str = None, limit: int = None) -> pd.Dat
 
 def get_oil_crudeoilpricehistory(limit: int = None) -> pd.DataFrame:
     """
-    :param data_type: 1为国家数据 2为机构数据 4为大洲数据
-    :param limit:
+    :param limit: 数据限制
     :return:
     """
     return get_oil_data_common(oil_crudeoilpricehistory_url, oil_crudeoilpricehistory_field_dict, limit=limit)

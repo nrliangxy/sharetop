@@ -535,6 +535,48 @@ pip install sharetop --upgrade
 [1529 rows x 13 columns]
 ```
 
+- 获取国家相关数据
+
+```python
+>>> import sharetop as sp
+>>> # 获取国家基础数据
+>>> country_data = sp.country.get_country_base_info(10)
+        国家简称      国家全称                      英文简称  ...     首都(中文)           首都(英文)  所属组织
+0     中国   中华人民共和国                     China  ...         北京          Beijing  None
+1     美国    美利坚合众国             United States  ...  华盛顿哥伦比亚特区  Washington D.C.  None
+2    俄罗斯     俄罗斯联邦                    Russia  ...        莫斯科           Moscow  None
+3  沙特阿拉伯   沙特阿拉伯王国              Saudi Arabia  ...        利雅得           Riyadh   欧佩克
+4    加拿大       加拿大                    Canada  ...       None             None  None
+5    伊拉克    伊拉克共和国                      Iraq  ...        巴格达          Baghdad   欧佩克
+6     伊朗  伊朗伊斯兰共和国                      Iran  ...        德黑兰           Tehran   欧佩克
+7    阿联酋  阿拉伯联合酋长国  The United Arab Emirates  ...       阿布扎比        Abu Dhabi   欧佩克
+8     巴西   巴西联邦共和国                    Brazil  ...       None             None  None
+9    科威特      科威特国                    Kuwait  ...       科威特城       Kuwait Cit   欧佩克
+
+[10 rows x 11 columns]
+
+```
+
+- 获取石油相关数据
+
+```python
+>>> import sharetop as sp
+>>> # 获取石油储量数据
+>>> sp.oil.get_oil_reserves('1', 10)
+        年份  储量(十亿桶)  总储量占比   储产比    产品名称 机构名称
+0  2000   181.50    NaN   NaN  探明储量石油  加拿大
+1  2010   174.85    NaN   NaN  探明储量石油  加拿大
+2  2020   168.10  0.097  89.4  探明储量石油  加拿大
+3  2000    24.63    NaN   NaN  探明储量石油  墨西哥
+4  2010    10.42    NaN   NaN  探明储量石油  墨西哥
+5  2020     6.10  0.004   8.7  探明储量石油  墨西哥
+6  2000    30.39    NaN   NaN  探明储量石油   美国
+7  2010    34.99    NaN   NaN  探明储量石油   美国
+8  2020    68.80  0.040  11.4  探明储量石油   美国
+9  2000     2.97    NaN   NaN  探明储量石油  阿根廷
+
+```
+
 
 ## Contact
 - 对市场感兴趣的同学可以联系我，对互联网金融感兴趣的同学可以联系我，对市场行业相关数据感兴趣的同学可以联系我，对数据有需求的同学可以联系我。欢迎志同道合的同学联系我
