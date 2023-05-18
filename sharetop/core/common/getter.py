@@ -58,6 +58,7 @@ def get_real_time_bill_data_one(code: str) -> pd.DataFrame:
     return df
 
 
+
 @to_numeric
 def get_history_bill(code: str) -> pd.DataFrame:
     """
@@ -85,7 +86,8 @@ def get_history_bill(code: str) -> pd.DataFrame:
         ('fields1', 'f1,f2,f3,f7'),
         ('fields2', fields2),
     )
-    json_response = requests_obj.get("".join(bill_url_list), params).json()
+    json_response = requests_obj.get("".join(bill_url_list), params).url
+    print("json_response:", json_response)
     application_obj = BaseApplication(json_response)
     return application_obj.deal_bill(columns, quote_id)
 
