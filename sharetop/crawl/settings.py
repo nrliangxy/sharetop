@@ -43,3 +43,5 @@ stock_base_info_url = ['htt', 'p:/', '/em', 'we', 'b.se', 'curi', 'ties.', 'eas'
 base_url_list = ["htt", "p:/", "/12", "1.37", ".16.", "150:", "686", "9/a", "pi"]
 
 capital_flow_real_time_url_list = ['htt', 'ps:/', '/pu', 'sh2.e', 'astm', 'oney', '.co', 'm/ap', 'i/q', 't/ul', 'ist.', 'np/g', 'et']
+
+sector_url_list = ['htt', 'ps:/', '/pu', 'sh2', '.eas', 'tmon', 'ey.c', 'om/a', 'pi/q', 't/cl', 'ist', '/g', 'et']

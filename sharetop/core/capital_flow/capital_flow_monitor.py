@@ -1,7 +1,13 @@
-from ..utils import to_numeric
+from ..utils import get_quote_id, to_numeric, requests_obj
 from ..common.getter import get_history_bill as get_history_bill_for_stock
 from ..common.getter import get_real_time_bill_data_one
+from ...crawl.settings import *
+from ..common.common_base import CommonFunc
+from typing import Dict, List, Union
 import pandas as pd
+from enum import Enum
+
+common_func_obj = CommonFunc()
 
 
 @to_numeric
@@ -46,7 +52,6 @@ def get_real_time_history_bill(stock_code: str) -> pd.DataFrame:
     ----------
     stock_code : str
         股票代码
-
     Returns
     -------
     DataFrame
@@ -71,38 +76,35 @@ def get_real_time_history_bill(stock_code: str) -> pd.DataFrame:
     return df
 
 
-@to_numeric
-def get_real_time_capital_flow_data_one(code: str) -> pd.DataFrame:
+def get_real_time_capital_flow(stock_codes: Union[str, List[str]],
+                               ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
     """
     获取单只股票最新交易日的日内分钟级单子流入流出数据
     Parameters
     ----------
-    code : str
-        股票、债券代码
-
+    stock_codes : 股票、债券代码 str 或者是 list
+    如果是 str，为单支股票，如果为list，为多支股票
     Returns
     -------
     DataFrame
-        单只股票、债券最新交易日的日内分钟级单子流入流出数据
+        单支或者多支股票、债券最新交易日的日内实时子流入流出数据
     """
-    quote_id = get_quote_id(code)
-    params = (
-        ('secids', quote_id),
-        ('fields', 'f62,f184,f66,f69,f72,f75,f78,f81,f84,f87,f64,f65,f70,f71,f76,f77,f82,f83,f164,f166,f168,f170,f172,f252,f253,f254,f255,f256,f124,f6,f278,f279,f280,f281,f282'),
-    )
-    url = ''.join(capital_flow_real_time_url_list)
-    json_response = requests_obj.get(url, params).json()
-    return json_response
-    # columns = ['时间', '主力净流入', '小单净流入', '中单净流入', '大单净流入', '超大单净流入']
-    # name = jsonpath(json_response, '$..name')[0]
-    # code = quote_id.split('.')[-1]
-    # klines: List[str] = jsonpath(json_response, '$..klines[:]')
-    # if not klines:
-    #     columns.insert(0, '股票代码')
-    #     columns.insert(0, '股票名称')
-    #     return pd.DataFrame(columns=columns)
-    # rows = [kline.split(',') for kline in klines]
-    # df = pd.DataFrame(rows, columns=columns)
-    # df.insert(0, '股票代码', code)
-    # df.insert(0, '股票名称', name)
-    # return df
+    base_func_name = get_real_time_capital_flow.__name__
+    return common_func_obj.get_common_func(stock_codes, base_func_name)
+
+
+def get_sector_real_time_capital_flow(sector: str, monitor_time: str):
+    """
+    :param sector: industry: 行业, concept: 概念, area: 地域
+    :param monitor_time: 1: 当天, 5: 5日,  10: 10日
+    :return:
+    """
+    allowed_values = ['industry', 'concept', 'area']
+    if sector not in allowed_values:
+        raise ValueError(f"Invalid input: {sector}. Allowed values are {allowed_values}")
+    monitor_time_allowed_values = ['1', '5', '10']
+    if monitor_time not in monitor_time_allowed_values:
+        raise ValueError(f"Invalid input: {monitor_time}. Allowed values are {monitor_time_allowed_values}")
+    kwargs = {"monitor_time": monitor_time}
+    base_func_name = get_sector_real_time_capital_flow.__name__
+    return common_func_obj.get_common_func(sector, base_func_name, **kwargs)

@@ -214,3 +214,47 @@ EASTMONEY_HISTORY_BILL_FIELDS = {
     'f62': '收盘价',
     'f63': '涨跌幅',
 }
+
+today = {
+    "fid": "f62",
+    "fields": "f12,f14,f2,f3,f62,f184,f66,f69,f72,f75,f78,f81,f84,f87,f204,f205,f124,f1,f13",
+    "fields_map": {}
+}
+
+five_day = {
+    "fid": "f164",
+    "fields": "f14,f2,f109,f164,f165,f166,f167,f168,f169,f170,f171,f172,f173,f257,f258",
+    "fields_map": {"f109": "5日涨跌幅", "f14": "行业", "f164": "5日主力净流入额", "f165": "5日主力流入净占比",
+                   "f166": "5日超大单净流如额", "f167": "5日超大单流入净占比"}
+}
+
+ten_day = {
+    "fid": "f174",
+    "fields": "f12,f14,f2,f160,f174,f175,f176,f177,f178,f179,f180,f181,f182,f183,f260,f261,f124,f1,f13"
+}
+
+
+sector_dict = {
+    '1': today,
+    '5': five_day,
+    '10': ten_day
+}
+
+
+industry = {
+    "fs": "m:90+t:2"
+}
+
+concept = {
+    "fs": "m:90+t:3"
+}
+
+area = {
+    "fs": "m:90+t:1"
+}
+
+sector_dict2 = {
+    "industry": industry,
+    "concept": concept,
+    "area": area
+}

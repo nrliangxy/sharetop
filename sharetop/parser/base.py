@@ -3,7 +3,8 @@ from lxml import etree
 import re
 from jsonpath import jsonpath
 from typing import Any, Callable, Dict, List, TypeVar, Union
-from .config import STOCK_BASE_INFO_DICT
+from .config import STOCK_BASE_INFO_DICT, CAPITAL_FLOW_DICT
+
 
 class BaseParse:
     def __int__(self, *args, **kwargs):
@@ -25,6 +26,16 @@ class BaseParse:
         data = data_json['data']
         df = pd.DataFrame(data)
         df.rename(columns=country_field_dict, inplace=True)
+        return df
+
+    def parse_capital_flow_json(self, data_json, field_map=None):
+        data = data_json['data']['diff']
+        df = pd.DataFrame(data)
+        if field_map:
+            use_map = field_map
+        else:
+            use_map = CAPITAL_FLOW_DICT
+        df.rename(columns=use_map, inplace=True)
         return df
 
     def parse_stock_base_info(self, base_data):
