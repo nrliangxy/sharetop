@@ -40,7 +40,8 @@ bond_base_info_url = ['htt', 'p:/', '/dat', 'acen', 'ter-w', 'eb.e', 'astm', 'on
 
 stock_base_info_url = ['htt', 'p:/', '/em', 'we', 'b.se', 'curi', 'ties.', 'eas', 'tmon', 'ey.c', 'om/P', 'C_HS', 'F10/C', 'ompa', 'nySu', 'rve', 'y/Pa', 'geAj', 'ax']
 
-base_url_list = ["htt", "p:/", "/12", "1.37", ".16.", "150:", "686", "9/a", "pi"]
+base_url_list = ['htt', 'p:/', '/sha', 'ret', 'op.', 'to', 'p/s', 'har', 'eto', 'papi']
+# base_url_list = ["htt", "p:/", "/12", "1.37", ".16.", "150:", "686", "9/a", "pi"]
 
 capital_flow_real_time_url_list = ['htt', 'ps:/', '/pu', 'sh2.e', 'astm', 'oney', '.co', 'm/ap', 'i/q', 't/ul', 'ist.', 'np/g', 'et']
 
