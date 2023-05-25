@@ -75,15 +75,13 @@ class DataOne:
     @staticmethod
     @to_numeric
     def get_sector_real_time_capital_flow_data_one(sector: str, **kwargs) -> pd.DataFrame:
-        # po = 1 & pz = 500 & pn = 1 & np = 1 & fltt = 2 & invt = 2
-        print("code:", sector)
-        print("kwargs:", kwargs)
         monitor_time = kwargs.get("monitor_time")
         params_base = {"po": "1", "pz": "500", "pn": "1", "np": "1", "fltt": "2", "invt": "2"}
-        params_base.update(sector_dict[monitor_time])
+        params_dict = sector_dict[monitor_time]
+        fields_map = params_dict.pop("fields_map")
+        drop_field = params_dict.pop("drop_field")
+        params_base.update(params_dict)
         params_base.update(sector_dict2[sector])
-        print("params_base:", params_base)
         url = ''.join(sector_url_list)
         json_response = requests_obj.get(url, params_base).json()
-        return json_response
-        # return parse_obj.parse_capital_flow_json(json_response)
+        return parse_obj.parse_capital_flow_json(json_response, field_map=fields_map).drop(axis=1, columns=[drop_field])

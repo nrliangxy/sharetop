@@ -1,11 +1,9 @@
-from ..utils import get_quote_id, to_numeric, requests_obj
+from ..utils import to_numeric
 from ..common.getter import get_history_bill as get_history_bill_for_stock
 from ..common.getter import get_real_time_bill_data_one
-from ...crawl.settings import *
 from ..common.common_base import CommonFunc
 from typing import Dict, List, Union
 import pandas as pd
-from enum import Enum
 
 common_func_obj = CommonFunc()
 
