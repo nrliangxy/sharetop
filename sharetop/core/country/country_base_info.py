@@ -5,7 +5,7 @@ from ..utils import to_numeric, requests_obj, parse_obj
 
 
 @to_numeric
-def get_country_base_info(limit: int = None) -> pd.DataFrame:
+def get_country_base_info(token: str, limit: int = None) -> pd.DataFrame:
     base_url_list.append(country_base_url)
     data = {"limit": limit}
     r = requests_obj.get("".join(base_url_list), data=data)

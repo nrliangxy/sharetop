@@ -35,14 +35,23 @@ class BaseApplication:
             data[_] = item
         return data
 
+    def deal_price_fields(self, data, fields_list):
+        f152 = data['f152']
+        for _ in fields_list:
+            item = data[_] / math.pow(10, f152)
+            data[_] = item
+        return data
+
     def deal_real_time_data(self, columns, fields_k_v):
         data = self.json_data['data']
         if not data:
             columns.insert(0, '代码')
             columns.insert(0, '名称')
             return pd.DataFrame(columns=columns)
-        deal_fields_list = ["f43", "f169", "f44", "f45", "f46", "f60", "f71", "f164", "f167", "f170", "f171"]
+        deal_real_time_price = ["f170"]
+        deal_fields_list = ["f43", "f169", "f44", "f45", "f46", "f60", "f71", "f164", "f167", "f171"]
         data = self.deal_fields(data, deal_fields_list)
+        data = self.deal_price_fields(data, deal_real_time_price)
         r = {v: data.get(k) for k, v in fields_k_v.items()}
         return pd.DataFrame([r])
 
