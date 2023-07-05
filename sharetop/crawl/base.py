@@ -2,6 +2,8 @@ import requests
 from random import choice
 from sharetop.crawl.settings import *
 
+class CustomException(BaseException):
+    pass
 
 class BaseRequest:
     def __init__(self, *args, **kwargs):
@@ -13,9 +15,13 @@ class BaseRequest:
                 'User-Agent': choice(user_agent_list)
             }
         try:
-            return requests.get(url, data, headers=headers)
+            r = requests.get(url, data, headers=headers)
+            r_code = r.status_code
+            if r_code == 401:
+                return {"msg": "您还没有权限，请先开通权限"}
+            return r
         except:
-            raise "request error and contact author"
+            raise CustomException("request error and contact author")
 
     def post(self, url, data, user_agent=False, headers=None, *args, **kwargs):
         if user_agent:

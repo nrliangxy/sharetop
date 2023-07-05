@@ -4,11 +4,12 @@ from ..common.config import EASTMONEY_REQUEST_HEADERS, FS_DICT
 from .config import EASTMONEY_BOND_BASE_INFO_FIELDS
 from ..utils import requests_obj
 from ...crawl.settings import *
-from ..utils import to_numeric, process_dataframe_and_series
+from ..utils import to_numeric, process_dataframe_and_series, validate_request
 from ..common import get_market_realtime_by_fs
 
 
-def get_bond_base_info_list() -> pd.DataFrame:
+@validate_request
+def get_bond_base_info_list(token: str) -> pd.DataFrame:
     """
     获取全部债券基本信息列表
     Returns
@@ -30,6 +31,7 @@ def get_bond_base_info_list() -> pd.DataFrame:
     83  110567   山鹰转债  600567  山鹰国际   AA  2007-09-05 00:00:00   4.700000    0.496391  2007-09-17 00:00:00  2010-02-01 00:00:00  2.4055  票面利率和付息日期:本次发行的债券票面利率第一年为1.4%,第二年为1.7%,第三年为2....
     84  110026   中海转债  600026  中远海能  AAA  2007-07-02 00:00:00  20.000000    1.333453  2007-07-12 00:00:00  2008-03-27 00:00:00   0.737  票面利率:第一年为1.84%,第二年为2.05%,第三年为2.26%,第四年为2.47%,第...
     """
+
     page = 1
     dfs: List[pd.DataFrame] = []
     columns = EASTMONEY_BOND_BASE_INFO_FIELDS
@@ -84,8 +86,9 @@ def get_bond_realtime_quotes(**kwargs) -> pd.DataFrame:
     return df
 
 
+@validate_request
 @to_numeric
-def get_bond_base_info(bond_code: str) -> pd.Series:
+def get_bond_base_info(token: str, bond_code: str) -> pd.Series:
     """
     获取单只债券基本信息
     Parameters
@@ -96,6 +99,8 @@ def get_bond_base_info(bond_code: str) -> pd.Series:
     -------
     Series
         债券的一些基本信息
+        :param bond_code:
+        :param token:
     """
     columns = EASTMONEY_BOND_BASE_INFO_FIELDS
     params = (
@@ -115,7 +120,8 @@ def get_bond_base_info(bond_code: str) -> pd.Series:
     return s
 
 
-def get_bond_public() -> pd.DataFrame:
+@validate_request
+def get_bond_public(token: str) -> pd.DataFrame:
     """
     中国-债券信息披露-债券发行
     http://www.chinamoney.com.cn/chinese/xzjfx/

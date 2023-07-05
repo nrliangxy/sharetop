@@ -11,6 +11,8 @@ import pandas as pd
 from functools import wraps
 from ..crawl import BaseRequest
 from ..parser import BaseParse
+from ..crawl.settings import base_url_list
+
 
 F = TypeVar('F')
 requests_obj = BaseRequest()
@@ -57,6 +59,28 @@ def to_numeric(func: F) -> F:
         return o
 
     return run
+
+
+def validate_request(func):
+    def wrapper(*args, **kwargs):
+        # 执行校验逻辑，可以是任何你需要的操作
+        token = args[0]
+        headers = {"token": token}
+        data = {}
+        base_url_list.append("/a_stock/base_data/detection")
+        r = requests_obj.get("".join(base_url_list), data=data, headers=headers)
+        if isinstance(r, dict):
+            return r
+        data_json = r.json()
+        msg = data_json['data'].get('msg', "")
+        if msg == "success":
+            # 执行被装饰的函数
+            return func(*args, **kwargs)
+        else:
+            return {"msg": "校验失败，请确认token或者稍后再试或者联系管理员"}
+    return wrapper
+
+
 
 
 def search_quote_locally(keyword: str) -> Union[Quote, None]:
