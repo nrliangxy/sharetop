@@ -2,11 +2,12 @@ import uuid
 import pandas as pd
 from typing import List, Union
 from retry import retry
-from ..utils import to_numeric, requests_obj
+from ..utils import to_numeric, requests_obj, validate_request
 from jsonpath import jsonpath
 from .config import EastmoneyFundHeaders
 
 
+@validate_request
 @retry(tries=3)
 @to_numeric
 def get_invest_position(
@@ -110,7 +111,8 @@ def get_invest_position(
     return df
 
 
-def get_public_dates(fund_code: str) -> List[str]:
+@validate_request
+def get_public_dates(token: str, fund_code: str) -> List[str]:
     """
     获取历史上更新持仓情况的日期列表
     Parameters

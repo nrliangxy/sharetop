@@ -2,14 +2,15 @@ import rich
 import uuid
 import pandas as pd
 from retry import retry
-from ..utils import to_numeric, requests_obj
+from ..utils import to_numeric, requests_obj, validate_request
 from .config import EastmoneyFundHeaders
 from ...crawl.settings import *
 
 
+@validate_request
 @retry(tries=3)
 @to_numeric
-def get_base_info(fund_code: str) -> pd.Series:
+def get_base_info(token: str, fund_code: str) -> pd.Series:
     """
     获取基金的一些基本信息
     Parameters
@@ -20,6 +21,8 @@ def get_base_info(fund_code: str) -> pd.Series:
     -------
     Series
         基金的一些基本信息
+        :param fund_code:
+        :param token:
     """
     str_uuid = str(uuid.uuid4()).upper()
     params = (
@@ -39,6 +42,9 @@ def get_base_info(fund_code: str) -> pd.Series:
         'JJGS': '基金公司',
         'FSRQ': '净值更新日期',
         'COMMENTS': '简介',
+        'ENDNAV': '基金规模',
+        'FEGMRQ': '基金规模更新时间',
+        'RLEVEL_SZ': '最新评级'
     }
     items = json_response['Datas']
     if not items:

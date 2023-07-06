@@ -2,7 +2,7 @@ import requests
 import datetime
 import re
 import pandas as pd
-from ..utils import requests_obj, parse_obj
+from ..utils import requests_obj, parse_obj, validate_request
 
 
 def fund_export_df(text_data):
@@ -14,7 +14,8 @@ def fund_export_df(text_data):
     return temp_df
 
 
-def fund_open_fund_rank(symbol: str = "全部") -> pd.DataFrame:
+@validate_request
+def fund_open_fund_rank(token: str, symbol: str = "全部") -> pd.DataFrame:
     """
     东方财富网-数据中心-开放基金排行
     https://fund.eastmoney.com/data/fundranking.html
@@ -113,7 +114,8 @@ def fund_open_fund_rank(symbol: str = "全部") -> pd.DataFrame:
     return temp_df
 
 
-def fund_exchange_rank() -> pd.DataFrame:
+@validate_request
+def fund_exchange_rank(token: str) -> pd.DataFrame:
     """
     东方财富网-数据中心-场内交易基金排行
     https://fund.eastmoney.com/data/fbsfundranking.html
@@ -203,7 +205,8 @@ def fund_exchange_rank() -> pd.DataFrame:
     return temp_df
 
 
-def fund_money_rank() -> pd.DataFrame:
+@validate_request
+def fund_money_rank(token: str) -> pd.DataFrame:
     """
     东方财富网-数据中心-货币型基金排行
     https://fund.eastmoney.com/data/hbxfundranking.html
@@ -227,6 +230,7 @@ def fund_money_rank() -> pd.DataFrame:
     }
     r = requests_obj.get(url, params, headers=headers)
     json_data = r.json()
+    print("json_data========:", json_data)
     temp_df = pd.DataFrame(json_data["Data"])
     temp_df.reset_index(inplace=True)
     temp_df["index"] = list(range(1, len(temp_df) + 1))
@@ -257,7 +261,10 @@ def fund_money_rank() -> pd.DataFrame:
         "_",
         "_",
         "_",
+        "_",
+        "_",
     ]
+    print("temp_df:==============:", temp_df)
     temp_df = temp_df[
         [
             "序号",

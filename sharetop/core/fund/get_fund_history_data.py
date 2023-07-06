@@ -1,13 +1,14 @@
 import pandas as pd
-from ..utils import to_numeric, requests_obj
+from ..utils import to_numeric, requests_obj, validate_request
 from retry import retry
 from .config import EastmoneyFundHeaders
 from ...crawl.settings import *
 
 
+@validate_request
 @retry(tries=3)
 @to_numeric
-def get_fund_history(fund_code: str, pz: int = 40000) -> pd.DataFrame:
+def get_fund_history(token: str, fund_code: str, pz: int = 40000) -> pd.DataFrame:
     """
     根据基金代码和要获取的页码抓取基金净值信息
 
@@ -37,6 +38,9 @@ def get_fund_history(fund_code: str, pz: int = 40000) -> pd.DataFrame:
     1471 2015-06-04  0.9970  0.9970      --
     1472 2015-05-29  0.9950  0.9950      --
     1473 2015-05-27  1.0000  1.0000      --
+    :param pz:
+    :param fund_code:
+    :param token:
 
     """
     data = {

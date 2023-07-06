@@ -1,14 +1,15 @@
 import uuid
 import pandas as pd
 from typing import List, Union
-from ..utils import to_numeric, requests_obj
+from ..utils import to_numeric, requests_obj, validate_request
 from ...crawl.settings import *
 from .config import EastmoneyFundHeaders
 
 
+@validate_request
 @to_numeric
 def get_industry_distribution(
-    fund_code: str, dates: Union[str, List[str]] = None
+    token: str, fund_code: str, dates: Union[str, List[str]] = None
 ) -> pd.DataFrame:
     """
     获取指定基金行业分布信息
@@ -48,6 +49,9 @@ def get_industry_distribution(
     17  161725         文化、体育和娱乐业     --  2021-06-30              --
     18  161725                综合     --  2021-06-30              --
     19  161725                合计  93.08  2021-06-30  6493286.808514
+    :param dates:
+    :param fund_code:
+    :param token:
     """
     columns = {'HYMC': '行业名称', 'ZJZBL': '持仓比例', 'FSRQ': '公布日期', 'SZ': '市值'}
     str_uuid = str(uuid.uuid4()).upper()

@@ -1,12 +1,13 @@
 import re
 import pandas as pd
 from retry import retry
-from ..utils import requests_obj
+from ..utils import requests_obj, validate_request
 from ..common.getter import BaseApplication
 
 
+@validate_request
 @retry(tries=3)
-def get_fund_codes(ft: str = None) -> pd.DataFrame:
+def get_fund_codes(token: str, ft: str = None) -> pd.DataFrame:
     """
     获取天天基金网公开的全部公墓基金名单
     Parameters
@@ -39,6 +40,8 @@ def get_fund_codes(ft: str = None) -> pd.DataFrame:
     1983  012600             中银内核驱动股票C
     1984  011043             国泰价值先锋股票C
     1985  012516  国泰中证细分机械设备产业主题ETF联接A
+    :param ft:
+    :param token:
     """
     params = [
         ('op', 'dy'),

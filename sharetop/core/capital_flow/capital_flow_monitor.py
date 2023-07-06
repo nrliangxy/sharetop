@@ -80,7 +80,7 @@ def get_real_time_history_bill(stock_code: str) -> pd.DataFrame:
 def get_real_time_capital_flow(stock_codes: Union[str, List[str]],
                                ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
     """
-    获取单只股票最新交易日的日内分钟级单子流入流出数据
+    获取单只股票最新交易日的日内最新单子流入流出数据
     Parameters
     ----------
     stock_codes : 股票、债券代码 str 或者是 list
