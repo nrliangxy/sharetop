@@ -8,7 +8,7 @@ from .config import EastmoneyFundHeaders
 
 @validate_request
 @to_numeric
-def get_industry_distribution(
+def get_fund_industry_distribution(
     token: str, fund_code: str, dates: Union[str, List[str]] = None
 ) -> pd.DataFrame:
     """

@@ -4,10 +4,12 @@ from ..common import get_history as get_history_data_for_stock
 from ..common import get_real_time
 from ..common.config import FS_DICT
 from ..common import get_market_realtime_by_fs
-from ..utils import to_numeric, process_dataframe_and_series
+from ..utils import to_numeric, process_dataframe_and_series, validate_request
 
 
-def get_history_data(
+@validate_request
+def get_stock_kline_data(
+        token: str,
         stock_codes: Union[str, List[str]],
         beg: str = '19000101',
         end: str = '20500101',
@@ -92,10 +94,11 @@ def get_history_data(
     return df
 
 
-def get_real_time_data(
+def get_stock_real_time_data(
         stock_codes: Union[str, List[str]],
 ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
     """
+    获取单个或者多个股票的实时股价
     :param stock_codes: 单个或者多个股票代码
     也可以是1.000001 0为深证，1为上证， 116为港股
     :return: 获取单个或者多个股票的实时股价和相关信息
@@ -106,7 +109,7 @@ def get_real_time_data(
 
 @process_dataframe_and_series(remove_columns_and_indexes=['市场编号'])
 @to_numeric
-def get_market_real_time(fs: Union[str, List[str]] = None, **kwargs) -> pd.DataFrame:
+def get_stock_market_real_time_data(fs: Union[str, List[str]] = None, **kwargs) -> pd.DataFrame:
     """
         获取单个或者多个市场行情的最新状况
 

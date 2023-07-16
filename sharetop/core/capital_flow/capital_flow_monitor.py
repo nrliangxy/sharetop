@@ -10,7 +10,7 @@ common_func_obj = CommonFunc()
 
 @validate_request
 @to_numeric
-def get_history_bill(token: str, stock_code: str) -> pd.DataFrame:
+def get_stock_history_capital(token: str, stock_code: str) -> pd.DataFrame:
     """
     获取单只股票历史单子流入流出数据
     Parameters
@@ -45,7 +45,7 @@ def get_history_bill(token: str, stock_code: str) -> pd.DataFrame:
 
 
 @to_numeric
-def get_real_time_history_bill(stock_code: str) -> pd.DataFrame:
+def get_stock_real_time_daily_capital(stock_code: str) -> pd.DataFrame:
     """
     获取单只股票最新交易日的日内分钟级单子流入流出数据
 
@@ -77,7 +77,7 @@ def get_real_time_history_bill(stock_code: str) -> pd.DataFrame:
     return df
 
 
-def get_real_time_capital_flow(stock_codes: Union[str, List[str]],
+def get_stock_real_time_sum_capital(stock_codes: Union[str, List[str]],
                                ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
     """
     获取单只股票最新交易日的日内最新单子流入流出数据
@@ -90,11 +90,11 @@ def get_real_time_capital_flow(stock_codes: Union[str, List[str]],
     DataFrame
         单支或者多支股票、债券最新交易日的日内实时子流入流出数据
     """
-    base_func_name = get_real_time_capital_flow.__name__
+    base_func_name = get_stock_real_time_sum_capital.__name__
     return common_func_obj.get_common_func(stock_codes, base_func_name)
 
 
-def get_sector_real_time_capital_flow(sector: str, monitor_time: str):
+def get_stock_real_time_sector_capital(sector: str, monitor_time: str):
     """
     :param sector: industry: 行业, concept: 概念, area: 地域
     :param monitor_time: 1: 当天, 5: 5日,  10: 10日
@@ -107,5 +107,7 @@ def get_sector_real_time_capital_flow(sector: str, monitor_time: str):
     if monitor_time not in monitor_time_allowed_values:
         raise ValueError(f"Invalid input: {monitor_time}. Allowed values are {monitor_time_allowed_values}")
     kwargs = {"monitor_time": monitor_time}
-    base_func_name = get_sector_real_time_capital_flow.__name__
+    base_func_name = get_stock_real_time_sector_capital.__name__
     return common_func_obj.get_common_func(sector, base_func_name, **kwargs)
+
+

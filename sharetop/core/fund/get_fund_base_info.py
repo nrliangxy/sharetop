@@ -10,7 +10,7 @@ from ...crawl.settings import *
 @validate_request
 @retry(tries=3)
 @to_numeric
-def get_base_info(token: str, fund_code: str) -> pd.Series:
+def get_fund_base_info(token: str, fund_code: str) -> pd.Series:
     """
     获取基金的一些基本信息
     Parameters

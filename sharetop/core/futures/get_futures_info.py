@@ -2,11 +2,12 @@ import pandas as pd
 from ..common.config import FS_DICT
 from typing import Dict, List, Union
 from ..common.getter import get_market_realtime_by_fs, get_deal_detail
-from ..utils import process_dataframe_and_series
+from ..utils import process_dataframe_and_series, validate_request
 from ..common import get_history as get_quote_history_for_futures
 
 
-def get_futures_base_info() -> pd.DataFrame:
+@validate_request
+def get_futures_base_info(token: str) -> pd.DataFrame:
     """
     获取四个交易所全部期货基本信息
     Returns
@@ -31,12 +32,14 @@ def get_futures_base_info() -> pd.DataFrame:
     -----
     """
     columns = ['期货代码', '期货名称', '行情ID', '市场类型']
-    df = get_realtime_quotes()
+    df = get_future_all_realtime_quotes()
     df = df[columns]
     return df
 
 
-def get_history_data(
+@validate_request
+def get_future_history_data(
+    token: str,
     quote_ids: Union[str, List[str]],
     beg: str = '19000101',
     end: str = '20500101',
@@ -126,13 +129,11 @@ def get_history_data(
     return df
 
 
-
-
+@validate_request
 @process_dataframe_and_series(remove_columns_and_indexes=['市场编号'])
-def get_realtime_quotes() -> pd.DataFrame:
+def get_future_all_realtime_quotes(token: str) -> pd.DataFrame:
     """
     获取期货最新行情总体情况
-
     Returns
     -------
     DataFrame

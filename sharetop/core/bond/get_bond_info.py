@@ -112,6 +112,7 @@ def get_bond_base_info(token: str, bond_code: str) -> pd.Series:
     )
     url = ''.join(bond_base_info_url)
     json_response = requests_obj.get(url, params, headers=EASTMONEY_REQUEST_HEADERS).json()
+    print("json_response============:", json_response)
     if json_response['result'] is None:
         return pd.Series(index=columns.values(), dtype='object')
     items = json_response['result']['data']

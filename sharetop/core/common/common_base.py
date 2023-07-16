@@ -61,7 +61,7 @@ class DataOne:
 
     @staticmethod
     @to_numeric
-    def get_real_time_capital_flow_data_one(code: str, **kwargs) -> pd.DataFrame:
+    def get_stock_real_time_sum_capital_data_one(code: str, **kwargs) -> pd.DataFrame:
         quote_id = get_quote_id(code)
         params = (
             ('secids', quote_id),
@@ -74,7 +74,7 @@ class DataOne:
 
     @staticmethod
     @to_numeric
-    def get_sector_real_time_capital_flow_data_one(sector: str, **kwargs) -> pd.DataFrame:
+    def get_stock_real_time_sector_capital_data_one(sector: str, **kwargs) -> pd.DataFrame:
         monitor_time = kwargs.get("monitor_time")
         params_base = {"po": "1", "pz": "500", "pn": "1", "np": "1", "fltt": "2", "invt": "2"}
         params_dict = sector_dict[monitor_time]

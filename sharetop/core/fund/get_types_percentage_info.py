@@ -1,15 +1,16 @@
 from retry import retry
-from ..utils import to_numeric, requests_obj
+from ..utils import to_numeric, requests_obj, validate_request
 from .config import EastmoneyFundHeaders
 from typing import List, Union
 from ...crawl.settings import *
 import pandas as pd
 
 
+@validate_request
 @retry(tries=3)
 @to_numeric
-def get_types_percentage(
-    fund_code: str, dates: Union[List[str], str, None] = None
+def get_fund_types_percentage(
+    token: str, fund_code: str, dates: Union[List[str], str, None] = None
 ) -> pd.DataFrame:
     """
     获取指定基金不同类型占比信息
@@ -32,6 +33,9 @@ def get_types_percentage(
         基金代码   股票比重 债券比重  现金比重         总规模(亿元) 其他比重
     0  005827   94.4   --  6.06  880.1570625231    0
     0  005827  94.09   --  7.63   677.007455712    0
+    :param dates:
+    :param fund_code:
+    :param token:
     """
     columns = {'GP': '股票比重', 'ZQ': '债券比重', 'HB': '现金比重', 'JZC': '总规模(亿元)', 'QT': '其他比重'}
     df = pd.DataFrame(columns=columns.values())

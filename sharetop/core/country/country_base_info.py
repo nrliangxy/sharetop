@@ -5,7 +5,7 @@ from ..utils import to_numeric, requests_obj, parse_obj
 
 
 @to_numeric
-def get_country_base_info(token: str, limit: int = None) -> pd.DataFrame:
+def get_country_list(token: str, limit: int = None) -> pd.DataFrame:
     """
     国家基本信息列表
     :param token:

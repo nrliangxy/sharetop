@@ -1,14 +1,15 @@
 import uuid
 import pandas as pd
 from retry import retry
-from ..utils import to_numeric, requests_obj
+from ..utils import to_numeric, requests_obj, validate_request
 from .config import EastmoneyFundHeaders
 from ...crawl.settings import *
 
 
+@validate_request
 @retry(tries=3)
 @to_numeric
-def get_period_change(fund_code: str) -> pd.DataFrame:
+def get_fund_period_change(token: str, fund_code: str) -> pd.DataFrame:
     """
     获取基金阶段涨跌幅度
     Parameters
@@ -32,6 +33,8 @@ def get_period_change(fund_code: str) -> pd.DataFrame:
     7  161725  519.44  61.62     1   389   近五年
     8  161725    6.46   5.03   423  1243  今年以来
     9  161725  477.00                     成立以来
+    :param fund_code:
+    :param token:
     """
     str_uuid = str(uuid.uuid4()).upper()
     params = (

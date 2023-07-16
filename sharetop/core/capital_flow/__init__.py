@@ -1,13 +1,13 @@
 from .capital_flow_monitor import (
-    get_history_bill,
-    get_real_time_history_bill,
-    get_real_time_capital_flow,
-    get_sector_real_time_capital_flow
+    get_stock_history_capital,
+    get_stock_real_time_daily_capital,
+    get_stock_real_time_sum_capital,
+    get_stock_real_time_sector_capital,
 )
 
 __all__ = [
-    'get_history_bill',
-    'get_real_time_history_bill',
-    'get_real_time_capital_flow',
-    'get_sector_real_time_capital_flow'
+    'get_stock_history_capital',
+    'get_stock_real_time_daily_capital',
+    'get_stock_real_time_sum_capital',
+    'get_stock_real_time_sector_capital'
 ]

@@ -135,6 +135,7 @@ def bond_local_government_issue_cninfo(
     }
     r = requests.post(url, headers=headers, params=params)
     data_json = r.json()
+    print("data_json======:", data_json)
     temp_df = pd.DataFrame(data_json["records"])
     temp_df.rename(
         columns={

@@ -8,7 +8,7 @@ from ...crawl.settings import *
 @validate_request
 @retry(tries=3)
 @to_numeric
-def get_fund_history(token: str, fund_code: str, pz: int = 40000) -> pd.DataFrame:
+def get_fund_history_price(token: str, fund_code: str, pz: int = 40000) -> pd.DataFrame:
     """
     根据基金代码和要获取的页码抓取基金净值信息
 

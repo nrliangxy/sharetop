@@ -331,7 +331,8 @@ def get_base_info(quote_id: str) -> pd.Series:
         ('secid', quote_id),
     )
     url = 'http://push2.eastmoney.com/api/qt/stock/get'
-    json_response = requests_obj.get(url, params, headers=EASTMONEY_REQUEST_HEADERS)
+    json_response = requests_obj.get(url, params, headers=EASTMONEY_REQUEST_HEADERS).json()
+    print("json_response=================:", json_response)
     items = json_response['data']
     if not items:
         return pd.Series(index=EASTMONEY_BASE_INFO_FIELDS.values(), dtype='object')
@@ -371,7 +372,8 @@ def get_deal_detail(quote_id: str, max_count: int = 1000000) -> pd.DataFrame:
         ('pos', f'-{int(max_count)}'),
     )
     url = 'https://push2.eastmoney.com/api/qt/stock/details/get'
-    json_response = requests_obj.get(url, params)
+    json_response = requests_obj.get(url, params).json()
+    # print("json_response==================:", json_response)
     lines: List[str] = json_response['data']['details']
     rows = [line.split(',')[:4] for line in lines]
     df = pd.DataFrame(columns=columns, index=range(len(rows)))

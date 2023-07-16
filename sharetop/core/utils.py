@@ -2,6 +2,7 @@ import time
 import rich
 import json
 import re
+import copy
 from retry.api import retry
 from typing import Any, Callable, Dict, List, TypeVar, Union
 from .cache import SEARCH_RESULT_DICT
@@ -64,11 +65,14 @@ def to_numeric(func: F) -> F:
 def validate_request(func):
     def wrapper(*args, **kwargs):
         # 执行校验逻辑，可以是任何你需要的操作
+        if len(args) == 0:
+            return {"msg": "请填写有效token"}
         token = args[0]
         headers = {"token": token}
         data = {}
-        base_url_list.append("/a_stock/base_data/detection")
-        r = requests_obj.get("".join(base_url_list), data=data, headers=headers)
+        copy_base_url_list = copy.deepcopy(base_url_list)
+        copy_base_url_list.append("/a_stock/base_data/detection")
+        r = requests_obj.get("".join(copy_base_url_list), data=data, headers=headers)
         if isinstance(r, dict):
             return r
         data_json = r.json()

@@ -15,10 +15,8 @@ class BaseRequest:
                 'User-Agent': choice(user_agent_list)
             }
         try:
-            print('r_code================:')
             r = requests.get(url, data, headers=headers)
             r_code = r.status_code
-            print('r_code================:', r_code)
             if r_code == 401:
                 return {"msg": "您还没有权限，请先开通权限"}
             return r

@@ -3,6 +3,7 @@ import datetime
 import re
 import pandas as pd
 from ..utils import requests_obj, parse_obj, validate_request
+from .config import fund_money_cloumns
 
 
 def fund_export_df(text_data):
@@ -15,7 +16,7 @@ def fund_export_df(text_data):
 
 
 @validate_request
-def fund_open_fund_rank(token: str, symbol: str = "全部") -> pd.DataFrame:
+def get_fund_open_rank(token: str, symbol: str = "全部") -> pd.DataFrame:
     """
     东方财富网-数据中心-开放基金排行
     https://fund.eastmoney.com/data/fundranking.html
@@ -115,7 +116,7 @@ def fund_open_fund_rank(token: str, symbol: str = "全部") -> pd.DataFrame:
 
 
 @validate_request
-def fund_exchange_rank(token: str) -> pd.DataFrame:
+def get_fund_exchange_rank(token: str) -> pd.DataFrame:
     """
     东方财富网-数据中心-场内交易基金排行
     https://fund.eastmoney.com/data/fbsfundranking.html
@@ -206,7 +207,7 @@ def fund_exchange_rank(token: str) -> pd.DataFrame:
 
 
 @validate_request
-def fund_money_rank(token: str) -> pd.DataFrame:
+def get_fund_money_rank(token: str) -> pd.DataFrame:
     """
     东方财富网-数据中心-货币型基金排行
     https://fund.eastmoney.com/data/hbxfundranking.html
@@ -230,63 +231,17 @@ def fund_money_rank(token: str) -> pd.DataFrame:
     }
     r = requests_obj.get(url, params, headers=headers)
     json_data = r.json()
-    print("json_data========:", json_data)
-    temp_df = pd.DataFrame(json_data["Data"])
+    temp_data_json = []
+    for _ in json_data["Data"]:
+        temp_dict = {}
+        for k, v in _.items():
+            if k in fund_money_cloumns:
+                temp_dict[k] = v
+        temp_data_json.append(temp_dict)
+    temp_df = pd.DataFrame(temp_data_json)
+    temp_df.rename(columns=fund_money_cloumns, inplace=True)
     temp_df.reset_index(inplace=True)
     temp_df["index"] = list(range(1, len(temp_df) + 1))
-    temp_df.columns = [
-        "序号",
-        "近1年",
-        "近2年",
-        "近3年",
-        "近5年",
-        "基金代码",
-        "基金简称",
-        "日期",
-        "万份收益",
-        "年化收益率7日",
-        "_",
-        "年化收益率14日",
-        "年化收益率28日",
-        "近1月",
-        "近3月",
-        "近6月",
-        "今年来",
-        "成立来",
-        "_",
-        "手续费",
-        "_",
-        "_",
-        "_",
-        "_",
-        "_",
-        "_",
-        "_",
-        "_",
-    ]
-    print("temp_df:==============:", temp_df)
-    temp_df = temp_df[
-        [
-            "序号",
-            "基金代码",
-            "基金简称",
-            "日期",
-            "万份收益",
-            "年化收益率7日",
-            "年化收益率14日",
-            "年化收益率28日",
-            "近1月",
-            "近3月",
-            "近6月",
-            "近1年",
-            "近2年",
-            "近3年",
-            "近5年",
-            "今年来",
-            "成立来",
-            "手续费",
-        ]
-    ]
     temp_df['日期'] = pd.to_datetime(temp_df['日期']).dt.date
     temp_df['万份收益'] = pd.to_numeric(temp_df['万份收益'], errors="coerce")
     temp_df['年化收益率7日'] = pd.to_numeric(temp_df['年化收益率7日'], errors="coerce")
@@ -304,7 +259,8 @@ def fund_money_rank(token: str) -> pd.DataFrame:
     return temp_df
 
 
-def fund_hk_rank() -> pd.DataFrame:
+@validate_request
+def fund_hk_rank(token: str) -> pd.DataFrame:
     """
     东方财富网-数据中心-香港基金排行
     https://overseas.1234567.com.cn/FundList

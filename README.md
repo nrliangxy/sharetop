@@ -267,7 +267,7 @@ pip install sharetop --upgrade
 
 ```python
 >>> import sharetop as sp
->>> sp.capital_flow.get_history_bill('300033')
+>>> sp.capital_flow.get_stock_history_capital('300033')
     股票名称    股票代码          日期        主力净流入        小单净流入        中单净流入        大单净流入  ...  主力净流入占比  小单流入净占 比  中单流入净占比  大单流入净占比  超大单流入净占比     收盘价    涨跌幅
 0    同花顺  300033  2022-11-25     882089.0     224019.0   -1106108.0   -5475560.0  ...     0.23     0.06    -0.29    -1.42      1.65   91.70  -0.17
 1    同花顺  300033  2022-11-28  -26657991.0   -1271355.0   27929346.0    7247576.0  ...    -7.12    -0.34     7.46     1.94     -9.06   89.77  -2.10
@@ -288,7 +288,7 @@ pip install sharetop --upgrade
 
 ```python
 >>> import sharetop as sp
->>> sp.capital_flow.get_real_time_history_bill('300033')
+>>> sp.capital_flow.get_stock_real_time_daily_capital('300033')
       股票名称    股票代码                时间        主力净流入        小单净流入        中单净流入       大单净流入       超大单净流入
 0    同花顺  300033  2023-04-26 09:31   -3217110.0     282877.0    2934232.0  -2000281.0   -1216829.0
 1    同花顺  300033  2023-04-26 09:32   -2170472.0    1124259.0    1046212.0    155117.0   -2325589.0
@@ -309,7 +309,7 @@ pip install sharetop --upgrade
 
 ```python
 >>> import sharetop as sp
->>> sp.capital_flow.get_real_time_capital_flow('002714')
+>>> sp.capital_flow.get_stock_real_time_sum_capital('002714')
       今日主力净流入        超大单流入        超大单流出  ...      5日大单净流入      5日中单净流入      5日小单净流入
 0 -645896624.0  374761776.0  824220960.0  ... -234025066.0  122677726.0  746371952.0
 

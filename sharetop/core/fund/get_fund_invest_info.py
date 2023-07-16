@@ -10,12 +10,11 @@ from .config import EastmoneyFundHeaders
 @validate_request
 @retry(tries=3)
 @to_numeric
-def get_invest_position(
+def get_fund_invest_position(token: str,
     fund_code: str, dates: Union[str, List[str]] = None
 ) -> pd.DataFrame:
     """
     获取基金持仓占比数据
-
     Parameters
     ----------
     fund_code : str
@@ -112,7 +111,7 @@ def get_invest_position(
 
 
 @validate_request
-def get_public_dates(token: str, fund_code: str) -> List[str]:
+def get_fund_public_dates(token: str, fund_code: str) -> List[str]:
     """
     获取历史上更新持仓情况的日期列表
     Parameters

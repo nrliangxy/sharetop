@@ -1,13 +1,14 @@
 import rich
 import pandas as pd
-from ..utils import to_numeric, requests_obj
+from ..utils import to_numeric, requests_obj, validate_request
 from typing import List, Union
 from jsonpath import jsonpath
 from ...crawl.settings import *
 from ..common.getter import get_company_report
 
 
-def get_all_report_dates() -> pd.DataFrame:
+@validate_request
+def get_stock_all_report_dates(token: str) -> pd.DataFrame:
     """
     获取沪深市场的全部股票报告期信息
 
@@ -78,21 +79,24 @@ def get_all_report_dates() -> pd.DataFrame:
     return df
 
 
+@validate_request
 @to_numeric
-def get_company_report_base(stock_codes: Union[str, List[str]], report_class: str = None) -> pd.DataFrame:
+def get_stock_company_report_data(token: str, stock_codes: Union[str, List[str]], report_class: str = None) -> pd.DataFrame:
     """
+    获取单个或者多个上市公司历史年报
+    :param token:
     :param stock_codes: 指定的单个公司或者多个公司
-    :param report_class: 默认为空是全部，一季报，半年报，三季报，年报
+    :param report_class: 默认为空是全部，剩余参数可以为：“一季报”，“半年报”，“三季报”，“年报”
     :return:
     """
     return get_company_report(stock_codes, report_class)
 
 
+@validate_request
 @to_numeric
-def get_all_company_quarterly_report(date: str = None) -> pd.DataFrame:
+def get_stock_all_company_quarterly_report(token: str, date: str = None) -> pd.DataFrame:
     """
     获取沪深市场股票某一季度的表现情况
-
     Parameters
     ----------
     date : str, optional
@@ -159,7 +163,7 @@ def get_all_company_quarterly_report(date: str = None) -> pd.DataFrame:
         # 'ISNEW':'是否最新'
     }
 
-    dates = get_all_report_dates()['报告日期'].to_list()
+    dates = get_stock_all_report_dates(token)['报告日期'].to_list()
     if date is None:
         date = dates[0]
     if date not in dates:

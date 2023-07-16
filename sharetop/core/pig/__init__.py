@@ -1,8 +1,8 @@
 from .pig_detail import (
-    get_fcr
+    get_pig_fcr
 )
 
 
 __all__ = [
-    'get_fcr'
+    'get_pig_fcr'
 ]
