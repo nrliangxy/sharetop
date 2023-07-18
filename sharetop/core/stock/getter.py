@@ -5,6 +5,7 @@ from ..common import get_real_time
 from ..common.config import FS_DICT
 from ..common import get_market_realtime_by_fs
 from ..utils import to_numeric, process_dataframe_and_series, validate_request
+from .config import exchange_explain
 
 
 @validate_request
@@ -107,17 +108,17 @@ def get_stock_real_time_data(
     return df
 
 
+@validate_request
 @process_dataframe_and_series(remove_columns_and_indexes=['市场编号'])
 @to_numeric
-def get_stock_market_real_time_data(fs: Union[str, List[str]] = None, **kwargs) -> pd.DataFrame:
+def get_stock_market_real_time_data(token: str, fs: Union[str, List[str]] = None, is_explain: bool = False,
+                                    **kwargs) -> pd.DataFrame:
     """
         获取单个或者多个市场行情的最新状况
-
         Parameters
         ----------
         fs : Union[str, List[str]], optional
             行情名称或者多个行情名列表 可选值及示例如下
-
             - ``None``  沪深京A股市场行情
             - ``'沪深A股'`` 沪深A股市场行情
             - ``'沪A'`` 沪市A股市场行情
@@ -140,7 +141,6 @@ def get_stock_market_real_time_data(fs: Union[str, List[str]] = None, **kwargs) 
             - ``'深证系列指数'``    深证系列指数市场行情
             - ``'ETF'`` ETF 基金市场行情
             - ``'LOF'`` LOF 基金市场行情
-
 
         Returns
         -------
@@ -196,6 +196,8 @@ def get_stock_market_real_time_data(fs: Union[str, List[str]] = None, **kwargs) 
         Notes
         -----
         无论股票、可转债、期货还是基金。第一列表头始终叫 ``股票代码``
+        :param fs:
+        :param is_explain: 是否以中文解释的方式返回数据，默认是FALSE
         """
     fs_list: List[str] = []
     if fs is None:
@@ -216,5 +218,4 @@ def get_stock_market_real_time_data(fs: Union[str, List[str]] = None, **kwargs) 
     fs_str = ','.join(fs_list)
     df = get_market_realtime_by_fs(fs_str, **kwargs)
     df.rename(columns={'代码': '股票代码', '名称': '股票名称'}, inplace=True)
-
-    return df
+    return exchange_explain(df, is_explain)

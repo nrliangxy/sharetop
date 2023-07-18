@@ -5,10 +5,11 @@ from typing import List, Union
 from jsonpath import jsonpath
 from ...crawl.settings import *
 from ..common.getter import get_company_report
+from .config import exchange_explain
 
 
 @validate_request
-def get_stock_all_report_dates(token: str) -> pd.DataFrame:
+def get_stock_all_report_dates(token: str, is_explain: bool = False) -> pd.DataFrame:
     """
     获取沪深市场的全部股票报告期信息
 
@@ -76,7 +77,7 @@ def get_stock_all_report_dates(token: str) -> pd.DataFrame:
     df = pd.DataFrame(items)
     df = df.rename(columns=fields)
     df['报告日期'] = df['报告日期'].apply(lambda x: x.split()[0])
-    return df
+    return exchange_explain(df, is_explain)
 
 
 @validate_request
@@ -94,7 +95,7 @@ def get_stock_company_report_data(token: str, stock_codes: Union[str, List[str]]
 
 @validate_request
 @to_numeric
-def get_stock_all_company_quarterly_report(token: str, date: str = None) -> pd.DataFrame:
+def get_stock_all_company_quarterly_report(token: str, date: str = None, is_explain: bool = False) -> pd.DataFrame:
     """
     获取沪深市场股票某一季度的表现情况
     Parameters
@@ -142,6 +143,9 @@ def get_stock_all_company_quarterly_report(token: str, date: str = None) -> pd.D
 
     Notes
     -----
+    :param is_explain:
+    :param date:
+    :param token:
 
     """
     # TODO 加速
@@ -163,7 +167,7 @@ def get_stock_all_company_quarterly_report(token: str, date: str = None) -> pd.D
         # 'ISNEW':'是否最新'
     }
 
-    dates = get_stock_all_report_dates(token)['报告日期'].to_list()
+    dates = get_stock_all_report_dates(token)['report_date'].to_list()
     if date is None:
         date = dates[0]
     if date not in dates:
@@ -188,7 +192,6 @@ def get_stock_all_company_quarterly_report(token: str, date: str = None) -> pd.D
         )
         url = "".join(quarterly_report_url_list)
         response = requests_obj.get(url, params, user_agent=True)
-        # response = session.get(url, headers=EASTMONEY_REQUEST_HEADERS, params=params)
         items = jsonpath(response.json(), '$..data[:]')
         if not items:
             break
@@ -201,3 +204,4 @@ def get_stock_all_company_quarterly_report(token: str, date: str = None) -> pd.D
     df = pd.concat(dfs, axis=0, ignore_index=True)
     df = df.rename(columns=fields)[fields.values()]
     return df
+    # return exchange_explain(df, is_explain)
