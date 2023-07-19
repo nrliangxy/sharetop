@@ -39,6 +39,9 @@ class BaseParse:
         return df
 
     def parse_stock_base_info(self, base_data):
+        status = base_data.get("status")
+        if status and status == -1:
+            return pd.DataFrame([base_data])
         jbzl = base_data['jbzl'][0]
         fxxg = base_data['fxxg'][0]
         fxxg = {k.lower(): v for k, v in fxxg.items()}

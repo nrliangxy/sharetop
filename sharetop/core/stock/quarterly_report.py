@@ -5,7 +5,7 @@ from typing import List, Union
 from jsonpath import jsonpath
 from ...crawl.settings import *
 from ..common.getter import get_company_report
-from .config import exchange_explain
+from ..common.explain_change import exchange_explain
 
 
 @validate_request
@@ -82,15 +82,19 @@ def get_stock_all_report_dates(token: str, is_explain: bool = False) -> pd.DataF
 
 @validate_request
 @to_numeric
-def get_stock_company_report_data(token: str, stock_codes: Union[str, List[str]], report_class: str = None) -> pd.DataFrame:
+def get_stock_company_report_data(token: str, stock_codes: Union[str, List[str]], report_class: str = None,
+                                  is_explain: bool = False) -> pd.DataFrame:
     """
     获取单个或者多个上市公司历史年报
+    :param is_explain: 是否需要翻译
     :param token:
     :param stock_codes: 指定的单个公司或者多个公司
     :param report_class: 默认为空是全部，剩余参数可以为：“一季报”，“半年报”，“三季报”，“年报”
     :return:
     """
-    return get_company_report(stock_codes, report_class)
+    return exchange_explain(get_company_report(stock_codes, report_class), is_explain)
+
+
 
 
 @validate_request
@@ -203,5 +207,4 @@ def get_stock_all_company_quarterly_report(token: str, date: str = None, is_expl
         return df
     df = pd.concat(dfs, axis=0, ignore_index=True)
     df = df.rename(columns=fields)[fields.values()]
-    return df
-    # return exchange_explain(df, is_explain)
+    return exchange_explain(df, is_explain)

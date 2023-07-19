@@ -5,8 +5,7 @@ from ..common import get_real_time
 from ..common.config import FS_DICT
 from ..common import get_market_realtime_by_fs
 from ..utils import to_numeric, process_dataframe_and_series, validate_request
-from .config import exchange_explain
-
+from ..common.explain_change import exchange_explain
 
 @validate_request
 def get_stock_kline_data(
