@@ -95,16 +95,17 @@ def get_stock_kline_data(
 
 
 def get_stock_real_time_data(
-        stock_codes: Union[str, List[str]],
+        stock_codes: Union[str, List[str]], is_explain: bool = False
 ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
     """
     获取单个或者多个股票的实时股价
+    :param is_explain:
     :param stock_codes: 单个或者多个股票代码
     也可以是1.000001 0为深证，1为上证， 116为港股
     :return: 获取单个或者多个股票的实时股价和相关信息
     """
     df = get_real_time(stock_codes)
-    return df
+    return exchange_explain(df, is_explain)
 
 
 @validate_request

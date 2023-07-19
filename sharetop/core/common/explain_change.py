@@ -39,7 +39,7 @@ class Explain:
         "净利润": "net_profit",
         "净利润同比增长": "yoy_growth_net_profit",
         "净利润季度环比": "qoq_growth_net_profit",
-        "每股收益": "earnings_per_share",
+        "每股收益": "eps",
         "每股净资产": "navps",
         "净资产收益率": "roe",
         "销售毛利率": "gross_profit_margin",
@@ -106,6 +106,32 @@ class Explain:
         "律师事务所": "law_office",
         "会计师事务所": "accounting_firm",
         "交易所代码": "exchange_code"
+    }
+
+    get_stock_real_time_data_fields = {
+        "股票名称": "stock_name",
+        "股票代码": "stock_code",
+        "最新价": "latest_price",
+        "最高价": "highest_price",
+        "最低价": "lowest_price",
+        "开盘价": "open_price",
+        "成交量(手)": "volume(lots)",
+        "成交额(元)": "volume(RMB)",
+        "外盘(手)": "foreign_volume(lots)",
+        "昨收": "previous_close",
+        "均价": "average_price",
+        "总股本": "total_share_capital",
+        "流通股本": "floating_shares",
+        "每股净资产": "navps",
+        "每股收益": "eps",
+        "总市值": "market_cap",
+        "流通市值": "free_float_market_cap",
+        "内盘(手)": "domestic_volume(lots)",
+        "市盈率(TTM)": "ttm",
+        "市净率": "pb_ratio",
+        "涨跌值": "price_change",
+        "涨跌幅(%)": "percentage_change(%)",
+        "振幅(%)": "amplitude(%)"
     }
 
 
