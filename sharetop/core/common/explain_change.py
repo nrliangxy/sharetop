@@ -19,7 +19,7 @@ class Explain:
         "量比": "volume_ratio",
         "动态市盈率": "price_to_earnings_ratio",
         "成交量": "trading_volume",
-        "成交额": "trading_volume",
+        "成交额": "volume",
         "昨日收盘": "previous_close",
         "总市值": "market_cap",
         "流通市值": "free_float_market_cap",
@@ -115,8 +115,8 @@ class Explain:
         "最高价": "highest_price",
         "最低价": "lowest_price",
         "开盘价": "open_price",
-        "成交量(手)": "volume(lots)",
-        "成交额(元)": "volume(RMB)",
+        "成交量(手)": "trading_volume",
+        "成交额(元)": "volume",
         "外盘(手)": "foreign_volume(lots)",
         "昨收": "previous_close",
         "均价": "average_price",
@@ -130,8 +130,55 @@ class Explain:
         "市盈率(TTM)": "ttm",
         "市净率": "pb_ratio",
         "涨跌值": "price_change",
-        "涨跌幅(%)": "percentage_change(%)",
-        "振幅(%)": "amplitude(%)"
+        "涨跌幅(%)": "percentage_change",
+        "振幅(%)": "amplitude"
+    }
+
+    get_stock_kline_data_fields = {
+        "股票名称": "stock_name",
+        "股票代码": "stock_code",
+        "日期": "date",
+        "开盘": "opening_price",
+        "收盘": "closing_price",
+        "最高": "highest_price",
+        "最低": "lowest_price",
+        "成交量": "trading_volume",
+        "成交额": "volume",
+        "振幅": "amplitude",
+        "涨跌幅": "percentage_change",
+        "涨跌额": "price_change",
+        "换手率": "turnover_rate",
+        "盘后量": "after_hours_volume",
+        "盘后额": "after_hours_value"
+    }
+
+    get_stock_history_capital_fields = {
+        "股票名称": "stock_name",
+        "股票代码": "stock_code",
+        "日期": "date",
+        "主力净流入": "net_main_inflow",
+        "小单净流入": "small_order_net_inflow",
+        "中单净流入": "medium_order_net_inflow",
+        "大单净流入": "large_order_net_inflow",
+        "超大单净流入": "super_large_order_net_inflow",
+        "主力净流入占比": "main_net_inflow_ratio",
+        "小单流入净占比": "smail_order_net_inflow_ratio",
+        "中单流入净占比": "medium_order_net_inflow_ratio",
+        "大单流入净占比": "large_order_net_inflow_ratio",
+        "超大单流入净占比": "super_large_order_net_inflow_ratio",
+        "收盘价": "closing_price",
+        "涨跌幅": "percentage_change"
+    }
+
+    get_stock_real_time_daily_capital_fields = {
+        "股票名称": "stock_name",
+        "股票代码": "stock_code",
+        "时间": "time",
+        "主力净流入": "net_main_inflow",
+        "小单净流入": "small_order_net_inflow",
+        "中单净流入": "medium_order_net_inflow",
+        "大单净流入": "large_order_net_inflow",
+        "超大单净流入": "super_large_order_net_inflow"
     }
 
 

@@ -2,6 +2,7 @@ from ..utils import to_numeric, validate_request
 from ..common.getter import get_history_bill as get_history_bill_for_stock
 from ..common.getter import get_real_time_bill_data_one
 from ..common.common_base import CommonFunc
+from ..common.explain_change import exchange_explain
 from typing import Dict, List, Union
 import pandas as pd
 
@@ -10,7 +11,7 @@ common_func_obj = CommonFunc()
 
 @validate_request
 @to_numeric
-def get_stock_history_capital(token: str, stock_code: str) -> pd.DataFrame:
+def get_stock_history_capital(token: str, stock_code: str, is_explain: bool = False) -> pd.DataFrame:
     """
     获取单只股票历史单子流入流出数据
     Parameters
@@ -35,20 +36,20 @@ def get_stock_history_capital(token: str, stock_code: str) -> pd.DataFrame:
     99   贵州茅台  600519  2021-07-28  3.997645e+08   2603511.0 -4.023677e+08  2.315648e+08  1.681997e+08     2.70     0.02    -2.72     1.57      1.14  1768.90  3.27
     100  贵州茅台  600519  2021-07-29 -9.209842e+08  -2312235.0  9.232964e+08 -3.959741e+08 -5.250101e+08    -8.15    -0.02     8.17    -3.50     -4.65  1749.79 -1.08
     101  贵州茅台  600519  2021-07-30 -1.524740e+09  -6020099.0  1.530761e+09  1.147248e+08 -1.639465e+09   -11.63    -0.05    11.68     0.88    -12.51  1678.99 -4.05
+    :param is_explain:
     :param stock_code:
     :param token:
 
     """
     df = get_history_bill_for_stock(stock_code)
     df.rename(columns={'代码': '股票代码', '名称': '股票名称'}, inplace=True)
-    return df
+    return exchange_explain(df, is_explain)
 
 
 @to_numeric
-def get_stock_real_time_daily_capital(stock_code: str) -> pd.DataFrame:
+def get_stock_real_time_daily_capital(stock_code: str, is_explain: bool = False) -> pd.DataFrame:
     """
     获取单只股票最新交易日的日内分钟级单子流入流出数据
-
     Parameters
     ----------
     stock_code : str
@@ -72,13 +73,14 @@ def get_stock_real_time_daily_capital(stock_code: str) -> pd.DataFrame:
     237  600519  2021-07-29 14:58 -920984196.0 -2312233.0  923296442.0 -395974137.0 -525010059.0
     238  600519  2021-07-29 14:59 -920984196.0 -2312233.0  923296442.0 -395974137.0 -525010059.0
     239  600519  2021-07-29 15:00 -920984196.0 -2312233.0  923296442.0 -395974137.0 -525010059.0
+    :param stock_code:
+    :param is_explain:
     """
     df = get_real_time_bill_data_one(stock_code)
-    return df
-
+    return exchange_explain(df, is_explain)
 
 def get_stock_real_time_sum_capital(stock_codes: Union[str, List[str]],
-                               ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
+                                    ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
     """
     获取单只股票最新交易日的日内最新单子流入流出数据
     Parameters
@@ -109,5 +111,3 @@ def get_stock_real_time_sector_capital(sector: str, monitor_time: str):
     kwargs = {"monitor_time": monitor_time}
     base_func_name = get_stock_real_time_sector_capital.__name__
     return common_func_obj.get_common_func(sector, base_func_name, **kwargs)
-
-

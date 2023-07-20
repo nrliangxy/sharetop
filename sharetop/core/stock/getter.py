@@ -7,6 +7,7 @@ from ..common import get_market_realtime_by_fs
 from ..utils import to_numeric, process_dataframe_and_series, validate_request
 from ..common.explain_change import exchange_explain
 
+
 @validate_request
 def get_stock_kline_data(
         token: str,
@@ -15,11 +16,11 @@ def get_stock_kline_data(
         end: str = '20500101',
         klt: int = 101,
         fqt: int = 1,
+        is_explain: bool = False,
         **kwargs,
 ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
     """
     获取股票的 K 线数据
-
     Parameters
     ----------
     stock_codes : Union[str,List[str]]
@@ -82,6 +83,13 @@ def get_stock_kline_data(
             2848  比亚迪  002594  2023-04-06  248.00  250.00  ...  -0.37 -0.92   0.70    0    0
             2849  比亚迪  002594  2023-04-07  250.05  249.28  ...  -0.29 -0.72   0.59    0    0
             2850  比亚迪  002594  2023-04-10  249.28  251.00  ...   0.69  1.72   0.84    0    0
+            :param token:
+            :param fqt:
+            :param klt:
+            :param end:
+            :param beg:
+            :param stock_codes:
+            :param is_explain:
     """
     df = get_history_data_for_stock(
         stock_codes, beg=beg, end=end, klt=klt, fqt=fqt, **kwargs
@@ -91,7 +99,7 @@ def get_stock_kline_data(
     elif isinstance(df, dict):
         for stock_code in df.keys():
             df[stock_code].rename(columns={'代码': '股票代码', '名称': '股票名称'}, inplace=True)
-    return df
+    return exchange_explain(df, is_explain)
 
 
 def get_stock_real_time_data(
