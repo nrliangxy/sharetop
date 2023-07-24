@@ -181,6 +181,37 @@ class Explain:
         "超大单净流入": "super_large_order_net_inflow"
     }
 
+    get_stock_real_time_sum_capital_fields = {
+        "今日主力净流入": "net_main_inflow_today",
+        "超大单流入": "super_large_inflow",
+        "超大单流出": "super_large_outflow",
+        "今日超大单净流入": "net_super_large_inflow_today",
+        "超大单净比": "net_super_large_ratio",
+        "大单流入": "large_inflow",
+        "大单流出": "large_outflow",
+        "今日大单净流入": "net_large_inflow_today",
+        "大单净比": "net_large_ratio",
+        "中单流入": "medium_inflow",
+        "中单流出": "medium_outflow",
+        "今日中单净流入": "net_medium_inflow_today",
+        "中单净比": "net_medium_ratio",
+        "小单流入": "small_inflow",
+        "小单流出": "small_outflow",
+        "今日小单净流入": "net_small_inflow_today",
+        "小单净比": "net_small_ratio",
+        "主力净比": "net_main_ratio",
+        "20日主力净流入": "net_main_inflow_20_days",
+        "20日超大单净流入": "net_super_large_inflow_20_days",
+        "20日大单净流入": "net_large_inflow_20_days",
+        "20日中单净流入": "net_medium_inflow_20_days",
+        "20日小单净流入": "net_small_inflow_20_days",
+        "5日主力净流入": "net_main_inflow_5_days",
+        "5日超大单净流入": "net_super_large_inflow_5_days",
+        "5日大单净流入": "net_large_inflow_5_days",
+        "5日中单净流入": "net_medium_inflow_5_days",
+        "5日小单净流入": "net_small_inflow_5_days"
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:

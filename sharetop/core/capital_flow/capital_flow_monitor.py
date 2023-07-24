@@ -79,7 +79,8 @@ def get_stock_real_time_daily_capital(stock_code: str, is_explain: bool = False)
     df = get_real_time_bill_data_one(stock_code)
     return exchange_explain(df, is_explain)
 
-def get_stock_real_time_sum_capital(stock_codes: Union[str, List[str]],
+
+def get_stock_real_time_sum_capital(stock_codes: Union[str, List[str]], is_explain: bool = False
                                     ) -> Union[pd.DataFrame, Dict[str, pd.DataFrame]]:
     """
     获取单只股票最新交易日的日内最新单子流入流出数据
@@ -93,7 +94,7 @@ def get_stock_real_time_sum_capital(stock_codes: Union[str, List[str]],
         单支或者多支股票、债券最新交易日的日内实时子流入流出数据
     """
     base_func_name = get_stock_real_time_sum_capital.__name__
-    return common_func_obj.get_common_func(stock_codes, base_func_name)
+    return exchange_explain(common_func_obj.get_common_func(stock_codes, base_func_name), is_explain)
 
 
 def get_stock_real_time_sector_capital(sector: str, monitor_time: str):
