@@ -212,6 +212,23 @@ class Explain:
         "5日小单净流入": "net_small_inflow_5_days"
     }
 
+    get_stock_real_time_sector_capital_fields = {
+        "今日涨跌幅(%)": "percentage_change_today",
+        "行业": "industry",
+        "今日主力净流入额": "net_main_inflow_amount_today",
+        "今日超大单净流入额": "net_super_large_inflow_amount_today",
+        "今日超大单流入净占比(%)": "net_super_large_inflow_ratio_today",
+        "今日大单净流入额": "net_large_inflow_amount_today",
+        "今日大单流入净占比(%)": "net_large_inflow_ratio_today",
+        "今日中单净流入额": "net_medium_inflow_amount_today",
+        "今日中单流入净占比(%)": "net_medium_inflow_ratio_today",
+        "今日小单净流入额": "net_small_inflow_ratio_today",
+        "今日小单流入净占比(%)": "net_small_inflow_ratio_today",
+        "今日主力流入净占比(%)": "net_main_inflow_ratio_today",
+        "股票名称": "stock_name",
+        "股票代码": "stock_code"
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:

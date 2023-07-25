@@ -92,13 +92,16 @@ def get_stock_real_time_sum_capital(stock_codes: Union[str, List[str]], is_expla
     -------
     DataFrame
         单支或者多支股票、债券最新交易日的日内实时子流入流出数据
+        :param stock_codes:
+        :param is_explain:
     """
     base_func_name = get_stock_real_time_sum_capital.__name__
     return exchange_explain(common_func_obj.get_common_func(stock_codes, base_func_name), is_explain)
 
 
-def get_stock_real_time_sector_capital(sector: str, monitor_time: str):
+def get_stock_real_time_sector_capital(sector: str, monitor_time: str, is_explain: bool = False):
     """
+    :param is_explain:
     :param sector: industry: 行业, concept: 概念, area: 地域
     :param monitor_time: 1: 当天, 5: 5日,  10: 10日
     :return:
@@ -111,4 +114,4 @@ def get_stock_real_time_sector_capital(sector: str, monitor_time: str):
         raise ValueError(f"Invalid input: {monitor_time}. Allowed values are {monitor_time_allowed_values}")
     kwargs = {"monitor_time": monitor_time}
     base_func_name = get_stock_real_time_sector_capital.__name__
-    return common_func_obj.get_common_func(sector, base_func_name, **kwargs)
+    return exchange_explain(common_func_obj.get_common_func(sector, base_func_name, **kwargs), is_explain)
