@@ -10,7 +10,7 @@ from .get_fund_rank import (
     get_fund_open_rank,
     get_fund_exchange_rank,
     get_fund_money_rank,
-    fund_hk_rank
+    get_fund_hk_rank
 )
 
 __all__ = [
@@ -26,5 +26,5 @@ __all__ = [
     'get_fund_open_rank',
     'get_fund_exchange_rank',
     'get_fund_money_rank',
-    'fund_hk_rank'
+    'get_fund_hk_rank'
 ]

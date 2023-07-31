@@ -11,7 +11,7 @@ from ..common.explain_change import exchange_explain
 @validate_request
 @retry(tries=3)
 @to_numeric
-def get_fund_base_info(token: str, fund_code: str) -> pd.Series:
+def get_fund_base_info(token: str, fund_code: str, is_explain: bool = False) -> pd.Series:
     """
     获取基金的一些基本信息
     Parameters
@@ -22,6 +22,7 @@ def get_fund_base_info(token: str, fund_code: str) -> pd.Series:
     -------
     Series
         基金的一些基本信息
+        :param is_explain:
         :param fund_code:
         :param token:
     """
@@ -54,5 +55,5 @@ def get_fund_base_info(token: str, fund_code: str) -> pd.Series:
         return pd.Series(index=columns.values())
 
     s = pd.DataFrame([items])
-    s = s.apply(lambda x: x.replace('\n', ' ').strip() if isinstance(x, str) else x)
-    return s
+    df = s.apply(lambda x: x.replace('\n', ' ').strip() if isinstance(x, str) else x)
+    return exchange_explain(df, is_explain)

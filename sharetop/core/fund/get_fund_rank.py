@@ -262,7 +262,7 @@ def get_fund_money_rank(token: str, is_explain: bool = False) -> pd.DataFrame:
 
 
 @validate_request
-def fund_hk_rank(token: str, is_explain: bool = False) -> pd.DataFrame:
+def get_fund_hk_rank(token: str, is_explain: bool = False) -> pd.DataFrame:
     """
     东方财富网-数据中心-香港基金排行
     https://overseas.1234567.com.cn/FundList

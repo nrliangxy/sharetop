@@ -318,7 +318,7 @@ class Explain:
         "成立来": "since_inception"
     }
 
-    fund_hk_rank_fields = {
+    get_fund_hk_rank_fields = {
         "序号": "number",
         "基金代码": "fund_code",
         "基金简称": "fund_name",
@@ -337,6 +337,27 @@ class Explain:
         "成立来": "since_inception",
         "可购买": "available_purchase",
         "香港基金代码": "hong_kong_fund_code"
+    }
+
+    get_fund_base_info_fields = {
+        "基金代码": "fund_code",
+        "基金简称": "fund_name",
+        "涨跌幅": "percentage_change",
+        "最新净值": "latest_nav",
+        "成立日期": "inception_date",
+        "最新评级": "latest_rating",
+        "基金公司": "fund_company",
+        "净值更新日期": "nav_update_date",
+        "基金规模": "fund_size",
+        "基金规模更新时间": "fund_size_update_date",
+        "简介": "introduction"
+    }
+
+    get_fund_history_price_fields = {
+        "日期": "date",
+        "单位净值": "nav_per_unit",
+        "累计净值": "cumulative_net_asset_value",
+        "涨跌幅": "percentage_change"
     }
 
 
