@@ -9,12 +9,13 @@ from .config import (
     EASTMONEY_STOCK_DAILY_BILL_BOARD_FIELDS,
 )
 from ...crawl.settings import *
+from ..common.explain_change import exchange_explain
 
 
 @validate_request
 @to_numeric
 @retry(tries=3)
-def get_stock_dragon_tiger_list(token: str, start_date: str = None, end_date: str = None) -> pd.DataFrame:
+def get_stock_dragon_tiger_list(token: str, start_date: str = None, end_date: str = None, is_explain: bool = False) -> pd.DataFrame:
     """
     获取指定日期区间的龙虎榜详情数据
     Parameters
@@ -135,4 +136,4 @@ def get_stock_dragon_tiger_list(token: str, start_date: str = None, end_date: st
 
     df = pd.concat(dfs, ignore_index=True)
     df['上榜日期'] = df['上榜日期'].astype('str').apply(lambda x: x.split(' ')[0])
-    return df
+    return exchange_explain(df, is_explain)

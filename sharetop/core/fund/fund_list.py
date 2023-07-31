@@ -3,11 +3,12 @@ import pandas as pd
 from retry import retry
 from ..utils import requests_obj, validate_request
 from ..common.getter import BaseApplication
+from ..common.explain_change import exchange_explain
 
 
 @validate_request
 @retry(tries=3)
-def get_fund_codes(token: str, ft: str = None) -> pd.DataFrame:
+def get_fund_codes(token: str, ft: str = None, is_explain: bool = False) -> pd.DataFrame:
     """
     获取天天基金网公开的全部公墓基金名单
     Parameters
@@ -40,6 +41,7 @@ def get_fund_codes(token: str, ft: str = None) -> pd.DataFrame:
     1983  012600             中银内核驱动股票C
     1984  011043             国泰价值先锋股票C
     1985  012516  国泰中证细分机械设备产业主题ETF联接A
+    :param is_explain:
     :param ft:
     :param token:
     """
@@ -70,4 +72,4 @@ def get_fund_codes(token: str, ft: str = None) -> pd.DataFrame:
     results = re.findall('\[.*\]', response.text)
     new_results = eval(results[0])
     application_obj = BaseApplication(new_results)
-    return application_obj.deal_fund_list()
+    return exchange_explain(application_obj.deal_fund_list(), is_explain)

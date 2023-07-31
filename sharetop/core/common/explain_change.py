@@ -229,6 +229,116 @@ class Explain:
         "股票代码": "stock_code"
     }
 
+    get_stock_dragon_tiger_list_fields = {
+        "股票名称": "stock_name",
+        "股票代码": "stock_code",
+        "上榜日期": "listing_date",
+        "解读": "interpretation",
+        "收盘价": "closing_price",
+        "涨跌幅": "percentage_change",
+        "换手率": "turnover_rate",
+        "龙虎榜净买额": "net_buying_amount_on_dtl",
+        "龙虎榜买入额": "buying_amount_on_dtl",
+        "龙虎榜卖出额": "selling_amount_on_dtl",
+        "龙虎榜成交额": "transaction_amount_on_dtl",
+        "市场总成交额": "total_market_turnover",
+        "净买额占总成交比": "net_buy_ratio",
+        "成交额占总成交比": "turnover_ratio",
+        "流通市值": "free_float_market_cap",
+        "上榜原因": "reason_listing"
+    }
+
+    get_fund_codes_fields = {
+        "基金代码": "fund_code",
+        "基金名称": "fund_name",
+        "自成立以来收益(%)": "cumulative_return_since_inception",
+        "成立时间": "inception_date",
+        "净值时间": "nav_date",
+        "单位净值": "nav_per_unit",
+        "累计净值": "cumulative_net_asset_value"
+    }
+
+    get_fund_open_rank_fields = {
+        "序号": "number",
+        "基金代码": "fund_code",
+        "基金简称": "fund_name",
+        "日期": "date",
+        "单位净值": "nav_per_unit",
+        "累计净值": "cumulative_net_asset_value",
+        "日增长率": "daily_growth_rate",
+        "近1周": "last_one_week",
+        "近1月": "last_one_month",
+        "近3月": "last_three_month",
+        "近6月": "last_six_month",
+        "近1年": "last_one_year",
+        "近2年": "last_two_year",
+        "近3年": "last_three_year",
+        "今年来": "year_to_day",
+        "成立来": "since_inception",
+        "手续费": "handling_fee"
+    }
+
+    get_fund_exchange_rank_fields = {
+        '序号': 'number',
+        "基金代码": "fund_code",
+        "基金简称": "fund_name",
+        "类型": "fund_type",
+        "日期": "date",
+        "单位净值": "nav_per_unit",
+        "累计净值": "cumulative_net_asset_value",
+        "近1周": "last_one_week",
+        "近1月": "last_one_month",
+        "近3月": "last_three_month",
+        "近6月": "last_six_month",
+        "近1年": "last_one_year",
+        "近2年": "last_two_year",
+        "近3年": "last_three_year",
+        "今年来": "year_to_day",
+        "成立来": "since_inception",
+        "成立日期": "inception_date"
+    }
+
+    get_fund_money_rank_fields = {
+        "序号": "number",
+        "近1月": "last_one_month",
+        "近3月": "last_three_month",
+        "近6月": "last_six_month",
+        "近1年": "last_one_year",
+        "近2年": "last_two_year",
+        "近3年": "last_three_year",
+        "近5年": "last_five_year",
+        "基金代码": "fund_code",
+        "基金简称": "fund_name",
+        "日期": "date",
+        "万份收益": "income_yield",
+        "年化收益率7日": "7_day_annualized_yield",
+        "年化收益率14日": "14_day_annualized_yield",
+        "年化收益率28日": "28_day_annualized_yield",
+        "今年来": "year_to_day",
+        "成立来": "since_inception"
+    }
+
+    fund_hk_rank_fields = {
+        "序号": "number",
+        "基金代码": "fund_code",
+        "基金简称": "fund_name",
+        "币种": "currency",
+        "日期": "date",
+        "单位净值": "nav_per_unit",
+        "日增长率": "daily_growth_rate",
+        "近1周": "last_one_week",
+        "近1月": "last_one_month",
+        "近3月": "last_three_month",
+        "近6月": "last_six_month",
+        "近1年": "last_one_year",
+        "近2年": "last_two_year",
+        "近3年": "last_three_year",
+        "今年来": "year_to_day",
+        "成立来": "since_inception",
+        "可购买": "available_purchase",
+        "香港基金代码": "hong_kong_fund_code"
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:

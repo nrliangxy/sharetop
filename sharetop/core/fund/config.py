@@ -25,5 +25,6 @@ fund_money_cloumns = {
     "SYL_5N": "近5年",
     "SYL_JN": "今年来",
     "SYL_LN": "成立来",
+    "index": '序号'
 }
 

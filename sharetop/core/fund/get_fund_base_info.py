@@ -5,6 +5,7 @@ from retry import retry
 from ..utils import to_numeric, requests_obj, validate_request
 from .config import EastmoneyFundHeaders
 from ...crawl.settings import *
+from ..common.explain_change import exchange_explain
 
 
 @validate_request
@@ -47,11 +48,11 @@ def get_fund_base_info(token: str, fund_code: str) -> pd.Series:
         'RLEVEL_SZ': '最新评级'
     }
     items = json_response['Datas']
+    items = {columns.get(k): v for k, v in items.items() if columns.get(k)}
     if not items:
         rich.print('基金代码', fund_code, '可能有误')
         return pd.Series(index=columns.values())
 
-    s = pd.Series(json_response['Datas']).rename(index=columns)[columns.values()]
-
+    s = pd.DataFrame([items])
     s = s.apply(lambda x: x.replace('\n', ' ').strip() if isinstance(x, str) else x)
     return s
