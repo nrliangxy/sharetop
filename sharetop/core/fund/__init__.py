@@ -1,5 +1,5 @@
 from .fund_list import get_fund_codes
-from .get_fund_real_time import get_fund_real_time_god
+# from .get_fund_real_time import get_fund_real_time_god
 from .get_fund_history_data import get_fund_history_price
 from .get_fund_invest_info import get_fund_invest_position, get_fund_public_dates
 from .get_period_change_info import get_fund_period_change
@@ -15,7 +15,6 @@ from .get_fund_rank import (
 
 __all__ = [
     'get_fund_codes',
-    'get_fund_real_time_god',
     'get_fund_history_price',
     'get_fund_invest_position',
     'get_fund_public_dates',

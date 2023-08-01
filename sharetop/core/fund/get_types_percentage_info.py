@@ -4,13 +4,14 @@ from .config import EastmoneyFundHeaders
 from typing import List, Union
 from ...crawl.settings import *
 import pandas as pd
+from ..common.explain_change import exchange_explain
 
 
 @validate_request
 @retry(tries=3)
 @to_numeric
 def get_fund_types_percentage(
-    token: str, fund_code: str, dates: Union[List[str], str, None] = None
+    token: str, fund_code: str, dates: Union[List[str], str, None] = None, is_explain: bool = False
 ) -> pd.DataFrame:
     """
     获取指定基金不同类型占比信息
@@ -65,4 +66,4 @@ def get_fund_types_percentage(
         _df = _df.rename(columns=columns)
         df = pd.concat([df, _df], axis=0, ignore_index=True)
     df.insert(0, '基金代码', fund_code)
-    return df
+    return exchange_explain(df, is_explain)

@@ -5,14 +5,15 @@ from retry import retry
 from ..utils import to_numeric, requests_obj, validate_request
 from jsonpath import jsonpath
 from .config import EastmoneyFundHeaders
+from ..common.explain_change import exchange_explain
 
 
 @validate_request
 @retry(tries=3)
 @to_numeric
 def get_fund_invest_position(token: str,
-    fund_code: str, dates: Union[str, List[str]] = None
-) -> pd.DataFrame:
+                             fund_code: str, dates: Union[str, List[str]] = None, is_explain: bool = False
+                             ) -> pd.DataFrame:
     """
     获取基金持仓占比数据
     Parameters
@@ -65,9 +66,12 @@ def get_fund_invest_position(token: str,
     17  161725  000596  古井贡酒   3.51  -0.69  2021-12-31
     18  161725  600779   水井坊   2.85  -0.41  2021-12-31
     19  161725  603589   口子窖   2.68   2.68  2021-12-31
+    :param token:
+    :param fund_code:
+    :param dates:
+    :param is_explain:
 
     """
-
     columns = {
         'GPDM': '股票代码',
         'GPJC': '股票简称',
@@ -107,7 +111,7 @@ def get_fund_invest_position(token: str,
     if not dfs:
         return pd.DataFrame(columns=fields)
     df = pd.concat(dfs, axis=0, ignore_index=True).rename(columns=columns)[fields]
-    return df
+    return exchange_explain(df, is_explain)
 
 
 @validate_request

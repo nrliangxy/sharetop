@@ -360,6 +360,117 @@ class Explain:
         "涨跌幅": "percentage_change"
     }
 
+    get_fund_industry_distribution_fields = {
+        "基金代码": "fund_code",
+        "行业名称": "industry_name",
+        "持仓比例": "position_ratio",
+        "公布日期": "announcement_date",
+        "市值": "market_cap"
+    }
+
+    get_fund_invest_position_fields = {
+        "基金代码": "fund_code",
+        "股票代码": "stock_code",
+        "股票简称": "stock_name",
+        "持仓占比": "weight",
+        "较上期变化": "change",
+        "公开日期": "pub_date"
+    }
+
+    get_fund_period_change_fields = {
+        "基金代码": "fund_code",
+        "收益率": "yield",
+        "同类平均": "category_average",
+        "同类排行": "category_ranking",
+        "同类总数": "total_number_categories",
+        "时间段": "time_period"
+    }
+
+    get_fund_types_percentage_fields = {
+        "基金代码": "fund_code",
+        "股票比重": "stock_weight",
+        "债券比重": "bond_weight",
+        "现金比重": "cash_weight",
+        "总规模(亿元)": "total_size",
+        "其他比重": "other_proportions"
+    }
+
+    get_bond_base_info_list_fields = {
+        "债券代码": "bond_code",
+        "债券名称": "bond_name",
+        "正股代码": "equity_code",
+        "正股名称": "equity_name",
+        "债券评级": "bond_rating",
+        "申购日期": "subscription_date",
+        "发行规模(亿)": "issuance_size",
+        "网上发行中签率(%)": "online_subscription_winning_rate",
+        "上市日期": "listing_date",
+        "到期日期": "maturity_date",
+        "期限(年)": "term",
+        "利率说明": "interest_rate_description"
+    }
+
+    get_bond_realtime_quotes_fields = {
+        "债券代码": "bond_code",
+        "债券名称": "bond_name",
+        "涨跌幅": "percentage_change",
+        "最新价": "last_price",
+        "最高": "high_price",
+        "最低": "low_price",
+        "今开": "open_price",
+        "涨跌额": "price_change",
+        "换手率": "turnover_rate",
+        "量比": "volume_ratio",
+        "动态市盈率": "price_to_earnings_ratio",
+        "成交量": "trading_volume",
+        "成交额": "volume",
+        "昨日收盘": "previous_close",
+        "总市值": "market_cap",
+        "流通市值": "free_float_market_cap",
+        "行情ID": "item_id",
+        "市场类型": "market_type",
+        "更新时间": "update_time",
+        "最新交易日": "latest_trading_day"
+    }
+
+    get_bond_base_info_fields = {
+        "债券代码": "bond_code",
+        "债券名称": "bond_name",
+        "正股代码": "equity_code",
+        "正股名称": "equity_name",
+        "债券评级": "bond_rating",
+        "申购日期": "subscription_date",
+        "发行规模(亿)": "issuance_size",
+        "网上发行中签率(%)": "online_subscription_winning_rate",
+        "上市日期": "listing_date",
+        "到期日期": "maturity_date",
+        "期限(年)": "term",
+        "利率说明": "interest_rate_description"
+    }
+
+    get_future_all_realtime_quotes_fields = {
+        "期货代码": "futures_code",
+        "期货名称": "futures_name",
+        "涨跌幅": "percentage_change",
+        "最新价": "last_price",
+        "最高": "high_price",
+        "最低": "low_price",
+        "今开": "open_price",
+        "涨跌额": "price_change",
+        "换手率": "turnover_rate",
+        "量比": "volume_ratio",
+        "动态市盈率": "price_to_earnings_ratio",
+        "成交量": "trading_volume",
+        "成交额": "volume",
+        "昨日收盘": "previous_close",
+        "总市值": "market_cap",
+        "流通市值": "free_float_market_cap",
+        "行情ID": "item_id",
+        "市场类型": "market_type",
+        "更新时间": "update_time",
+        "最新交易日": "latest_trading_day"
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:

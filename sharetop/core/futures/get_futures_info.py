@@ -4,6 +4,7 @@ from typing import Dict, List, Union
 from ..common.getter import get_market_realtime_by_fs, get_deal_detail
 from ..utils import process_dataframe_and_series, validate_request
 from ..common import get_history as get_quote_history_for_futures
+from ..common.explain_change import exchange_explain
 
 
 @validate_request
@@ -131,7 +132,7 @@ def get_future_history_data(
 
 @validate_request
 @process_dataframe_and_series(remove_columns_and_indexes=['市场编号'])
-def get_future_all_realtime_quotes(token: str) -> pd.DataFrame:
+def get_future_all_realtime_quotes(token: str, is_explain: bool = False) -> pd.DataFrame:
     """
     获取期货最新行情总体情况
     Returns
@@ -161,7 +162,7 @@ def get_future_all_realtime_quotes(token: str) -> pd.DataFrame:
     fs = FS_DICT['futures']
     df = get_market_realtime_by_fs(fs)
     df = df.rename(columns={'代码': '期货代码', '名称': '期货名称'})
-    return df
+    return exchange_explain(df, is_explain)
 
 
 def get_future_deal_detail(quote_id: str, max_count: int = 1000000) -> pd.DataFrame:

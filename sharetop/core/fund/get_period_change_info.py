@@ -4,12 +4,13 @@ from retry import retry
 from ..utils import to_numeric, requests_obj, validate_request
 from .config import EastmoneyFundHeaders
 from ...crawl.settings import *
+from ..common.explain_change import exchange_explain
 
 
 @validate_request
 @retry(tries=3)
 @to_numeric
-def get_fund_period_change(token: str, fund_code: str) -> pd.DataFrame:
+def get_fund_period_change(token: str, fund_code: str, is_explain: bool = False) -> pd.DataFrame:
     """
     获取基金阶段涨跌幅度
     Parameters
@@ -33,6 +34,7 @@ def get_fund_period_change(token: str, fund_code: str) -> pd.DataFrame:
     7  161725  519.44  61.62     1   389   近五年
     8  161725    6.46   5.03   423  1243  今年以来
     9  161725  477.00                     成立以来
+    :param is_explain:
     :param fund_code:
     :param token:
     """
@@ -74,4 +76,4 @@ def get_fund_period_change(token: str, fund_code: str) -> pd.DataFrame:
     df = df[list(columns.keys())].rename(columns=columns)
     df['时间段'] = titles.values()
     df.insert(0, '基金代码', fund_code)
-    return df
+    return exchange_explain(df, is_explain)

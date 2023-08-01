@@ -4,12 +4,13 @@ from typing import List, Union
 from ..utils import to_numeric, requests_obj, validate_request
 from ...crawl.settings import *
 from .config import EastmoneyFundHeaders
+from ..common.explain_change import exchange_explain
 
 
 @validate_request
 @to_numeric
 def get_fund_industry_distribution(
-    token: str, fund_code: str, dates: Union[str, List[str]] = None
+    token: str, fund_code: str, dates: Union[str, List[str]] = None, is_explain: bool = False
 ) -> pd.DataFrame:
     """
     获取指定基金行业分布信息
@@ -49,6 +50,7 @@ def get_fund_industry_distribution(
     17  161725         文化、体育和娱乐业     --  2021-06-30              --
     18  161725                综合     --  2021-06-30              --
     19  161725                合计  93.08  2021-06-30  6493286.808514
+    :param is_explain:
     :param dates:
     :param fund_code:
     :param token:
@@ -81,4 +83,4 @@ def get_fund_industry_distribution(
         df = pd.concat([df, _df], axis=0, ignore_index=True)
     df.insert(0, '基金代码', fund_code)
     df = df.drop_duplicates()
-    return df
+    return exchange_explain(df, is_explain)

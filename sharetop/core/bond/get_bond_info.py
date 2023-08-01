@@ -6,10 +6,11 @@ from ..utils import requests_obj
 from ...crawl.settings import *
 from ..utils import to_numeric, process_dataframe_and_series, validate_request
 from ..common import get_market_realtime_by_fs
+from ..common.explain_change import exchange_explain
 
 
 @validate_request
-def get_bond_base_info_list(token: str) -> pd.DataFrame:
+def get_bond_base_info_list(token: str, is_explain: bool = False) -> pd.DataFrame:
     """
     获取全部债券基本信息列表
     Returns
@@ -54,12 +55,12 @@ def get_bond_base_info_list(token: str) -> pd.DataFrame:
         dfs.append(df)
         page += 1
     df = pd.concat(dfs, ignore_index=True)
-    return df
+    return exchange_explain(df, is_explain)
 
 
 @process_dataframe_and_series(remove_columns_and_indexes=['市场编号'])
 @to_numeric
-def get_bond_realtime_quotes(**kwargs) -> pd.DataFrame:
+def get_bond_realtime_quotes(is_explain: bool = False, **kwargs) -> pd.DataFrame:
     """
     获取沪深市场全部债券实时行情信息
     Returns
@@ -83,12 +84,12 @@ def get_bond_realtime_quotes(**kwargs) -> pd.DataFrame:
     """
     df = get_market_realtime_by_fs(FS_DICT['bond'], **kwargs)
     df.rename(columns={'代码': '债券代码', '名称': '债券名称'}, inplace=True)
-    return df
+    return exchange_explain(df, is_explain)
 
 
 @validate_request
 @to_numeric
-def get_bond_base_info(token: str, bond_code: str) -> pd.Series:
+def get_bond_base_info(token: str, bond_code: str, is_explain: bool = False) -> pd.Series:
     """
     获取单只债券基本信息
     Parameters
@@ -99,6 +100,7 @@ def get_bond_base_info(token: str, bond_code: str) -> pd.Series:
     -------
     Series
         债券的一些基本信息
+        :param is_explain:
         :param bond_code:
         :param token:
     """
@@ -112,13 +114,12 @@ def get_bond_base_info(token: str, bond_code: str) -> pd.Series:
     )
     url = ''.join(bond_base_info_url)
     json_response = requests_obj.get(url, params, headers=EASTMONEY_REQUEST_HEADERS).json()
-    print("json_response============:", json_response)
     if json_response['result'] is None:
         return pd.Series(index=columns.values(), dtype='object')
     items = json_response['result']['data']
-    s = pd.Series(items[0]).rename(index=columns)
+    s = pd.DataFrame(items).rename(columns=columns)
     s = s[columns.values()]
-    return s
+    return exchange_explain(s, is_explain)
 
 
 @validate_request
