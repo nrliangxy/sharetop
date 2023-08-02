@@ -46,6 +46,7 @@ def get_future_history_data(
     end: str = '20500101',
     klt: int = 101,
     fqt: int = 1,
+    is_explain: bool = False,
     **kwargs
 ) -> pd.DataFrame:
     """
@@ -113,6 +114,7 @@ def get_future_history_data(
     1526  动力煤主力  ZCM  2021-08-19  776.8  777.6  798.0  764.6  97229  7.597474e+09  4.30  0.03   0.2  0.0
     1527  动力煤主力  ZCM  2021-08-20  778.0  793.0  795.0  775.2  70549  5.553617e+09  2.53  1.48  11.6  0.0
     1528  动力煤主力  ZCM  2021-08-23  796.8  836.6  843.8  796.8  82954  6.850341e+09  5.97  6.28  49.4  0.0
+    :param is_explain:
 
     """
     df = get_quote_history_for_futures(
@@ -127,7 +129,7 @@ def get_future_history_data(
             # NOTE 扩展接口 设定此关键词即返回 DataFrame 而不是 dict
         if kwargs.get('return_df'):
             df: pd.DataFrame = pd.concat(df, axis=0, ignore_index=True)
-    return df
+    return exchange_explain(df, is_explain)
 
 
 @validate_request
@@ -165,7 +167,7 @@ def get_future_all_realtime_quotes(token: str, is_explain: bool = False) -> pd.D
     return exchange_explain(df, is_explain)
 
 
-def get_future_deal_detail(quote_id: str, max_count: int = 1000000) -> pd.DataFrame:
+def get_future_deal_detail(quote_id: str, max_count: int = 1000000, is_explain: bool = False) -> pd.DataFrame:
     """
     获取期货最新交易日成交明细
     Parameters
@@ -192,4 +194,4 @@ def get_future_deal_detail(quote_id: str, max_count: int = 1000000) -> pd.DataFr
     """
     df = get_deal_detail(quote_id, max_count=max_count)
     df.rename(columns={'代码': '期货代码', '名称': '期货名称'}, inplace=True)
-    return df
+    return exchange_explain(df, is_explain)

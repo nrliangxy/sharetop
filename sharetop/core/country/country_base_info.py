@@ -2,10 +2,11 @@ import pandas as pd
 from .config import country_base_url, country_field_dict
 from ...crawl.settings import *
 from ..utils import to_numeric, requests_obj, parse_obj
+from ..common.explain_change import exchange_explain
 
 
 @to_numeric
-def get_country_list(token: str, limit: int = None) -> pd.DataFrame:
+def get_country_list(token: str, limit: int = None, is_explain: bool = False) -> pd.DataFrame:
     """
     国家基本信息列表
     :param token:
@@ -20,4 +21,4 @@ def get_country_list(token: str, limit: int = None) -> pd.DataFrame:
         return r
     data_json = r.json()
     df = parse_obj.parse_god_cup_json(data_json, country_field_dict)
-    return df
+    return exchange_explain(df, is_explain)

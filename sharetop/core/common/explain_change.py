@@ -471,6 +471,100 @@ class Explain:
         "最新交易日": "latest_trading_day"
     }
 
+    get_future_deal_detail_fields = {
+        "期货代码": "futures_code",
+        "期货名称": "futures_name",
+        "时间": "time",
+        "昨收": "previous_close",
+        "成交价": "transaction_price",
+        "成交量": "trading_volume",
+        "单数": "lot_size"
+    }
+
+    get_future_history_data_fields = {
+        "期货代码": "futures_code",
+        "期货名称": "futures_name",
+        "日期": "date",
+        "开盘": "opening_price",
+        "收盘": "closing_price",
+        "最高": "highest_price",
+        "最低": "low_price",
+        "成交量": "trading_volume",
+        "成交额": "volume",
+        "振幅": "amplitude",
+        "涨跌幅": "percentage_change",
+        "涨跌额": "price_change",
+        "换手率": "turnover_rate",
+        "盘后量": "after_hours_volume",
+        "盘后额": "after_hours_value"
+    }
+
+    get_country_list_fields = {
+        "国家简称": "country_abbreviation",
+        "国家全称": "country_full_name",
+        "英文简称": "english_abbreviation",
+        "英文全称": "english_full_name",
+        "土地面积(万平方公里)": "land_area",
+        "所属洲": "continent",
+        "机构类型": "institution_type",
+        "首都(中文)": "capital_ch",
+        "首都(英文)": "capital_en",
+        "所属组织": "organization"
+    }
+
+    get_oil_reserves_fields = {
+        "年份": "year",
+        "储量(十亿桶)": "reserves",
+        "总储量占比": "total_reserves_ratio",
+        "储产比": "rpr",
+        "产品名称": "product_name",
+        "机构名称": "institution_name"
+    }
+
+    get_oil_products_fields = {
+        "年份": "year",
+        "产量(千桶/天)": "production",
+        "总产量占比": "total_production_proportion",
+        "产品名称": "product_name",
+        "机构名称": "institution_name"
+    }
+
+    get_oil_consumption_fields = {
+        "年份": "year",
+        "产量(千桶/天)": "production",
+        "总产量占比": "total_production_proportion",
+        "产品名称": "product_name",
+        "机构名称": "institution_name"
+    }
+
+    get_oil_refinerythroughput_fields = {
+        "年份": "year",
+        "加工量(千桶/天)": "processing_volume",
+        "总产量占比": "total_production_proportion",
+        "产品名称": "product_name",
+        "机构名称": "institution_name"
+    }
+
+    get_oil_refinerycapacity_fields = {
+        "年份": "year",
+        "产能(千桶/天)": "production_capacity",
+        "总产能占比": "total_production_capacity_ratio",
+        "产品名称": "product_name",
+        "机构名称": "institution_name"
+    }
+
+    get_oil_crudeoilpricehistory_fields = {
+        "年份": "year",
+        "价格(当年真实价格)": "current_year_real_price",
+        "价格(按2022年美国消费者物价指数平减)": "2022_price",
+        "产品名称": "product_name"
+    }
+
+    get_pig_fcr_fields = {
+        "发布时间": "pub_date",
+
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:
