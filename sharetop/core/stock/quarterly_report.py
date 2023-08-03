@@ -96,7 +96,6 @@ def get_stock_company_report_data(token: str, stock_codes: Union[str, List[str]]
 
 
 
-
 @validate_request
 @to_numeric
 def get_stock_all_company_quarterly_report(token: str, date: str = None, is_explain: bool = False) -> pd.DataFrame:
