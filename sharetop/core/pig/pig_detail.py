@@ -3,6 +3,7 @@ import pandas as pd
 from .config import pig_fcr_url, pig_fcr_field_dict
 from ...crawl.settings import *
 from ..utils import to_numeric, requests_obj, parse_obj
+from ..common.explain_change import exchange_explain
 
 
 @to_numeric
@@ -34,7 +35,7 @@ def get_pig_data_common(token: str, pig_url: str, field_dict: dict, start_date: 
     return df
 
 
-def get_pig_fcr(token: str, start_date: str = None, end_date: str = None, limit: int = None) -> pd.DataFrame:
+def get_pig_fcr(token: str, start_date: str = None, end_date: str = None, limit: int = None, is_explain: bool = False) -> pd.DataFrame:
     """
     获取猪周期的历史猪肉价格和猪粮比
     :param token:
@@ -43,4 +44,4 @@ def get_pig_fcr(token: str, start_date: str = None, end_date: str = None, limit:
     :param limit:
     :return:
     """
-    return get_pig_data_common(token, pig_fcr_url, pig_fcr_field_dict, start_date, end_date,  limit)
+    return exchange_explain(get_pig_data_common(token, pig_fcr_url, pig_fcr_field_dict, start_date, end_date,  limit), is_explain)

@@ -59,7 +59,7 @@ class BaseApplication:
         df = pd.DataFrame(self.json_data['data']['diff'])
         df = df.rename(columns=columns)
         df: pd.DataFrame = df[columns.values()]
-        df['行情ID'] = df['市场编号'].astype(str) + '.' + df['代码'].astype(str)
+        # df['行情ID'] = df['市场编号'].astype(str) + '.' + df['代码'].astype(str)
         df['市场类型'] = df['市场编号'].astype(str).apply(lambda x: MARKET_NUMBER_DICT.get(x))
         df['更新时间'] = df['更新时间戳'].apply(lambda x: str(datetime.fromtimestamp(x)))
         df['最新交易日'] = pd.to_datetime(df['最新交易日'], format='%Y%m%d').astype(str)

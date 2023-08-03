@@ -1,5 +1,6 @@
 import inspect
 
+
 class Explain:
     get_stock_all_report_dates_fields = {
         "报告日期": "report_date",
@@ -23,7 +24,7 @@ class Explain:
         "昨日收盘": "previous_close",
         "总市值": "market_cap",
         "流通市值": "free_float_market_cap",
-        "行情ID": "item_id",
+        # "行情ID": "item_id",
         "市场类型": "market_type",
         "更新时间": "update_time",
         "最新交易日": "latest_trading_day"
@@ -562,7 +563,8 @@ class Explain:
 
     get_pig_fcr_fields = {
         "发布时间": "pub_date",
-
+        "生猪(外三元)(元/公斤)": "pork_duroc_price",
+        "猪粮比": "fcr"
     }
 
 
