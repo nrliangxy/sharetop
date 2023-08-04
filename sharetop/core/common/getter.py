@@ -115,7 +115,7 @@ def get_company_report(stock_codes: Union[str, List[str]],
     elif hasattr(stock_codes, '__iter__'):
         codes = list(stock_codes)
         return get_quote_multi(
-            codes, **kwargs
+            codes, report_class=report_class, **kwargs
         )
     raise TypeError('代码数据类型输入不正确！')
 
@@ -311,6 +311,8 @@ def get_quote_multi(
     base_func_name = s[-2][2]
     total = len(codes)
     pool = Pool(total)
+    print("base_func_name========:", base_func_name)
+    print("report_class===============:", report_class)
     func = globals()[f"{base_func_name}_data_one"]
     coroutine_list = [pool.spawn(func, x, beg=beg, end=end, klt=klt, fqt=fqt, report_class=report_class, **kwargs) for x
                       in codes]
