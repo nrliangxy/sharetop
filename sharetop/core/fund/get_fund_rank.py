@@ -2,7 +2,7 @@ import requests
 import datetime
 import re
 import pandas as pd
-from ..utils import requests_obj, parse_obj, validate_request
+from ..utils import requests_obj, parse_obj, validate_request, to_numeric
 from .config import fund_money_cloumns
 from ..common.explain_change import exchange_explain
 
@@ -16,6 +16,7 @@ def fund_export_df(text_data):
     return temp_df
 
 
+@to_numeric
 @validate_request
 def get_fund_open_rank(token: str, symbol: str = "全部", is_explain: bool = False) -> pd.DataFrame:
     """
@@ -117,6 +118,7 @@ def get_fund_open_rank(token: str, symbol: str = "全部", is_explain: bool = Fa
     return exchange_explain(temp_df, is_explain)
 
 
+@to_numeric
 @validate_request
 def get_fund_exchange_rank(token: str, is_explain: bool = False) -> pd.DataFrame:
     """
@@ -208,6 +210,7 @@ def get_fund_exchange_rank(token: str, is_explain: bool = False) -> pd.DataFrame
     return exchange_explain(temp_df, is_explain)
 
 
+@to_numeric
 @validate_request
 def get_fund_money_rank(token: str, is_explain: bool = False) -> pd.DataFrame:
     """
@@ -261,6 +264,7 @@ def get_fund_money_rank(token: str, is_explain: bool = False) -> pd.DataFrame:
     return exchange_explain(temp_df, is_explain)
 
 
+@to_numeric
 @validate_request
 def get_fund_hk_rank(token: str, is_explain: bool = False) -> pd.DataFrame:
     """

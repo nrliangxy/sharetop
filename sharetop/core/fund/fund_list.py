@@ -1,12 +1,13 @@
 import re
 import pandas as pd
 from retry import retry
-from ..utils import requests_obj, validate_request
+from ..utils import requests_obj, validate_request, to_numeric
 from ..common.getter import BaseApplication
 from ..common.explain_change import exchange_explain
 
 
 @validate_request
+@to_numeric
 @retry(tries=3)
 def get_fund_codes(token: str, ft: str = None, is_explain: bool = False) -> pd.DataFrame:
     """
