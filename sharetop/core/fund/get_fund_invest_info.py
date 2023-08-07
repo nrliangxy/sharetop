@@ -1,6 +1,6 @@
 import uuid
 import pandas as pd
-from typing import List, Union
+from typing import List, Union, Dict, Any
 from retry import retry
 from ..utils import to_numeric, requests_obj, validate_request
 from jsonpath import jsonpath
@@ -115,7 +115,7 @@ def get_fund_invest_position(token: str,
 
 
 @validate_request
-def get_fund_public_dates(token: str, fund_code: str) -> List[str]:
+def get_fund_public_dates(token: str, fund_code: str) -> Dict[str, Any]:
     """
     获取历史上更新持仓情况的日期列表
     Parameters
@@ -142,5 +142,5 @@ def get_fund_public_dates(token: str, fund_code: str) -> List[str]:
     url = 'https://fundmobapi.eastmoney.com/FundMNewApi/FundMNIVInfoMultiple'
     json_response = requests_obj.get(url, params, headers=EastmoneyFundHeaders).json()
     if json_response['Datas'] is None:
-        return []
-    return json_response['Datas']
+        return {"date_list": []}
+    return {"date_list": json_response['Datas']}
