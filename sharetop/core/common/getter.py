@@ -334,7 +334,6 @@ def get_base_info(quote_id: str) -> pd.Series:
     )
     url = 'http://push2.eastmoney.com/api/qt/stock/get'
     json_response = requests_obj.get(url, params, headers=EASTMONEY_REQUEST_HEADERS).json()
-    print("json_response=================:", json_response)
     items = json_response['data']
     if not items:
         return pd.Series(index=EASTMONEY_BASE_INFO_FIELDS.values(), dtype='object')

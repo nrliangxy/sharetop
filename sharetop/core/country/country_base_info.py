@@ -6,7 +6,7 @@ from ..common.explain_change import exchange_explain
 
 
 @to_numeric
-def get_country_list(token: str, limit: int = None, is_explain: bool = False) -> pd.DataFrame:
+def get_country_list(token: str, limit: int = 100, is_explain: bool = False) -> pd.DataFrame:
     """
     国家基本信息列表
     :param token:

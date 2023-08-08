@@ -36,7 +36,7 @@ def get_oil_data_common(token: str, oil_url: str, field_dict: dict, data_type: s
     return df
 
 
-def get_oil_reserves(token: str, data_type: str = None, limit: int = None, is_explain: bool = False) -> pd.DataFrame:
+def get_oil_reserves(token: str, data_type: str = '1', limit: int = 100, is_explain: bool = False) -> pd.DataFrame:
     """
     获取机构的石油储量
     :param token:
@@ -47,7 +47,7 @@ def get_oil_reserves(token: str, data_type: str = None, limit: int = None, is_ex
     return exchange_explain(get_oil_data_common(token, oil_reserves_url, oil_reserves_field_dict, data_type, limit), is_explain)
 
 
-def get_oil_products(token: str, data_type: str = None, limit: int = None, is_explain: bool = False) -> pd.DataFrame:
+def get_oil_products(token: str, data_type: str = '1', limit: int = 100, is_explain: bool = False) -> pd.DataFrame:
     """
     获取机构的石油产量
     :param token:
@@ -58,7 +58,7 @@ def get_oil_products(token: str, data_type: str = None, limit: int = None, is_ex
     return exchange_explain(get_oil_data_common(token, oil_products_url, oil_products_field_dict, data_type, limit), is_explain)
 
 
-def get_oil_consumption(token: str, data_type: str = None, limit: int = None, is_explain: bool = False) -> pd.DataFrame:
+def get_oil_consumption(token: str, data_type: str = '1', limit: int = 100, is_explain: bool = False) -> pd.DataFrame:
     """
     获取机构的消费量
     :param token:
@@ -69,7 +69,7 @@ def get_oil_consumption(token: str, data_type: str = None, limit: int = None, is
     return exchange_explain(get_oil_data_common(token, oil_consumption_url, oil_consumption_field_dict, data_type, limit), is_explain)
 
 
-def get_oil_refinerythroughput(token: str, data_type: str = None, limit: int = None, is_explain: bool = False) -> pd.DataFrame:
+def get_oil_refinerythroughput(token: str, data_type: str = '1', limit: int = 100, is_explain: bool = False) -> pd.DataFrame:
     """
     获取石油的加工量
     :param token:
@@ -80,7 +80,7 @@ def get_oil_refinerythroughput(token: str, data_type: str = None, limit: int = N
     return exchange_explain(get_oil_data_common(token, oil_refinerythroughput_url, oil_refinerythroughput_field_dict, data_type, limit), is_explain)
 
 
-def get_oil_refinerycapacity(token: str, data_type: str = None, limit: int = None, is_explain: bool = False) -> pd.DataFrame:
+def get_oil_refinerycapacity(token: str, data_type: str = '1', limit: int = 100, is_explain: bool = False) -> pd.DataFrame:
     """
     获取石油的产能
     :param token:
@@ -91,7 +91,7 @@ def get_oil_refinerycapacity(token: str, data_type: str = None, limit: int = Non
     return exchange_explain(get_oil_data_common(token, oil_refinerycapacity_url, oil_refinerycapacity_field_dict, data_type, limit), is_explain)
 
 
-def get_oil_crudeoilpricehistory(token: str, limit: int = None, is_explain: bool = False) -> pd.DataFrame:
+def get_oil_crudeoilpricehistory(token: str, limit: int = 100, is_explain: bool = False) -> pd.DataFrame:
     """
     获取石油的历史价格
     :param token:
