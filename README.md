@@ -75,6 +75,8 @@ pip install sharetop --upgrade
     * 原油历史价格
 * 猪周期数据
     * 猪肉历史价格和猪粮比
+* 世界造船数据
+    * 世界造船三大指标
 
 
 ## Contact

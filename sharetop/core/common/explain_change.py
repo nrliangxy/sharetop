@@ -567,6 +567,16 @@ class Explain:
         "猪粮比": "fcr"
     }
 
+    get_ship_indicators_fields = {
+        "年份": "year",
+        "万载重吨": "wdwt",
+        "万载重吨所占比重": "wdwt_percent",
+        "万修正总吨": "cgt",
+        "万修正总吨百分比": "cgt_percent",
+        "造船指标": "ship_indicators",
+        "机构名称": "short_name"
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:
