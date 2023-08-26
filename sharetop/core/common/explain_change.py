@@ -577,6 +577,21 @@ class Explain:
         "机构名称": "short_name"
     }
 
+    get_car_sales_fields = {
+        "排名": "rank",
+        "车系": "car_series",
+        "经销商最低价格": "dealer_min_price",
+        "经销商最高价格": "dealer_max_price",
+        "厂商最高价格": "maker_max_price",
+        "厂商最低价格": "maker_min_price",
+        "总品牌": "brand_name",
+        "子品牌": "sub_brand_name",
+        "销量": "sales_volume",
+        "汽车类型": "car_type",
+        "公布时间": "pub_date",
+        "数据源": "source"
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:
