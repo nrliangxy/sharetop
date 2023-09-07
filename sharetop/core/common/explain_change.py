@@ -592,6 +592,12 @@ class Explain:
         "数据源": "source"
     }
 
+    get_logistics_index_fields = {
+        "指标值": "index_value",
+        "指数类型": "index_type",
+        "指数日期": "index_date"
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:

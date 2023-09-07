@@ -15,6 +15,9 @@ class BaseRequest:
                 'User-Agent': choice(user_agent_list)
             }
         try:
+            if headers.get("token"):
+                if len(headers.get("token")) != 16:
+                    return {"msg": "token有误，请先确认token是否正确"}
             r = requests.get(url, data, headers=headers)
             r_code = r.status_code
             if r_code == 401:

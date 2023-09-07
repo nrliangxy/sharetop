@@ -1,7 +1,7 @@
 import requests
 import threading
 import pandas as pd
-import uuid
+import json
 from typing import List, Union
 from ...crawl.settings import fund_valuation_url_list
 
@@ -10,18 +10,18 @@ data_source = []
 
 def get_fund_price(fund_code: str):
     global data_source
-    str_uuid = str(uuid.uuid4()).upper()
-    params = {"code": fund_code, "deviceid": str_uuid}
+    params = {"code": fund_code}
     FUND_ESTIMATION_BASE_URL = "".join(fund_valuation_url_list)
     fund_base_url = FUND_ESTIMATION_BASE_URL.format(**params)
     r = requests.get(fund_base_url)
-    data = r.json()
-    expansion = data.get("Expansion")
-    short_name = expansion.get("SHORTNAME")
-    gz = expansion.get("GZ")   # 估值价格
-    diff_value = expansion.get("GZZF")  # 涨跌值
-    gz_time = expansion.get("GZTIME") # 估值时间
-    fund_range = expansion.get("GSZZL")  # 估值涨跌幅
+    data = r.text
+    deal_data = data.replace("jsonpgz(", "").replace(");", "")
+    expansion = json.loads(deal_data)
+    short_name = expansion.get("name")
+    gz = float(expansion.get("gsz"))   # 估值价格
+    fund_range = float(expansion.get("gszzl"))  # 估值涨跌幅
+    diff_value = round(gz * (float(fund_range)/100), 3)  # 涨跌值
+    gz_time = expansion.get("gztime") # 估值时间
     data_source.append((short_name, fund_code, gz, diff_value, fund_range, gz_time))
 
 

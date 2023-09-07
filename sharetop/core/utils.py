@@ -81,7 +81,7 @@ def validate_request(func):
             # 执行被装饰的函数
             return func(*args, **kwargs)
         else:
-            return {"msg": "校验失败，请确认token或者稍后再试或者联系管理员"}
+            return {"msg": "校验失败，请确认token是否最新或者稍后再试或者联系管理员"}
     return wrapper
 
 
