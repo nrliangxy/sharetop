@@ -598,6 +598,15 @@ class Explain:
         "指数日期": "index_date"
     }
 
+    get_fund_real_time_god_fields = {
+        "基金名称": "fund_name",
+        "基金代码": "fund_code",
+        "净值估算": "net_value_estimation",
+        "涨跌值": "price_change",
+        "估算涨跌幅": "percentage_change_estimation",
+        "更新时间": "update_time"
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:
