@@ -47,7 +47,6 @@ def get_car_data_common(token: str, car_url: str, field_dict: dict, car_type: st
 def get_car_sales(token: str, car_type: str = None, pub_date: str = None, source: str = None, limit: int = 100,
                   is_explain: bool = False) -> pd.DataFrame:
     """
-    获取猪周期的历史猪肉价格和猪粮比
     :param is_explain:
     :param car_type:
     :param pub_date:

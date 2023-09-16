@@ -1,18 +1,20 @@
-import requests
 import datetime
+import copy
 import pandas as pd
-from sharetop.core.utils import to_numeric, requests_obj, parse_obj
+from ..utils import requests_obj
+from .config import url, bond_yield_url, headers
+from ..common.explain_change import exchange_explain, exchange_explain_new
+from ...crawl.settings import *
 
 
 class BondYieldServices:
     def __init__(self, token, *args, **kwargs):
         self.token = token
-        self.url = "https://hq.sinajs.cn/?rn=1694440934177&list=globalbd_{bond_name}"
-        self.headers = {
-            "Referer": "https://stock.finance.sina.com.cn/forex/globalbd/gcny10.html"
-        }
+        self.url = url
+        self.headers = headers
 
-    def real_time(self, **kwargs):
+    def bond_yield_real_time(self, **kwargs):
+        is_explain = kwargs.get("is_explain", False)
         bond_name = kwargs.get("bond_name")
         bond_url = self.url.format(bond_name=bond_name)
         r = requests_obj.get(bond_url, data={}, headers=self.headers)
@@ -33,6 +35,16 @@ class BondYieldServices:
                 "high_price": high_price, "low_price": low_price,
                 "percentage_change": percentage_change, "price_change": price_change, "update_time": update_time}
         df = pd.DataFrame([item])
-        return df
+        return exchange_explain_new(df, is_explain)
 
-
+    def bond_yield_kline_data(self, **kwargs):
+        is_explain = kwargs.pop("is_explain", False)
+        bond_yield_base_url_list = copy.deepcopy(base_url_list)
+        bond_yield_base_url_list.append(bond_yield_url)
+        headers = {"token": self.token}
+        r = requests_obj.get("".join(bond_yield_base_url_list), data=kwargs, headers=headers)
+        if isinstance(r, dict):
+            return r
+        data_json = r.json()
+        df = pd.DataFrame(data_json['data'])
+        return exchange_explain_new(df, is_explain)

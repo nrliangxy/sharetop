@@ -592,6 +592,21 @@ class Explain:
         "数据源": "source"
     }
 
+    car_kline_data_fields = {
+        "排名": "rank",
+        "车系": "car_series",
+        "经销商最低价格": "dealer_min_price",
+        "经销商最高价格": "dealer_max_price",
+        "厂商最高价格": "maker_max_price",
+        "厂商最低价格": "maker_min_price",
+        "总品牌": "brand_name",
+        "子品牌": "sub_brand_name",
+        "销量": "sales_volume",
+        "汽车类型": "car_type",
+        "公布时间": "pub_date",
+        "数据源": "source"
+    }
+
     get_logistics_index_fields = {
         "指标值": "index_value",
         "指数类型": "index_type",
@@ -607,6 +622,29 @@ class Explain:
         "更新时间": "update_time"
     }
 
+    bond_yield_real_time_fields = {
+        "国债名称": "bond_name",
+        "开盘价格": "open_price",
+        "昨收": "previous_close",
+        "当前价格": "now_price",
+        "最高": "high_price",
+        "最低": "low_price",
+        "涨跌幅(%)": "percentage_change",
+        "涨跌额": "price_change",
+        "更新时间": "update_time"
+    }
+
+    bond_yield_kline_data_fields = {
+        "国债代码": "bond_code",
+        "开盘价格": "open_price",
+        "收盘价格": "close_price",
+        "最高": "high_price",
+        "最低": "low_price",
+        "涨跌幅(%)": "percentage_change",
+        "涨跌额": "price_change",
+        "更新时间": "day"
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:
@@ -619,6 +657,18 @@ def exchange_explain(df, is_explain):
     func_name_fields = frame.f_code.co_name
     exchange_fields = getattr(Explain, f"{func_name_fields}_fields")
     if not is_explain:
+        if isinstance(df, dict):
+            return {k: exchange_explain_one(v, exchange_fields, is_explain) for k, v in df.items()}
+        df.rename(columns=exchange_fields, inplace=True)
+    return df
+
+
+def exchange_explain_new(df, is_explain):
+    frame = inspect.currentframe().f_back
+    func_name_fields = frame.f_code.co_name
+    exchange_fields = getattr(Explain, f"{func_name_fields}_fields")
+    exchange_fields = {v: k for k, v in exchange_fields.items()}
+    if is_explain:
         if isinstance(df, dict):
             return {k: exchange_explain_one(v, exchange_fields, is_explain) for k, v in df.items()}
         df.rename(columns=exchange_fields, inplace=True)

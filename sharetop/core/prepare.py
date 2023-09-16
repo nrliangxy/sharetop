@@ -26,17 +26,24 @@ def get_all_services_map():
     }
     """
     map_dic = dict()
+    all_file_names = []
     dir_path = os.path.dirname(os.path.abspath(__file__))
-
-    all_file_paths = glob.glob(f"{dir_path}/bond_yield/*_services.py")
-    all_file_names = [os.path.basename(_).replace(".py", "") for _ in all_file_paths]
+    bond_yield_paths = glob.glob(f"{dir_path}/bond_yield/*_services.py")
+    car_paths = glob.glob(f"{dir_path}/car/*_services.py")
+    for item_paths in [bond_yield_paths, car_paths]:
+        for _ in item_paths:
+            all_file_names.append(os.path.basename(_).replace(".py", ""))
+    # all_file_names = [os.path.basename(_).replace(".py", "") for _ in all_file_paths]
+    print("all_file_names=======:", all_file_names)
     for module in all_file_names:
         if module.startswith("_"):
             continue
         try:
             # > 自动获取 所有文件中的 XxxxServices
-            module_obj = importlib.import_module(f"sharetop.core.bond_yield.{module}")
-            my_test = [_ for _ in dir(module_obj)]
+            # module_obj = importlib.import_module(f"sharetop.core.bond_yield.{module}")
+            package_name = module.replace("_services", "")
+            print('package_name=========:', package_name)
+            module_obj = importlib.import_module(f"sharetop.core.{package_name}.{module}")
             services_cls_strs = [_ for _ in dir(module_obj) if _.endswith("Services")]
 
             for services_cls_str in services_cls_strs:
@@ -59,7 +66,9 @@ class BasicTop:
         self.token = token
         self.class_map = MAP_DIC
 
-    def common_exec_func(self, class_code: str, func_code: str, class_params: dict, func_params: dict):
+    def common_exec_func(self, class_code: str, func_code: str, func_params: dict, class_params=None):
+        if class_params is None:
+            class_params = {}
         try:
             print("self.class_map11111:", self.class_map)
             if class_code not in self.class_map.keys():
@@ -70,7 +79,7 @@ class BasicTop:
             print("cls_obj====:", cls_obj)
             class_params.update({"token": self.token})
             print("class_params===:", class_params)
-            func_obj = getattr(cls_obj(**class_params), func_code)
+            func_obj = getattr(cls_obj(**class_params), f"{class_code}_{func_code}")
             return_data = func_obj(**func_params)
             print("return_data=======:", return_data)
         except Exception as err:
