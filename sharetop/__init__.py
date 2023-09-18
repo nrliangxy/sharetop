@@ -13,8 +13,8 @@ from sharetop.api import (
     oil,
     capital_flow,
     ship,
-    car,
+    sp_prepare,
     index
 )
 
-__all__ = ['stock', 'fund', 'bond', 'futures', 'country', 'pig', 'oil', 'capital_flow', 'ship', 'car', 'index']
+__all__ = ['stock', 'fund', 'bond', 'futures', 'country', 'pig', 'oil', 'capital_flow', 'ship', 'sp_prepare', 'index']

@@ -592,7 +592,7 @@ class Explain:
         "数据源": "source"
     }
 
-    car_kline_data_fields = {
+    car_to_kline_data_fields = {
         "排名": "rank",
         "车系": "car_series",
         "经销商最低价格": "dealer_min_price",
@@ -622,7 +622,7 @@ class Explain:
         "更新时间": "update_time"
     }
 
-    bond_yield_real_time_fields = {
+    bond_yield_to_real_time_fields = {
         "国债名称": "bond_name",
         "开盘价格": "open_price",
         "昨收": "previous_close",
@@ -634,7 +634,7 @@ class Explain:
         "更新时间": "update_time"
     }
 
-    bond_yield_kline_data_fields = {
+    bond_yield_to_kline_data_fields = {
         "国债代码": "bond_code",
         "开盘价格": "open_price",
         "收盘价格": "close_price",

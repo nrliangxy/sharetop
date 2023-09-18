@@ -22,7 +22,7 @@ class CarServices:
     def __init__(self, token, *args, **kwargs):
         self.token = token
 
-    def car_kline_data(self, **kwargs):
+    def car_to_kline_data(self, **kwargs):
         is_explain = kwargs.pop("is_explain", False)
         copy_base_url_list = copy.deepcopy(base_url_list)
         copy_base_url_list.append(car_sales_url)

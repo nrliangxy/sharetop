@@ -7,5 +7,5 @@ import sharetop.core.oil as oil
 import sharetop.core.pig as pig
 import sharetop.core.capital_flow as capital_flow
 import sharetop.core.ship as ship
-import sharetop.core.car as car
 import sharetop.core.index as index
+import sharetop.core.prepare as sp_prepare

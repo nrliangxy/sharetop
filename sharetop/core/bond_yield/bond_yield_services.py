@@ -10,14 +10,14 @@ from ...crawl.settings import *
 class BondYieldServices:
     def __init__(self, token, *args, **kwargs):
         self.token = token
-        self.url = url
-        self.headers = headers
+        self.__url = url
+        self.__headers = headers
 
-    def bond_yield_real_time(self, **kwargs):
+    def bond_yield_to_real_time(self, **kwargs):
         is_explain = kwargs.get("is_explain", False)
         bond_name = kwargs.get("bond_name")
-        bond_url = self.url.format(bond_name=bond_name)
-        r = requests_obj.get(bond_url, data={}, headers=self.headers)
+        bond_url = self.__url.format(bond_name=bond_name)
+        r = requests_obj.get(bond_url, data={}, headers=self.__headers)
         data = r.text
         data = data.replace(f'var hq_str_globalbd_{bond_name}="', "").replace('";', "")
         data_list = data.split(",")
@@ -37,7 +37,7 @@ class BondYieldServices:
         df = pd.DataFrame([item])
         return exchange_explain_new(df, is_explain)
 
-    def bond_yield_kline_data(self, **kwargs):
+    def bond_yield_to_kline_data(self, **kwargs):
         is_explain = kwargs.pop("is_explain", False)
         bond_yield_base_url_list = copy.deepcopy(base_url_list)
         bond_yield_base_url_list.append(bond_yield_url)
