@@ -3,7 +3,7 @@ import copy
 import pandas as pd
 from ..utils import requests_obj
 from .config import url, bond_yield_url, headers
-from ..common.explain_change import exchange_explain, exchange_explain_new
+from ..common.explain_change import exchange_explain_new
 from ...crawl.settings import *
 
 

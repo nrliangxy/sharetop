@@ -65,9 +65,9 @@ def to_numeric(func: F) -> F:
 def validate_request(func):
     def wrapper(*args, **kwargs):
         # 执行校验逻辑，可以是任何你需要的操作
-        if len(args) == 0:
+        if len(args) == 0 and not kwargs.get("token"):
             return {"msg": "请填写有效token"}
-        token = args[0]
+        token = kwargs.get("token") if len(args) == 0 else args[0]
         headers = {"token": token}
         data = {}
         copy_base_url_list = copy.deepcopy(base_url_list)
