@@ -15,7 +15,7 @@ class BondYieldServices:
 
     def bond_yield_to_real_time(self, **kwargs):
         is_explain = kwargs.get("is_explain", False)
-        bond_name = kwargs.get("bond_name")
+        bond_name = kwargs.get("bond_code")
         bond_url = self.__url.format(bond_name=bond_name)
         r = requests_obj.get(bond_url, data={}, headers=self.__headers)
         data = r.text

@@ -9,7 +9,7 @@ class BaseRequest:
     def __init__(self, *args, **kwargs):
         pass
 
-    def get(self, url, data, user_agent=False, headers=None, *args, **kwargs):
+    def get(self, url, data, user_agent=False, headers={}, *args, **kwargs):
         if user_agent:
             headers = {
                 'User-Agent': choice(user_agent_list)
