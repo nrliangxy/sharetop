@@ -645,6 +645,18 @@ class Explain:
         "更新时间": "day"
     }
 
+    pig_to_warning_kline_data_fields = {
+        "级别": "grade",
+        "涨跌": "status",
+        "公布时间": "pub_date"
+    }
+
+    pig_to_fcr_kline_data_fields = {
+        "发布时间": "pub_date",
+        "生猪(外三元)(元/公斤)": "pig_price_one",
+        "猪粮比": "pig_grain_ratio"
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:

@@ -22,6 +22,12 @@ class BaseRequest:
             r_code = r.status_code
             if r_code == 401:
                 return {"msg": "您还没有权限，请先开通权限"}
+            data_json = r.json()
+            data = data_json.get("data", {})
+            if isinstance(data, dict):
+                description = data.get("description", "")
+                if description and "Invalid token" in description:
+                    return {"msg": "token有误，请先确认token是否正确"}
             return r
         except:
             raise CustomException("request error and contact author")
