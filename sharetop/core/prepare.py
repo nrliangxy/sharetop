@@ -68,8 +68,10 @@ class BasicTop:
         self.token = token
         self.__class_map = _MAP_DIC
 
-    def common_exec_func(self, exec_code: str, func_params: dict, class_params=None):
+    def common_exec_func(self, exec_code: str, func_params=None, class_params=None):
         return_data = []
+        if func_params is None:
+            func_params = {}
         if class_params is None:
             class_params = {}
         try:

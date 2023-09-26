@@ -5,6 +5,7 @@ from ..utils import requests_obj
 from .config import pig_warning_url, pig_fcr_url
 from ..common.explain_change import exchange_explain_new
 from ...crawl.settings import *
+from sharetop.core.stock import get_stock_kline_data
 
 
 class PigServices:
@@ -29,3 +30,8 @@ class PigServices:
         data_json = r.json()
         df = pd.DataFrame(data_json['data'])
         return df
+
+    def pig_to_index(self, **kwargs):
+        is_explain = kwargs.get("is_explain", False)
+        params = {'is_explain': is_explain, "stock_codes": "BK0882", "token": self.token}
+        return get_stock_kline_data(**params)
