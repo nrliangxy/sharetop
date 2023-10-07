@@ -657,6 +657,13 @@ class Explain:
         "猪粮比": "pig_grain_ratio"
     }
 
+    stock_to_kline_data_fields = {'ts代码': 'ts_code', '股票代码': 'code', '市场代码': 'mk_code', '股票名称': 'name',
+                                  '股票全称': 'fullname', '英文全称': 'enname', '拼音缩写': 'ren_ping',
+                                  '市场类别': 'market', '交易所代码': 'exchange_code', '交易货币': 'curr_type',
+                                  '上市状态': 'list_status', '上市日期': 'list_date', '退市日期': 'delist_date',
+                                  '成立日期': 'fund_date', '是否沪深港通标的': 'is_hs', '地域': 'area',
+                                  '所属行业': 'industry', '曾用名列表': 'former_name', '发行方式': 'audit_type'}
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:

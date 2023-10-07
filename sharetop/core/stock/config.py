@@ -2,6 +2,8 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 
+a_stock_list_url = "/stock/a_stock/stock_list"
+
 # 股票基本信息表头
 EASTMONEY_STOCK_BASE_INFO_FIELDS = {
     'f57': '股票代码',

@@ -4,6 +4,8 @@ import os
 
 __all__ = ["BasicTop"]
 
+import pandas as pd
+
 
 def _camel_to_snake(camel_case_str):
     """驼峰命名 转换 下划线命名"""
@@ -34,7 +36,8 @@ def _get_all_services_map():
     car_paths = glob.glob(f"{dir_path}/car/*_services.py")
     fund_paths = glob.glob(f"{dir_path}/fund/*_services.py")
     pig_paths = glob.glob(f"{dir_path}/pig/*_services.py")
-    for item_paths in [bond_yield_paths, car_paths, fund_paths, pig_paths]:
+    stock_paths = glob.glob(f"{dir_path}/stock/*_services.py")
+    for item_paths in [bond_yield_paths, car_paths, fund_paths, pig_paths, stock_paths]:
         for _ in item_paths:
             all_file_names.append(os.path.basename(_).replace(".py", ""))
     for module in all_file_names:
@@ -84,9 +87,11 @@ class BasicTop:
         except Exception as err:
             import traceback
             traceback.print_exc()
+            return_data = pd.DataFrame()
             return_data = dict(status="error", message=str(err), detail_message=str(traceback.format_exc()))
         finally:
-            res_data = dict(status="success", data=return_data)
+            res_data = return_data
+            # res_data = dict(status="success", data=return_data)
         return res_data
 
 # if __name__ == '__main__':
