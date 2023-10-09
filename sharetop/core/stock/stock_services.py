@@ -11,12 +11,12 @@ class StockServices:
     def __init__(self, token, *args, **kwargs):
         self.token = token
 
-    def stock_to_kline_data(self, **kwargs):
-        is_explain = kwargs.pop("is_explain", False)
+    def common_func(self, params, item_url):
+        is_explain = params.pop("is_explain", False)
         copy_base_url_list = copy.deepcopy(base_url_list)
-        copy_base_url_list.append(a_stock_list_url)
+        copy_base_url_list.append(item_url)
         headers = {"token": self.token}
-        r = requests_obj.get("".join(copy_base_url_list), data=kwargs, headers=headers)
+        r = requests_obj.get("".join(copy_base_url_list), data=params, headers=headers)
         if isinstance(r, dict):
             return r
         data_json = r.json()
@@ -25,3 +25,9 @@ class StockServices:
             return exchange_explain_new(df, is_explain)
         else:
             return data_json
+
+    def stock_to_kline_data(self, **kwargs):
+        return self.common_func(kwargs, a_stock_list_url)
+
+    def stock_to_trade_date_list(self, **kwargs):
+        pass
