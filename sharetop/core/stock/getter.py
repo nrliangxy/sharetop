@@ -8,6 +8,25 @@ from ..utils import to_numeric, process_dataframe_and_series, validate_request
 from ..common.explain_change import exchange_explain
 
 
+def deal_codes_one(item):
+    item = item.lower()
+    if '.sh' in item:
+        code_item = item.split(".")[0]
+        return f"1.{code_item}"
+    if '.sz' in item:
+        code_item = item.split(".")[0]
+        return f"0.{code_item}"
+    return item
+
+
+def deal_stock_codes(stock_codes):
+    if isinstance(stock_codes, list):
+        stock_codes = [deal_codes_one(_) for _ in stock_codes]
+    if isinstance(stock_codes, str):
+        stock_codes = deal_codes_one(stock_codes)
+    return stock_codes
+
+
 @validate_request
 def get_stock_kline_data(
         token: str,
@@ -91,6 +110,7 @@ def get_stock_kline_data(
             :param stock_codes:
             :param is_explain:
     """
+    stock_codes = deal_stock_codes(stock_codes)
     df = get_history_data_for_stock(
         stock_codes, beg=beg, end=end, klt=klt, fqt=fqt, **kwargs
     )

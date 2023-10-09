@@ -211,7 +211,7 @@ def get_history_data_one(
     fields = list(EM_KLINE_FIELDS.keys())
     columns = list(EM_KLINE_FIELDS.values())
     fields2 = ",".join(fields)
-    if kwargs.get(MagicConfig.QUOTE_ID_MODE):
+    if kwargs.get(MagicConfig.QUOTE_ID_MODE) or "." in code:
         quote_id = code
     else:
         quote_id = get_quote_id(code)
@@ -311,8 +311,6 @@ def get_quote_multi(
     base_func_name = s[-2][2]
     total = len(codes)
     pool = Pool(total)
-    print("base_func_name========:", base_func_name)
-    print("report_class===============:", report_class)
     func = globals()[f"{base_func_name}_data_one"]
     coroutine_list = [pool.spawn(func, x, beg=beg, end=end, klt=klt, fqt=fqt, report_class=report_class, **kwargs) for x
                       in codes]
