@@ -664,6 +664,14 @@ class Explain:
                                   '成立日期': 'fund_date', '是否沪深港通标的': 'is_hs', '地域': 'area',
                                   '所属行业': 'industry', '曾用名列表': 'former_name', '发行方式': 'audit_type'}
 
+    stock_to_trade_date_list_fields = {
+        "交易时间": "cal_date"
+    }
+
+    stock_to_index_list_fields = {
+        'ts代码': 'ts_code', '指数代码': 'code', '市场代码': 'mk_code', '指数名称': 'name'
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:
