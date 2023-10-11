@@ -153,6 +153,7 @@ def search_quote(
         ('count', f'{count}'),
     )
     json_response = requests_obj.get(url, params).json()
+    print("json_res:", json_response)
     items = json_response['QuotationCodeTable']['Data']
     if items is not None:
         quotes = [Quote(*item.values()) for item in items]
