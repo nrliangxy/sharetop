@@ -31,6 +31,16 @@ class StockServices:
             return data_json
 
     def stock_to_trade_date_list(self, **kwargs):
+        """
+        交易日历数据
+        Parameters
+        ----------
+        kwargs
+
+        Returns
+        -------
+
+        """
         is_explain = kwargs.pop("is_explain", False)
         data_json = self.common_func(kwargs, a_stock_trade_date_url)
         if data_json['data'] and isinstance(data_json['data'], list):
