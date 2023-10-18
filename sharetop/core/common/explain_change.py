@@ -672,6 +672,10 @@ class Explain:
         'ts代码': 'ts_code', '指数代码': 'code', '市场代码': 'mk_code', '指数名称': 'name'
     }
 
+    stock_to_intl_index_list_fields = {
+        'ts代码': 'ts_code', '指数代码': 'code', '指数区域': 'region', '指数名称': 'name'
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:

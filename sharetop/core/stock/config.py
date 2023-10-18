@@ -8,6 +8,9 @@ a_stock_trade_date_url = "/stock/a_stock/trade_cal_list"
 
 a_stock_index_url = "/stock/a_stock/stock_index"
 
+stock_intl_index_url = "/stock/index/stock_intl_index"
+
+
 
 # 股票基本信息表头
 EASTMONEY_STOCK_BASE_INFO_FIELDS = {
