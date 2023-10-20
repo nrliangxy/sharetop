@@ -11,6 +11,10 @@ a_stock_index_url = "/stock/a_stock/stock_index"
 stock_intl_index_url = "/stock/index/stock_intl_index"
 
 
+index_stock_composition_url = "/stock/index/stock_composition"
+
+
+
 
 # 股票基本信息表头
 EASTMONEY_STOCK_BASE_INFO_FIELDS = {

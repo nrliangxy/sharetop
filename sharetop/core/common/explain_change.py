@@ -676,6 +676,11 @@ class Explain:
         'ts代码': 'ts_code', '指数代码': 'code', '指数区域': 'region', '指数名称': 'name'
     }
 
+    stock_to_index_stock_composition_fields = {
+        'ts代码': 'ts_code', '股票代码': 'code', '股票所在城市': 'region', '股票名称': 'name', "指数类型": "index_type",
+        "所属行业": "industry"
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:
