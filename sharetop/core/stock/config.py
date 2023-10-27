@@ -15,7 +15,6 @@ index_stock_composition_url = "/stock/index/stock_composition"
 
 
 
-
 # 股票基本信息表头
 EASTMONEY_STOCK_BASE_INFO_FIELDS = {
     'f57': '股票代码',
