@@ -37,7 +37,8 @@ def _get_all_services_map():
     fund_paths = glob.glob(f"{dir_path}/fund/*_services.py")
     pig_paths = glob.glob(f"{dir_path}/pig/*_services.py")
     stock_paths = glob.glob(f"{dir_path}/stock/*_services.py")
-    for item_paths in [bond_yield_paths, car_paths, fund_paths, pig_paths, stock_paths]:
+    news_paths = glob.glob(f"{dir_path}/news/*_services.py")
+    for item_paths in [bond_yield_paths, car_paths, fund_paths, pig_paths, stock_paths, news_paths]:
         for _ in item_paths:
             all_file_names.append(os.path.basename(_).replace(".py", ""))
     for module in all_file_names:

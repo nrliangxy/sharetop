@@ -681,6 +681,15 @@ class Explain:
         "所属行业": "industry"
     }
 
+    news_to_normal_fields = {
+        "发布时间": "display_time",
+        "新闻链接": "source_url",
+        "标题": "title",
+        "新闻内容": "content",
+        "新闻简述": "content_short",
+        "新闻标签": "tags"
+    }
+
 
 def exchange_explain_one(df, exchange_fields, is_explain):
     if not is_explain:
