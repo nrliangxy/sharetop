@@ -10,8 +10,13 @@ a_stock_index_url = "/stock/a_stock/stock_index"
 
 stock_intl_index_url = "/stock/index/stock_intl_index"
 
-
 index_stock_composition_url = "/stock/index/stock_composition"
+
+stock_bonus_url = "/stock/stock_bonus"
+
+stock_repurchase_url = "/stock/stock_repurchase"
+
+
 
 
 

@@ -681,6 +681,48 @@ class Explain:
         "所属行业": "industry"
     }
 
+    stock_to_stock_repurchase_fields = {
+        'ts代码': 'ts_code',
+        '股票名称': 'name',
+        '计划回购价格区间(元)': 'repurpricecap',
+        '计划回购股票数量区间最小值(股)': 'repurnumlower',
+        "计划回购股票数量区间最大值(股)": "repurnumcap",
+        "占公告前一日总股本比例最小值(%)": "zszxx",
+        "占公告前一日总股本比例最大值(%)": "zszsx",
+        "计划回购金额区间最小值(元)": "repuramountlower",
+        "计划回购金额区间最大值(元)": "repuramountlimit",
+        "回购起始时间": "repurstartdate",
+        "实施进度": "repurprogress",
+        "已回购股份价格区间最小值(元)": "repurpricelower1",
+        "已回购股份价格区间最大值(元)": "repurpricecap1",
+        "已回购股票数量(股)": "repurnum",
+        "已回购金额(元)": "repuramount",
+        "最新公告日期": "updatedate"
+    }
+
+    stock_to_stock_bonus_fields = {
+        'ts代码': 'ts_code',
+        '股票名称': 'name',
+        '报告期': 'report_date',
+        '业绩披露日期': 'plan_notice_date',
+        "送转总比例": "bonus_it_ratio",
+        "送股比例": "bonus_ratio",
+        "转股比例": "it_ratio",
+        "现金分红比例": "pretax_bonus_rmb",
+        "股息率": "divident_ratio",
+        "每股收益(元)": "basic_eps",
+        "每股净资产(元)": "bvps",
+        "每股公积金(元)": "per_capital_reserve",
+        "每股未分配利润(元)": "per_unassign_profit",
+        "净利润同比增长": "pnp_yoy_ratio",
+        "总股本(亿)": "total_shares",
+        "预案公告日": "publish_date",
+        "股权登记日": "equity_record_date",
+        "除权除息日": "ex_dividend_date",
+        "方案进度": "assign_progress",
+        "最新公告日期": "最新公告日期"
+    }
+
     news_to_normal_fields = {
         "发布时间": "display_time",
         "新闻链接": "source_url",
