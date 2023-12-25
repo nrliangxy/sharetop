@@ -1,5 +1,5 @@
 __title__ = 'sharetop'
-__version__ = '5.16.19'
+__version__ = '6.16.20'
 __author__ = 'nrliangxy'
 __url__ = 'https://github.com/nrliangxy/sharetop'
 __author_email__ = 'nrliangxy@foxmail.com'

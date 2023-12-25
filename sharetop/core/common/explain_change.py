@@ -657,7 +657,7 @@ class Explain:
         "猪粮比": "pig_grain_ratio"
     }
 
-    stock_to_kline_data_fields = {'ts代码': 'ts_code', '股票代码': 'code', '市场代码': 'mk_code', '股票名称': 'name',
+    stock_to_list_data_fields = {'ts代码': 'ts_code', '股票代码': 'code', '市场代码': 'mk_code', '股票名称': 'name',
                                   '股票全称': 'fullname', '英文全称': 'enname', '拼音缩写': 'ren_ping',
                                   '市场类别': 'market', '交易所代码': 'exchange_code', '交易货币': 'curr_type',
                                   '上市状态': 'list_status', '上市日期': 'list_date', '退市日期': 'delist_date',

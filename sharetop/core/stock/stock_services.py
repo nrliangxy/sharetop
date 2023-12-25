@@ -22,7 +22,7 @@ class StockServices:
         data_json = r.json()
         return data_json
 
-    def stock_to_kline_data(self, **kwargs):
+    def stock_to_list_data(self, **kwargs):
         is_explain = kwargs.pop("is_explain", False)
         data_json = self.common_func(kwargs, a_stock_list_url)
         if data_json['data'] and isinstance(data_json['data'], list):
